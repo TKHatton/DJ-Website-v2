@@ -3,6 +3,7 @@ import React from 'react';
 
 const services = [
   {
+    id: 'websites',
     title: 'Websites',
     desc: 'Custom sites that look polished and feel effortless to use. Designed to build trust. Built to grow with you.',
     color: 'bg-terracotta/10',
@@ -14,6 +15,7 @@ const services = [
     )
   },
   {
+    id: 'saas',
     title: 'SaaS and Web Apps',
     desc: 'Tools that turn your big ideas into working software. Clear, intuitive, and built around real people.',
     color: 'bg-honey/10',
@@ -25,6 +27,7 @@ const services = [
     )
   },
   {
+    id: 'automations',
     title: 'Automations',
     desc: 'Quiet systems that save time in the background. Your business runs smoother. You get your energy back.',
     color: 'bg-teal/10',
@@ -36,6 +39,7 @@ const services = [
     )
   },
   {
+    id: 'ai',
     title: 'AI-powered Tools',
     desc: 'Practical AI that supports your workflow instead of overwhelming it. Smart. Stable. Helpful.',
     color: 'bg-plum/10',
@@ -48,7 +52,11 @@ const services = [
   }
 ];
 
-const Services: React.FC = () => {
+interface ServicesProps {
+  onLearnMore: (serviceId: string) => void;
+}
+
+const Services: React.FC<ServicesProps> = ({ onLearnMore }) => {
   return (
     <section className="py-24 px-6 md:px-12 max-w-7xl mx-auto">
       <div className="mb-16">
@@ -66,7 +74,10 @@ const Services: React.FC = () => {
             <p className="text-charcoal/70 mb-8 flex-grow leading-relaxed">
               {s.desc}
             </p>
-            <button className="text-sm font-semibold flex items-center gap-2 group">
+            <button 
+              onClick={() => onLearnMore(s.id)}
+              className="text-sm font-semibold flex items-center gap-2 group text-charcoal/80 hover:text-charcoal transition-colors"
+            >
               Learn more
               <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
