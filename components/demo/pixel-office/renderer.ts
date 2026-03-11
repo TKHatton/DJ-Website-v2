@@ -6,9 +6,10 @@ import {
   FLOOR_FALLBACK_COLOR,
 } from './constants';
 import { getCachedSprite } from './spriteCache';
-import { getCharacterSprites } from './sprites';
+import { getCharacterSprites, getBubbleSprite } from './sprites';
 import { getCharacterSprite } from './characters';
 import type {
+  Camera,
   Character,
   FloorColor,
   FurnitureInstance,
@@ -108,13 +109,44 @@ function renderScene(
     const spriteData = getCharacterSprite(ch, sprites);
     const cached = getCachedSprite(spriteData, zoom);
     const sittingOffset = ch.state === CharacterState.TYPE ? CHARACTER_SITTING_OFFSET_PX : 0;
+
+    // Celebrate bounce: sine-wave Y offset when celebrating and arrived at gathering point
+    let celebrateBounce = 0;
+    if (ch.state === CharacterState.CELEBRATE && ch.path.length === 0) {
+      celebrateBounce = Math.sin(ch.frameTimer * 4) * 2 * zoom;
+    }
+
     const drawX = Math.round(offsetX + ch.x * zoom - cached.width / 2);
-    const drawY = Math.round(offsetY + (ch.y + sittingOffset) * zoom - cached.height);
+    const drawY = Math.round(offsetY + (ch.y + sittingOffset) * zoom - cached.height - celebrateBounce);
     const charZY = ch.y + TILE_SIZE / 2 + CHARACTER_Z_SORT_OFFSET;
 
     drawables.push({
       zY: charZY,
-      draw: (c) => c.drawImage(cached, drawX, drawY),
+      draw: (c) => {
+        // Monitor glow for active typing characters
+        if (ch.state === CharacterState.TYPE && ch.isActive) {
+          const glowAlpha = 0.15 + Math.sin(Date.now() / 300) * 0.05;
+          c.fillStyle = `rgba(100, 200, 255, ${glowAlpha})`;
+          const glowW = TILE_SIZE * zoom;
+          const glowH = TILE_SIZE * zoom * 0.5;
+          const glowX = Math.round(offsetX + ch.x * zoom - glowW / 2);
+          const glowY = Math.round(offsetY + ch.y * zoom - glowH);
+          c.fillRect(glowX, glowY, glowW, glowH);
+        }
+
+        c.drawImage(cached, drawX, drawY);
+
+        // Bubble rendering
+        if (ch.bubble !== 'none') {
+          const bubbleSprite = getBubbleSprite(ch.bubble);
+          if (bubbleSprite) {
+            const bubbleCached = getCachedSprite(bubbleSprite, zoom);
+            const bx = drawX + 4 * zoom;
+            const by = drawY - bubbleCached.height - 2 * zoom;
+            c.drawImage(bubbleCached, bx, by);
+          }
+        }
+      },
     });
   }
 
@@ -136,6 +168,7 @@ export function renderFrame(
   tileColors?: Array<FloorColor | null>,
   layoutCols?: number,
   layoutRows?: number,
+  camera?: Camera,
 ): void {
   // Clear
   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -143,11 +176,24 @@ export function renderFrame(
   const cols = layoutCols ?? (tileMap.length > 0 ? tileMap[0].length : 0);
   const rows = layoutRows ?? tileMap.length;
 
-  // Center map in viewport
-  const mapW = cols * TILE_SIZE * zoom;
-  const mapH = rows * TILE_SIZE * zoom;
-  const offsetX = Math.floor((canvasWidth - mapW) / 2);
-  const offsetY = Math.floor((canvasHeight - mapH) / 2);
+  let offsetX: number;
+  let offsetY: number;
+
+  if (camera) {
+    // Camera-based offset calculation
+    const halfVW = canvasWidth / (2 * zoom);
+    const halfVH = canvasHeight / (2 * zoom);
+    const clampedX = Math.max(halfVW, Math.min(cols * TILE_SIZE - halfVW, camera.x));
+    const clampedY = Math.max(halfVH, Math.min(rows * TILE_SIZE - halfVH, camera.y));
+    offsetX = Math.floor(canvasWidth / 2 - clampedX * zoom);
+    offsetY = Math.floor(canvasHeight / 2 - clampedY * zoom);
+  } else {
+    // Fallback: center map in viewport
+    const mapW = cols * TILE_SIZE * zoom;
+    const mapH = rows * TILE_SIZE * zoom;
+    offsetX = Math.floor((canvasWidth - mapW) / 2);
+    offsetY = Math.floor((canvasHeight - mapH) / 2);
+  }
 
   // Draw tiles
   renderTileGrid(ctx, tileMap, offsetX, offsetY, zoom, tileColors, layoutCols);

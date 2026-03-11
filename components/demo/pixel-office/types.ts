@@ -25,6 +25,7 @@ export const CharacterState = {
   IDLE: 'idle',
   WALK: 'walk',
   TYPE: 'type',
+  CELEBRATE: 'celebrate',
 } as const;
 export type CharacterState = (typeof CharacterState)[keyof typeof CharacterState];
 
@@ -38,6 +39,13 @@ export type Direction = (typeof Direction)[keyof typeof Direction];
 
 /** 2D array of hex color strings ('' for transparent). [row][col] */
 export type SpriteData = string[][];
+
+export interface Camera {
+  x: number;
+  y: number;
+  targetX: number;
+  targetY: number;
+}
 
 export interface Seat {
   uid: string;
@@ -101,4 +109,6 @@ export interface Character {
   isActive: boolean;
   seatId: string | null;
   seatTimer: number;
+  bubble: 'none' | 'gear' | 'lightbulb' | 'check' | 'dots';
+  bubbleTimer: number;
 }

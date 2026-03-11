@@ -11,6 +11,17 @@ import {
   INACTIVE_SEAT_TIMER_MIN_SEC,
   INACTIVE_SEAT_TIMER_RANGE_SEC,
   TILE_SIZE,
+  CALM_IDLE_PAUSE_MIN_SEC,
+  CALM_IDLE_PAUSE_MAX_SEC,
+  CALM_STAND_CHANCE,
+  CALM_TYPE_FRAME_DURATION_SEC,
+  ACTIVE_WALK_SPEED_PX_PER_SEC,
+  ACTIVE_WANDER_PAUSE_MIN_SEC,
+  ACTIVE_WANDER_PAUSE_MAX_SEC,
+  BUBBLE_ROTATE_SEC,
+  BUBBLE_CHECK_DURATION_SEC,
+  BUBBLE_DOTS_CHANCE,
+  BUBBLE_DOTS_DURATION_SEC,
 } from './constants';
 import { findPath } from './tileMap';
 import type { Character, Seat, TileType as TileTypeVal, SpriteData } from './types';
@@ -67,6 +78,8 @@ export function createCharacter(
     isActive: false,
     seatId,
     seatTimer: 0,
+    bubble: 'none',
+    bubbleTimer: 0,
   };
 }
 
@@ -77,15 +90,46 @@ export function updateCharacter(
   seats: Map<string, Seat>,
   tileMap: TileTypeVal[][],
   blockedTiles: Set<string>,
+  officePhase: string = 'idle',
 ): void {
   ch.frameTimer += dt;
 
+  // Update bubble timer
+  if (ch.bubble === 'check') {
+    ch.bubbleTimer -= dt;
+    if (ch.bubbleTimer <= 0) {
+      ch.bubble = 'none';
+      ch.bubbleTimer = 0;
+    }
+  } else if (ch.bubble === 'dots') {
+    ch.bubbleTimer -= dt;
+    if (ch.bubbleTimer <= 0) {
+      ch.bubble = 'none';
+      ch.bubbleTimer = 0;
+    }
+  }
+
   switch (ch.state) {
     case CharacterState.TYPE: {
-      if (ch.frameTimer >= TYPE_FRAME_DURATION_SEC) {
-        ch.frameTimer -= TYPE_FRAME_DURATION_SEC;
+      const typeSpeed = officePhase === 'idle' ? CALM_TYPE_FRAME_DURATION_SEC : TYPE_FRAME_DURATION_SEC;
+      if (ch.frameTimer >= typeSpeed) {
+        ch.frameTimer -= typeSpeed;
         ch.frame = (ch.frame + 1) % 2;
       }
+
+      if (officePhase === 'active' && ch.isActive) {
+        ch.bubbleTimer += dt;
+        if (ch.bubbleTimer >= BUBBLE_ROTATE_SEC) {
+          ch.bubbleTimer -= BUBBLE_ROTATE_SEC;
+          ch.bubble = ch.bubble === 'gear' ? 'lightbulb' : 'gear';
+        }
+      } else if (officePhase === 'idle' && ch.bubble === 'none') {
+        if (Math.random() < BUBBLE_DOTS_CHANCE * dt) {
+          ch.bubble = 'dots';
+          ch.bubbleTimer = BUBBLE_DOTS_DURATION_SEC;
+        }
+      }
+
       if (!ch.isActive) {
         if (ch.seatTimer > 0) {
           ch.seatTimer -= dt;
@@ -95,7 +139,13 @@ export function updateCharacter(
         ch.state = CharacterState.IDLE;
         ch.frame = 0;
         ch.frameTimer = 0;
-        ch.wanderTimer = randomRange(WANDER_PAUSE_MIN_SEC, WANDER_PAUSE_MAX_SEC);
+        ch.bubble = 'none';
+        ch.bubbleTimer = 0;
+        if (officePhase === 'idle') {
+          ch.wanderTimer = randomRange(CALM_IDLE_PAUSE_MIN_SEC, CALM_IDLE_PAUSE_MAX_SEC);
+        } else {
+          ch.wanderTimer = randomRange(WANDER_PAUSE_MIN_SEC, WANDER_PAUSE_MAX_SEC);
+        }
         ch.wanderCount = 0;
         ch.wanderLimit = randomInt(WANDER_MOVES_BEFORE_REST_MIN, WANDER_MOVES_BEFORE_REST_MAX);
       }
@@ -106,11 +156,25 @@ export function updateCharacter(
       ch.frame = 0;
       if (ch.seatTimer < 0) ch.seatTimer = 0;
 
+      if (officePhase === 'idle' && ch.seatId && !ch.isActive) {
+        const seat = seats.get(ch.seatId);
+        if (seat && ch.tileCol === seat.seatCol && ch.tileRow === seat.seatRow) {
+          ch.state = CharacterState.TYPE;
+          ch.dir = seat.facingDir;
+          ch.frame = 0;
+          ch.frameTimer = 0;
+          ch.seatTimer = randomRange(CALM_IDLE_PAUSE_MIN_SEC, CALM_IDLE_PAUSE_MAX_SEC);
+          break;
+        }
+      }
+
       if (ch.isActive) {
         if (!ch.seatId) {
           ch.state = CharacterState.TYPE;
           ch.frame = 0;
           ch.frameTimer = 0;
+          ch.bubble = 'gear';
+          ch.bubbleTimer = 0;
           break;
         }
         const seat = seats.get(ch.seatId);
@@ -127,13 +191,37 @@ export function updateCharacter(
             ch.dir = seat.facingDir;
             ch.frame = 0;
             ch.frameTimer = 0;
+            ch.bubble = 'gear';
+            ch.bubbleTimer = 0;
           }
         }
         break;
       }
 
+      const pauseMin = officePhase === 'idle' ? CALM_IDLE_PAUSE_MIN_SEC :
+        (officePhase === 'active' ? ACTIVE_WANDER_PAUSE_MIN_SEC : WANDER_PAUSE_MIN_SEC);
+      const pauseMax = officePhase === 'idle' ? CALM_IDLE_PAUSE_MAX_SEC :
+        (officePhase === 'active' ? ACTIVE_WANDER_PAUSE_MAX_SEC : WANDER_PAUSE_MAX_SEC);
+
       ch.wanderTimer -= dt;
       if (ch.wanderTimer <= 0) {
+        if (officePhase === 'idle') {
+          if (Math.random() > CALM_STAND_CHANCE) {
+            ch.wanderTimer = randomRange(pauseMin, pauseMax);
+            if (ch.seatId) {
+              const seat = seats.get(ch.seatId);
+              if (seat && ch.tileCol === seat.seatCol && ch.tileRow === seat.seatRow) {
+                ch.state = CharacterState.TYPE;
+                ch.dir = seat.facingDir;
+                ch.frame = 0;
+                ch.frameTimer = 0;
+                ch.seatTimer = randomRange(CALM_IDLE_PAUSE_MIN_SEC, CALM_IDLE_PAUSE_MAX_SEC);
+              }
+            }
+            break;
+          }
+        }
+
         if (ch.wanderCount >= ch.wanderLimit && ch.seatId) {
           const seat = seats.get(ch.seatId);
           if (seat) {
@@ -160,7 +248,7 @@ export function updateCharacter(
             ch.wanderCount++;
           }
         }
-        ch.wanderTimer = randomRange(WANDER_PAUSE_MIN_SEC, WANDER_PAUSE_MAX_SEC);
+        ch.wanderTimer = randomRange(pauseMin, pauseMax);
       }
       break;
     }
@@ -179,11 +267,15 @@ export function updateCharacter(
         if (ch.isActive) {
           if (!ch.seatId) {
             ch.state = CharacterState.TYPE;
+            ch.bubble = 'gear';
+            ch.bubbleTimer = 0;
           } else {
             const seat = seats.get(ch.seatId);
             if (seat && ch.tileCol === seat.seatCol && ch.tileRow === seat.seatRow) {
               ch.state = CharacterState.TYPE;
               ch.dir = seat.facingDir;
+              ch.bubble = 'gear';
+              ch.bubbleTimer = 0;
             } else {
               ch.state = CharacterState.IDLE;
             }
@@ -207,7 +299,9 @@ export function updateCharacter(
             }
           }
           ch.state = CharacterState.IDLE;
-          ch.wanderTimer = randomRange(WANDER_PAUSE_MIN_SEC, WANDER_PAUSE_MAX_SEC);
+          const pMin = officePhase === 'active' ? ACTIVE_WANDER_PAUSE_MIN_SEC : WANDER_PAUSE_MIN_SEC;
+          const pMax = officePhase === 'active' ? ACTIVE_WANDER_PAUSE_MAX_SEC : WANDER_PAUSE_MAX_SEC;
+          ch.wanderTimer = randomRange(pMin, pMax);
         }
         ch.frame = 0;
         ch.frameTimer = 0;
@@ -216,7 +310,9 @@ export function updateCharacter(
 
       const nextTile = ch.path[0];
       ch.dir = directionBetween(ch.tileCol, ch.tileRow, nextTile.col, nextTile.row);
-      ch.moveProgress += (WALK_SPEED_PX_PER_SEC / TILE_SIZE) * dt;
+
+      const walkSpeed = (officePhase === 'active' && ch.isActive) ? ACTIVE_WALK_SPEED_PX_PER_SEC : WALK_SPEED_PX_PER_SEC;
+      ch.moveProgress += (walkSpeed / TILE_SIZE) * dt;
 
       const fromCenter = tileCenter(ch.tileCol, ch.tileRow);
       const toCenter = tileCenter(nextTile.col, nextTile.row);
@@ -248,6 +344,36 @@ export function updateCharacter(
       }
       break;
     }
+
+    case CharacterState.CELEBRATE: {
+      if (ch.path.length > 0) {
+        if (ch.frameTimer >= WALK_FRAME_DURATION_SEC) {
+          ch.frameTimer -= WALK_FRAME_DURATION_SEC;
+          ch.frame = (ch.frame + 1) % 4;
+        }
+        const nextTile = ch.path[0];
+        ch.dir = directionBetween(ch.tileCol, ch.tileRow, nextTile.col, nextTile.row);
+        ch.moveProgress += (WALK_SPEED_PX_PER_SEC / TILE_SIZE) * dt;
+        const fromCenter = tileCenter(ch.tileCol, ch.tileRow);
+        const toCenter = tileCenter(nextTile.col, nextTile.row);
+        const t = Math.min(ch.moveProgress, 1);
+        ch.x = fromCenter.x + (toCenter.x - fromCenter.x) * t;
+        ch.y = fromCenter.y + (toCenter.y - fromCenter.y) * t;
+        if (ch.moveProgress >= 1) {
+          ch.tileCol = nextTile.col;
+          ch.tileRow = nextTile.row;
+          ch.x = toCenter.x;
+          ch.y = toCenter.y;
+          ch.path.shift();
+          ch.moveProgress = 0;
+        }
+      } else {
+        ch.dir = Direction.DOWN;
+        ch.frame = 0;
+        ch.bubble = 'check';
+      }
+      break;
+    }
   }
 }
 
@@ -257,6 +383,11 @@ export function getCharacterSprite(ch: Character, sprites: CharacterSprites): Sp
       return sprites.typing[ch.dir][ch.frame % 2];
     case CharacterState.WALK:
       return sprites.walk[ch.dir][ch.frame % 4];
+    case CharacterState.CELEBRATE:
+      if (ch.path.length > 0) {
+        return sprites.walk[ch.dir][ch.frame % 4];
+      }
+      return sprites.walk[ch.dir][1];
     case CharacterState.IDLE:
       return sprites.walk[ch.dir][1];
     default:

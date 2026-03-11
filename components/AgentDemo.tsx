@@ -52,6 +52,7 @@ const AgentDemo: React.FC<AgentDemoProps> = ({ onNavigate }) => {
   const revealTimerRef = useRef<number | null>(null);
   const thinkingTimerRef = useRef<number | null>(null);
   const resultRef = useRef<HTMLDivElement>(null);
+  const workspaceRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setUsesRemaining(getUsesRemaining());
@@ -95,6 +96,9 @@ const AgentDemo: React.FC<AgentDemoProps> = ({ onNavigate }) => {
     const obstacles = pickRandomObstacles(2);
 
     setPhase('generating');
+    setTimeout(() => {
+      workspaceRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
     setAgentOutputs([]);
     setFinalStory('');
     setRevealIndex(-1);
@@ -200,27 +204,17 @@ const AgentDemo: React.FC<AgentDemoProps> = ({ onNavigate }) => {
             Live Demo
           </span>
           <h2 className="text-4xl md:text-5xl font-accent font-black mt-3 mb-4">
-            What are multi-agents? See them in action.
+            See multi-agent AI in action.
           </h2>
           <p className="text-lg text-charcoal/60 max-w-2xl leading-relaxed">
-            Watch 6 AI agents collaborate in real time to create a unique fairy tale.
-            Pick a story, customize the mission, and let the agents work.
+            Pick a story, customize the details, and watch 6 AI agents coordinate
+            behind the scenes to build something together. This is a simplified
+            visualization of how our agent systems work.
           </p>
           <div className="w-20 h-1 bg-terracotta rounded-full mt-6" aria-hidden="true" />
         </div>
 
-        {/* Agent Workspace (always visible for the office scene) */}
-        {(phase === 'select' || phase === 'customize' || phase === 'generating' || phase === 'revealing' || phase === 'complete') && (
-          <AgentWorkspace
-            agents={agents}
-            phase={phase}
-            revealIndex={revealIndex}
-            agentOutputs={agentOutputs}
-            thinkingMessageIndex={thinkingMessageIndex}
-          />
-        )}
-
-        {/* Phase-specific content */}
+        {/* Story selection / customization FIRST (user picks before seeing agents work) */}
         {phase === 'select' && (
           <StorySelector
             stories={stories}
@@ -244,6 +238,19 @@ const AgentDemo: React.FC<AgentDemoProps> = ({ onNavigate }) => {
             onGenerate={handleGenerate}
             onBack={() => setPhase('select')}
           />
+        )}
+
+        {/* Agent Workspace BELOW the story UI */}
+        {(phase === 'select' || phase === 'customize' || phase === 'generating' || phase === 'revealing' || phase === 'complete') && (
+          <div ref={workspaceRef}>
+          <AgentWorkspace
+            agents={agents}
+            phase={phase}
+            revealIndex={revealIndex}
+            agentOutputs={agentOutputs}
+            thinkingMessageIndex={thinkingMessageIndex}
+          />
+          </div>
         )}
 
         {phase === 'complete' && (

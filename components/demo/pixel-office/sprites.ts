@@ -625,3 +625,131 @@ export const FURNITURE_CATALOG: FurnitureCatalogEntry[] = [
 export function getCatalogEntry(type: string): FurnitureCatalogEntry | undefined {
   return FURNITURE_CATALOG.find(e => e.type === type);
 }
+
+
+/** Gear bubble (working) - white bg, gray gear icon */
+export const BUBBLE_GEAR_SPRITE: SpriteData = [
+  ['', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', ''],
+  ['#CCCCCC', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#CCCCCC'],
+  ['#CCCCCC', '#FFFFFF', '#FFFFFF', '#888888', '#888888', '#888888', '#FFFFFF', '#FFFFFF', '#CCCCCC'],
+  ['#CCCCCC', '#FFFFFF', '#888888', '#FFFFFF', '#888888', '#FFFFFF', '#888888', '#FFFFFF', '#CCCCCC'],
+  ['#CCCCCC', '#FFFFFF', '#FFFFFF', '#888888', '#888888', '#888888', '#FFFFFF', '#FFFFFF', '#CCCCCC'],
+  ['#CCCCCC', '#FFFFFF', '#888888', '#FFFFFF', '#888888', '#FFFFFF', '#888888', '#FFFFFF', '#CCCCCC'],
+  ['#CCCCCC', '#FFFFFF', '#FFFFFF', '#888888', '#888888', '#888888', '#FFFFFF', '#FFFFFF', '#CCCCCC'],
+  ['', '#CCCCCC', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#CCCCCC', ''],
+  ['', '', '', '', '#CCCCCC', '', '', '', ''],
+  ['', '', '', '', '#CCCCCC', '', '', '', ''],
+  ['', '', '', '', '', '', '', '', ''],
+];
+
+/** Lightbulb bubble (idea) - white bg, yellow bulb */
+export const BUBBLE_LIGHTBULB_SPRITE: SpriteData = [
+  ['', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', ''],
+  ['#CCCCCC', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#CCCCCC'],
+  ['#CCCCCC', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFD700', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#CCCCCC'],
+  ['#CCCCCC', '#FFFFFF', '#FFFFFF', '#FFD700', '#FFD700', '#FFD700', '#FFFFFF', '#FFFFFF', '#CCCCCC'],
+  ['#CCCCCC', '#FFFFFF', '#FFFFFF', '#FFD700', '#FFD700', '#FFD700', '#FFFFFF', '#FFFFFF', '#CCCCCC'],
+  ['#CCCCCC', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFD700', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#CCCCCC'],
+  ['#CCCCCC', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#888888', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#CCCCCC'],
+  ['', '#CCCCCC', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#CCCCCC', ''],
+  ['', '', '', '', '#CCCCCC', '', '', '', ''],
+  ['', '', '', '', '#CCCCCC', '', '', '', ''],
+  ['', '', '', '', '', '', '', '', ''],
+];
+
+/** Checkmark bubble (done) - white bg, green check */
+export const BUBBLE_CHECK_SPRITE: SpriteData = [
+  ['', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', ''],
+  ['#CCCCCC', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#CCCCCC'],
+  ['#CCCCCC', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#CCCCCC'],
+  ['#CCCCCC', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#44BB66', '#FFFFFF', '#CCCCCC'],
+  ['#CCCCCC', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#44BB66', '#FFFFFF', '#FFFFFF', '#CCCCCC'],
+  ['#CCCCCC', '#FFFFFF', '#44BB66', '#FFFFFF', '#44BB66', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#CCCCCC'],
+  ['#CCCCCC', '#FFFFFF', '#FFFFFF', '#44BB66', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#CCCCCC'],
+  ['', '#CCCCCC', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#CCCCCC', ''],
+  ['', '', '', '', '#CCCCCC', '', '', '', ''],
+  ['', '', '', '', '#CCCCCC', '', '', '', ''],
+  ['', '', '', '', '', '', '', '', ''],
+];
+
+/** Dots bubble (thinking) - white bg, gray dots */
+export const BUBBLE_DOTS_SPRITE: SpriteData = [
+  ['', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', ''],
+  ['#CCCCCC', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#CCCCCC'],
+  ['#CCCCCC', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#CCCCCC'],
+  ['#CCCCCC', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#CCCCCC'],
+  ['#CCCCCC', '#FFFFFF', '#888888', '#FFFFFF', '#888888', '#FFFFFF', '#888888', '#FFFFFF', '#CCCCCC'],
+  ['#CCCCCC', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#CCCCCC'],
+  ['#CCCCCC', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#CCCCCC'],
+  ['', '#CCCCCC', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#CCCCCC', ''],
+  ['', '', '', '', '#CCCCCC', '', '', '', ''],
+  ['', '', '', '', '#CCCCCC', '', '', '', ''],
+  ['', '', '', '', '', '', '', '', ''],
+];
+
+export function getBubbleSprite(type: string): SpriteData | null {
+  switch (type) {
+    case 'gear': return BUBBLE_GEAR_SPRITE;
+    case 'lightbulb': return BUBBLE_LIGHTBULB_SPRITE;
+    case 'check': return BUBBLE_CHECK_SPRITE;
+    case 'dots': return BUBBLE_DOTS_SPRITE;
+    default: return null;
+  }
+}
+
+// Whiteboard Variant Sprites
+
+/** Whiteboard with some progress marks: 32x16 (2x1 tiles) */
+export const WHITEBOARD_PROGRESS_SPRITE: SpriteData = (() => {
+  const F = '#DDDDDD';
+  const B = '#888888';
+  const E = '#AAAAAA';
+  const R = '#CC4444';
+  const BL = '#4488CC';
+  const rows: string[][] = [];
+  rows.push(new Array(32).fill(_));
+  rows.push([_,_,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,_,_]);
+  rows.push([_,_,B,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,B,_,_]);
+  rows.push([_,_,B,F,F,R,R,R,R,R,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,B,_,_]);
+  rows.push([_,_,B,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,B,_,_]);
+  rows.push([_,_,B,F,F,F,F,F,F,F,F,BL,BL,BL,BL,BL,BL,F,F,F,F,F,F,F,F,F,F,F,F,B,_,_]);
+  rows.push([_,_,B,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,B,_,_]);
+  rows.push([_,_,B,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,B,_,_]);
+  rows.push([_,_,B,F,F,F,F,R,R,R,R,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,B,_,_]);
+  rows.push([_,_,B,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,B,_,_]);
+  rows.push([_,_,B,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,B,_,_]);
+  rows.push([_,_,B,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,B,_,_]);
+  rows.push([_,_,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,_,_]);
+  rows.push([_,_,_,_,_,_,_,_,_,_,_,_,_,_,E,E,E,E,_,_,_,_,_,_,_,_,_,_,_,_,_,_]);
+  rows.push([_,_,_,_,_,_,_,_,_,_,_,_,_,_,E,_,_,E,_,_,_,_,_,_,_,_,_,_,_,_,_]);
+  rows.push([_,_,_,_,_,_,_,_,_,_,_,_,_,_,E,_,_,E,_,_,_,_,_,_,_,_,_,_,_,_,_]);
+  return rows;
+})();
+
+/** Whiteboard fully covered with marks: 32x16 (2x1 tiles) */
+export const WHITEBOARD_FULL_SPRITE: SpriteData = (() => {
+  const F = '#DDDDDD';
+  const B = '#888888';
+  const E = '#AAAAAA';
+  const R = '#CC4444';
+  const BL = '#4488CC';
+  const G = '#44AA66';
+  const rows: string[][] = [];
+  rows.push(new Array(32).fill(_));
+  rows.push([_,_,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,_,_]);
+  rows.push([_,_,B,F,R,R,R,R,R,R,F,F,BL,BL,BL,BL,F,F,G,G,G,G,F,F,F,R,R,R,F,B,_,_]);
+  rows.push([_,_,B,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,B,_,_]);
+  rows.push([_,_,B,F,BL,BL,BL,BL,BL,F,F,R,R,R,R,R,R,F,F,BL,BL,BL,BL,F,F,F,F,F,F,B,_,_]);
+  rows.push([_,_,B,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,B,_,_]);
+  rows.push([_,_,B,F,R,R,R,F,F,G,G,G,G,G,F,F,BL,BL,BL,BL,F,F,R,R,R,R,F,F,F,B,_,_]);
+  rows.push([_,_,B,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,B,_,_]);
+  rows.push([_,_,B,F,G,G,G,G,F,F,BL,BL,BL,BL,BL,F,F,R,R,R,R,R,F,F,G,G,G,F,F,B,_,_]);
+  rows.push([_,_,B,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,B,_,_]);
+  rows.push([_,_,B,F,BL,BL,F,F,R,R,R,R,F,F,G,G,G,G,G,F,F,BL,BL,BL,F,F,R,R,F,B,_,_]);
+  rows.push([_,_,B,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,B,_,_]);
+  rows.push([_,_,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,_,_]);
+  rows.push([_,_,_,_,_,_,_,_,_,_,_,_,_,_,E,E,E,E,_,_,_,_,_,_,_,_,_,_,_,_,_,_]);
+  rows.push([_,_,_,_,_,_,_,_,_,_,_,_,_,_,E,_,_,E,_,_,_,_,_,_,_,_,_,_,_,_,_,_]);
+  rows.push([_,_,_,_,_,_,_,_,_,_,_,_,_,_,E,_,_,E,_,_,_,_,_,_,_,_,_,_,_,_,_]);
+  return rows;
+})();

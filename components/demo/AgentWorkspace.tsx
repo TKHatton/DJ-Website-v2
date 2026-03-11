@@ -67,10 +67,10 @@ const AgentWorkspace: React.FC<AgentWorkspaceProps> = ({
         <div className="flex items-center justify-between mb-6 md:mb-8">
           <div>
             <p className="text-cream/25 text-[10px] font-bold uppercase tracking-[0.25em] mb-1" aria-hidden="true">
-              Agent Command Center
+              Behind the Scenes
             </p>
             <h3 className="text-cream font-accent font-bold text-lg md:text-xl">
-              Agent Workspace
+              Your Agents at Work
             </h3>
             <p className="text-cream/40 text-xs mt-0.5" aria-live="polite">
               {phase === 'select' || phase === 'customize'

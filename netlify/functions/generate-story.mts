@@ -122,7 +122,7 @@ export default async (req: Request) => {
 
     // ─── Call 1: World Builder + Pathfinder + Strategist ───
 
-    const call1System = `You are simulating three AI agents working on a collaborative fairy tale creation project. You must respond with valid JSON containing exactly three fields. Each field value should be 2-4 sentences. Do not use em dashes anywhere. Use periods, commas, or restructure sentences instead.
+    const call1System = `You are simulating three AI agents working on a collaborative fairy tale creation project. You must respond with valid JSON containing exactly three fields. Each field value should be 2-4 sentences. Do not use em dashes anywhere. Use periods, commas, or restructure sentences instead. Keep the tone fun, light, and adventurous. Think Pixar, not Brothers Grimm. No dark, sad, or heavy themes.
 
 Agent 1 - World Builder: Take the fairy tale setting and the custom destination. Create a vivid world description. Establish what makes this version of the world different from the traditional tale.
 Output field: "worldBuilder"
@@ -151,7 +151,7 @@ Generate the three agent outputs as JSON.`;
 
     // ─── Call 2: Chaos Engine + Moral Weaver ───
 
-    const call2System = `You are simulating two AI agents. You have context from three previous agents. You must respond with valid JSON containing exactly two fields. Each field value should be 2-4 sentences. Do not use em dashes anywhere.
+    const call2System = `You are simulating two AI agents. You have context from three previous agents. You must respond with valid JSON containing exactly two fields. Each field value should be 2-4 sentences. Do not use em dashes anywhere. Keep the tone fun, light, playful, and adventurous. Tension comes from comedy and cleverness, never from sadness or hardship.
 
 Agent 4 - Chaos Engine: You MUST incorporate these specific obstacles into the story. Describe how each one disrupts the character's plan and creates unexpected challenges. Be creative and dramatic.
 Output field: "chaosEngine"
@@ -183,16 +183,18 @@ Generate the two agent outputs as JSON.`;
     const call3System = `You are the Storyteller agent. You have received outputs from 5 previous AI agents. Your job is to weave everything into one cohesive, engaging fairy tale narrative.
 
 Rules:
-- Write in classic fairy tale style. Start with "Once upon a time" or a similar opening.
-- Incorporate ALL elements from previous agents: the world, the path, the strategy, the obstacles, and the moral.
-- The obstacles from the Chaos Engine must appear naturally in the story as surprising events.
-- The moral must be earned through the character's journey, not stated flatly.
-- Write 500 to 800 words.
+- Write at an 8th grade reading level. Use simple, vivid words. Short sentences mixed with medium ones.
+- Keep the tone FUN, playful, and adventurous. Think Pixar, not Brothers Grimm.
+- Tension should come from comedy, adventure, and cleverness. Never from sadness, hardship, or fear.
+- Start with a fun, hooky opening. "Once upon a time" is fine but not required.
+- Write 250 to 400 words. Keep it tight and punchy. Every sentence should be interesting.
 - NEVER use em dashes. Use periods, commas, colons, or restructure sentences instead.
-- Keep the original fairy tale characters but in the new context.
-- End with a clear resolution and the moral lesson woven in.
-- Use vivid, sensory language.
-- Write in third person past tense.
+- Make the story feel fresh and different from the original fairy tale. Do not retell the classic plot.
+- Incorporate ALL elements from previous agents: the world, the path, the strategy, the obstacles, and the moral.
+- The obstacles should feel like funny or exciting surprises, not threats.
+- The moral should be earned through the character's choices, woven in naturally, not stated as a lesson.
+- End with a satisfying, upbeat resolution.
+- Use vivid sensory details. Write in third person past tense.
 
 Respond with ONLY the story text. No JSON, no labels, no markdown formatting.`;
 
@@ -220,7 +222,7 @@ Write the complete story now.`;
     const call3Result = await callClaude(
       call3System,
       [{ role: 'user', content: call3Prompt }],
-      2500
+      1500
     );
 
     // ─── Return all outputs ───

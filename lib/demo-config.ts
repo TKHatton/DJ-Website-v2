@@ -244,9 +244,9 @@ export const agents: Agent[] = [
 export const obstaclePool: Record<string, string[]> = {
   natural: [
     'A sudden thunderstorm floods the path and washes away all trail markers',
-    'An earthquake splits the ground, creating a ravine that blocks the way forward',
+    'The ground turns bouncy like a trampoline, launching everyone skyward with each step',
     'A thick magical fog rolls in, making everything look identical in every direction',
-    'A wildfire sweeps across the main road, forcing a dangerous detour',
+    'A river of chocolate floods the main road, making everything deliciously slippery',
     'An avalanche of crystallized sugar buries the only known trail',
   ],
   creature: [
@@ -258,16 +258,16 @@ export const obstaclePool: Record<string, string[]> = {
   ],
   magical: [
     'The forest shifts its layout and now all paths lead back to the starting point',
-    'A sleeping spell begins to take effect, making it harder to stay awake with each step',
+    'A giggle spell hits and everyone laughs so hard they cannot walk straight',
     'Gravity reverses in a clearing, sending everything upward',
     'Everything the protagonist touches turns to glass for one hour',
-    'A mirror appears showing a version of the future where the mission has already failed',
+    'A mirror appears that only shows everyone doing silly dance moves',
   ],
   social: [
     'A group of traveling merchants warns that the destination no longer exists',
-    'A lost child begs for help, pulling the protagonist completely off course',
+    'A parade of singing frogs blocks the entire road and refuses to stop',
     'A celebration in the nearest village blocks all exits until dawn',
-    "A wanted poster with the protagonist's face appears on every tree",
+    "A poster on every tree declares them the winner of a pie-eating contest they never entered",
     'A rival team is pursuing the exact same mission with a head start',
   ],
   temporal: [

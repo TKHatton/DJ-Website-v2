@@ -16,12 +16,12 @@ const PixelOffice: React.FC<PixelOfficeProps> = ({ phase, revealIndex, agentCoun
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const officeRef = useRef<OfficeState | null>(null);
-  const [zoom, setZoom] = useState(3);
+  const [zoom, setZoom] = useState(5);
 
   // Initialize office state once
   useEffect(() => {
     const office = new OfficeState();
-    // Add 6 agents with palette indices 0-5
+    // Add agents with palette indices
     for (let i = 0; i < Math.min(agentCount, 6); i++) {
       office.addAgent(i, i);
     }
@@ -33,16 +33,21 @@ const PixelOffice: React.FC<PixelOfficeProps> = ({ phase, revealIndex, agentCoun
     const office = officeRef.current;
     if (!office) return;
 
+    // Update office phase
+    office.setOfficePhase(phase);
+
     if (phase === 'select' || phase === 'customize') {
       // All agents idle (wandering)
       for (let i = 0; i < agentCount; i++) {
         office.setAgentActive(i, false);
       }
+      office.setActiveAgent(null);
     } else if (phase === 'generating') {
       // All agents idle, waiting
       for (let i = 0; i < agentCount; i++) {
         office.setAgentActive(i, false);
       }
+      office.setActiveAgent(null);
     } else if (phase === 'revealing') {
       // Activate agents up to revealIndex
       for (let i = 0; i < agentCount; i++) {
@@ -52,11 +57,13 @@ const PixelOffice: React.FC<PixelOfficeProps> = ({ phase, revealIndex, agentCoun
           office.setAgentActive(i, false);
         }
       }
+      office.setActiveAgent(revealIndex);
     } else if (phase === 'complete') {
-      // All agents complete - deactivate so they wander
+      // All agents complete
       for (let i = 0; i < agentCount; i++) {
         office.setAgentActive(i, false);
       }
+      office.setActiveAgent(null);
     }
   }, [phase, revealIndex, agentCount]);
 
@@ -68,7 +75,7 @@ const PixelOffice: React.FC<PixelOfficeProps> = ({ phase, revealIndex, agentCoun
     // Office is 22 tiles x 16px = 352px base width
     // Calculate zoom to fill container
     const idealZoom = Math.floor(width / 352);
-    const newZoom = Math.max(2, Math.min(5, idealZoom));
+    const newZoom = Math.max(5, Math.min(8, idealZoom));
     setZoom(newZoom);
   }, []);
 
@@ -118,6 +125,7 @@ const PixelOffice: React.FC<PixelOfficeProps> = ({ phase, revealIndex, agentCoun
           office.layout.tileColors,
           office.layout.cols,
           office.layout.rows,
+          office.camera,
         );
       },
     });
@@ -128,16 +136,12 @@ const PixelOffice: React.FC<PixelOfficeProps> = ({ phase, revealIndex, agentCoun
     };
   }, [zoom]);
 
-  // Calculate canvas height based on zoom and office dimensions
-  // Office is 22x14 tiles, each 16px, so height = 14 * 16 * zoom = 224 * zoom
-  const canvasHeight = 14 * 16 * zoom;
-
   return (
     <div
       ref={containerRef}
       className="w-full overflow-hidden rounded-2xl md:rounded-3xl"
       style={{
-        height: `${Math.min(canvasHeight + 32, 600)}px`,
+        height: '400px',
         background: '#1E1E2E',
       }}
     >

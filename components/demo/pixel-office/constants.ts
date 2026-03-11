@@ -24,3 +24,23 @@ export const INACTIVE_SEAT_TIMER_RANGE_SEC = 2.0;
 // Wall color
 export const WALL_COLOR = '#2A2A3A';
 export const FLOOR_FALLBACK_COLOR = '#808080';
+
+// Calm office (pre-generation)
+export const CALM_IDLE_PAUSE_MIN_SEC = 8.0;
+export const CALM_IDLE_PAUSE_MAX_SEC = 25.0;
+export const CALM_STAND_CHANCE = 0.15;
+export const CALM_TYPE_FRAME_DURATION_SEC = 0.5;
+
+// Active work mode
+export const ACTIVE_WALK_SPEED_PX_PER_SEC = 60;
+export const ACTIVE_WANDER_PAUSE_MIN_SEC = 0.5;
+export const ACTIVE_WANDER_PAUSE_MAX_SEC = 2.0;
+
+// Camera
+export const CAMERA_LERP_SPEED = 3.0;
+
+// Bubbles
+export const BUBBLE_ROTATE_SEC = 2.5;
+export const BUBBLE_CHECK_DURATION_SEC = 1.5;
+export const BUBBLE_DOTS_CHANCE = 0.10;
+export const BUBBLE_DOTS_DURATION_SEC = 2.0;
