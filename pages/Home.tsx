@@ -1,6 +1,7 @@
 import React from 'react';
 import Hero from '../components/Hero';
 import Services from '../components/Services';
+import AgentDemo from '../components/AgentDemo';
 import WhyUs from '../components/WhyUs';
 import Projects from '../components/Projects';
 import Approach from '../components/Approach';
@@ -21,6 +22,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
     <>
       <Hero onNavigate={onNavigate} />
       <Services onLearnMore={handleLearnMore} />
+      <AgentDemo onNavigate={onNavigate} />
       <WhyUs />
       <Projects />
       <Approach />

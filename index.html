@@ -30,6 +30,8 @@
             pointer-events: none;
             background-image: url("https://grainy-gradients.vercel.app/noise.svg");
         }
+
+        /* Existing animations */
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
@@ -43,6 +45,132 @@
         }
         .card-overlap:hover {
             transform: translateY(-8px) scale(1.02);
+        }
+
+        /* Agent Demo: Pixel bounce */
+        @keyframes pixel-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .animate-pixel-bounce {
+            animation: pixel-bounce 0.6s ease-in-out infinite;
+        }
+
+        /* Agent Demo: Agent breathing (idle) */
+        @keyframes agent-breathe {
+            0%, 100% { transform: scale(0.95); opacity: 0.4; }
+            50% { transform: scale(1.0); opacity: 0.6; }
+        }
+        .animate-agent-breathe {
+            animation: agent-breathe 3s ease-in-out infinite;
+        }
+
+        /* Agent Demo: Pulse glow on working cards */
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 5px rgba(226, 114, 91, 0.2); }
+            50% { box-shadow: 0 0 20px rgba(226, 114, 91, 0.5); }
+        }
+        .animate-pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        /* Agent Demo: Reveal text */
+        @keyframes reveal-text {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-reveal {
+            animation: reveal-text 0.5s ease-out forwards;
+        }
+
+        /* Agent Demo: Typing dots */
+        @keyframes typing-dots {
+            0%, 20% { opacity: 0.2; }
+            50% { opacity: 1; }
+            100% { opacity: 0.2; }
+        }
+        .typing-dot:nth-child(1) { animation: typing-dots 1.4s infinite 0s; }
+        .typing-dot:nth-child(2) { animation: typing-dots 1.4s infinite 0.2s; }
+        .typing-dot:nth-child(3) { animation: typing-dots 1.4s infinite 0.4s; }
+
+        /* Agent Demo: Monitor on flicker */
+        @keyframes monitor-on {
+            0% { opacity: 0; transform: scaleY(0.1); }
+            15% { opacity: 0.8; transform: scaleY(1.02); }
+            25% { opacity: 0.3; transform: scaleY(0.98); }
+            40% { opacity: 0.9; transform: scaleY(1.0); }
+            100% { opacity: 1; transform: scaleY(1.0); }
+        }
+        .animate-monitor-on {
+            animation: monitor-on 0.5s ease-out forwards;
+        }
+
+        /* Agent Demo: Monitor cursor blink */
+        @keyframes monitor-cursor {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        .animate-monitor-cursor {
+            animation: monitor-cursor 1s step-end infinite;
+        }
+
+        /* Agent Demo: Workstation activation pop */
+        @keyframes workstation-activate {
+            0% { transform: scale(1); }
+            40% { transform: scale(1.04); }
+            100% { transform: scale(1); }
+        }
+        .animate-workstation-activate {
+            animation: workstation-activate 0.4s ease-out;
+        }
+
+        /* Agent Demo: SVG data flow dash animation */
+        @keyframes dash-flow {
+            to { stroke-dashoffset: -20; }
+        }
+        .animate-dash-flow {
+            animation: dash-flow 0.8s linear infinite;
+        }
+
+        /* Agent Demo: Data pulse traveling along line */
+        @keyframes data-pulse-move {
+            0% { offset-distance: 0%; opacity: 0; }
+            15% { opacity: 1; }
+            85% { opacity: 1; }
+            100% { offset-distance: 100%; opacity: 0; }
+        }
+
+        /* Agent Demo: Monitor scanline */
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        .animate-scanline {
+            animation: scanline 2s linear infinite;
+        }
+
+        /* Agent Demo: Ring pulse for active workstation */
+        @keyframes ring-pulse {
+            0% { box-shadow: 0 0 0 0px var(--ring-color); }
+            70% { box-shadow: 0 0 0 6px transparent; }
+            100% { box-shadow: 0 0 0 0px transparent; }
+        }
+        .animate-ring-pulse {
+            animation: ring-pulse 1.5s ease-out infinite;
+        }
+
+        /* Agent Demo: Line clamp utility */
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
     </style>
     <script>
