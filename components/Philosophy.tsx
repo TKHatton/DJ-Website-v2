@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const Philosophy: React.FC = () => {
@@ -10,17 +9,18 @@ const Philosophy: React.FC = () => {
         </h2>
         <div className="space-y-8 text-xl md:text-2xl text-charcoal/80 leading-relaxed font-light">
           <p>
-            Digital tools can be beautiful, supportive, and deeply human. 
-            We design with emotion and intention. We automate with care. 
-            We build with respect for your story.
+            AI systems can be powerful, supportive, and deeply human. We design
+            with intention. We automate with care. We build with respect for
+            your business and your story.
           </p>
           <p className="font-semibold text-charcoal">
-            Progress matters more than perfection. But quality matters too.
+            Architecture matters more than hype. A well-designed system
+            outperforms a trendy tool every time.
           </p>
         </div>
-        
-        {/* Subtle decorative element */}
-        <div className="mt-20 flex justify-center gap-4">
+
+        {/* Decorative divider */}
+        <div className="mt-20 flex justify-center items-center gap-4" aria-hidden="true">
           <div className="w-12 h-[1px] bg-charcoal/20"></div>
           <div className="w-2 h-2 rounded-full border border-charcoal/40"></div>
           <div className="w-12 h-[1px] bg-charcoal/20"></div>

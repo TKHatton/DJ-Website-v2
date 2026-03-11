@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{POST_TITLE}} | Against Traffic | Digital Jaywalking</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Sora:wght@300;400;600&display=swap');
+
+    :root {
+      --cream: #FDFBF7;
+      --charcoal: #1A1A1A;
+      --terracotta: #E2725B;
+      --honey: #EBC06D;
+      --teal: #4A7C7A;
+      --plum: #6B4E71;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Sora', sans-serif;
+      background-color: var(--cream);
+      color: var(--charcoal);
+      line-height: 1.7;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 48px 24px;
+    }
+
+    /* Header */
+    .blog-header {
+      text-align: center;
+      padding: 60px 24px 40px;
+      border-bottom: 1px solid rgba(26, 26, 26, 0.08);
+    }
+
+    .blog-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 8px;
+    }
+
+    .blog-tagline {
+      font-size: 12px;
+      color: rgba(26, 26, 26, 0.4);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* Post Meta */
+    .post-meta {
+      text-align: center;
+      padding: 48px 24px 16px;
+    }
+
+    .post-category {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--teal);
+      background: rgba(74, 124, 122, 0.1);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+
+    .post-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .post-date {
+      font-size: 13px;
+      color: rgba(26, 26, 26, 0.4);
+    }
+
+    .post-author {
+      font-size: 13px;
+      color: rgba(26, 26, 26, 0.5);
+      margin-top: 4px;
+    }
+
+    /* Post Body */
+    .post-body h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 700;
+      margin: 40px 0 16px;
+    }
+
+    .post-body h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 32px 0 12px;
+    }
+
+    .post-body p {
+      margin-bottom: 20px;
+      color: rgba(26, 26, 26, 0.8);
+    }
+
+    .post-body ul, .post-body ol {
+      margin-bottom: 20px;
+      padding-left: 24px;
+    }
+
+    .post-body li {
+      margin-bottom: 8px;
+      color: rgba(26, 26, 26, 0.8);
+    }
+
+    .post-body blockquote {
+      border-left: 3px solid var(--terracotta);
+      padding: 16px 24px;
+      margin: 32px 0;
+      background: rgba(226, 114, 91, 0.05);
+      border-radius: 0 12px 12px 0;
+      font-style: italic;
+      color: rgba(26, 26, 26, 0.7);
+    }
+
+    .post-body code {
+      background: rgba(26, 26, 26, 0.05);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .post-body pre {
+      background: var(--charcoal);
+      color: var(--cream);
+      padding: 24px;
+      border-radius: 12px;
+      overflow-x: auto;
+      margin: 24px 0;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .post-body pre code {
+      background: none;
+      padding: 0;
+      color: inherit;
+    }
+
+    .post-body img {
+      max-width: 100%;
+      border-radius: 12px;
+      margin: 24px 0;
+    }
+
+    /* Divider */
+    .divider {
+      text-align: center;
+      margin: 48px 0;
+      position: relative;
+    }
+
+    .divider::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: rgba(26, 26, 26, 0.08);
+    }
+
+    .divider span {
+      background: var(--cream);
+      padding: 0 16px;
+      position: relative;
+      color: rgba(26, 26, 26, 0.2);
+      font-size: 12px;
+    }
+
+    /* Newsletter CTA */
+    .newsletter-cta {
+      background: var(--charcoal);
+      color: var(--cream);
+      padding: 40px;
+      border-radius: 24px;
+      text-align: center;
+      margin: 48px 0;
+    }
+
+    .newsletter-cta h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .newsletter-cta p {
+      color: rgba(253, 251, 247, 0.7);
+      margin-bottom: 24px;
+      font-size: 15px;
+    }
+
+    .newsletter-cta .cta-button {
+      display: inline-block;
+      background: var(--honey);
+      color: var(--charcoal);
+      padding: 12px 32px;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 14px;
+      transition: opacity 0.2s;
+    }
+
+    .newsletter-cta .cta-button:hover {
+      opacity: 0.9;
+    }
+
+    /* Footer */
+    .blog-footer {
+      text-align: center;
+      padding: 40px 24px;
+      border-top: 1px solid rgba(26, 26, 26, 0.08);
+    }
+
+    .blog-footer .brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .blog-footer p {
+      font-size: 13px;
+      color: rgba(26, 26, 26, 0.4);
+    }
+
+    .blog-footer a {
+      color: var(--terracotta);
+      text-decoration: none;
+    }
+
+    .blog-footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 640px) {
+      .post-title { font-size: 28px; }
+      .container { padding: 32px 16px; }
+      .newsletter-cta { padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Blog Header -->
+  <header class="blog-header">
+    <div class="blog-name">Against Traffic</div>
+    <div class="blog-tagline">by Digital Jaywalking</div>
+  </header>
+
+  <!-- Post Meta -->
+  <div class="post-meta">
+    <div class="post-category">{{POST_CATEGORY}}</div>
+    <h1 class="post-title">{{POST_TITLE}}</h1>
+    <div class="post-date">{{POST_DATE}}</div>
+    <div class="post-author">By {{POST_AUTHOR}}</div>
+  </div>
+
+  <!-- Post Body -->
+  <article class="container post-body">
+
+    {{POST_CONTENT}}
+
+  </article>
+
+  <!-- Divider -->
+  <div class="container">
+    <div class="divider"><span>&#9679;</span></div>
+  </div>
+
+  <!-- Newsletter CTA -->
+  <div class="container">
+    <div class="newsletter-cta">
+      <h3>The Blind Spot</h3>
+      <p>The things about AI that nobody is talking about. Delivered to your inbox.</p>
+      <a href="{{NEWSLETTER_SIGNUP_URL}}" class="cta-button">Subscribe to the newsletter</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="blog-footer">
+    <div class="brand">Digital Jaywalking</div>
+    <p>
+      <a href="{{WEBSITE_URL}}">Website</a> &middot;
+      <a href="mailto:info@digitaljaywalking.com">Email</a> &middot;
+      <a href="{{LINKEDIN_URL}}">LinkedIn</a>
+    </p>
+    <p style="margin-top: 12px;">Built with heart and intention. No em dashes were harmed in the making of this post.</p>
+  </footer>
+
+</body>
+</html>

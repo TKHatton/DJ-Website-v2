@@ -1,86 +1,96 @@
-
 import React from 'react';
-
-const services = [
-  {
-    id: 'websites',
-    title: 'Websites',
-    desc: 'Custom sites that look polished and feel effortless to use. Designed to build trust. Built to grow with you.',
-    color: 'bg-terracotta/10',
-    borderColor: 'border-terracotta/20',
-    icon: (
-      <svg className="w-8 h-8 text-terracotta" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9-9c1.657 0 3 4.03 3 9s-1.343 9-3 9m0-18c-1.657 0-3 4.03-3 9s1.343 9 3 9m-9-9h18" />
-      </svg>
-    )
-  },
-  {
-    id: 'saas',
-    title: 'SaaS and Web Apps',
-    desc: 'Tools that turn your big ideas into working software. Clear, intuitive, and built around real people.',
-    color: 'bg-honey/10',
-    borderColor: 'border-honey/20',
-    icon: (
-      <svg className="w-8 h-8 text-honey" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-      </svg>
-    )
-  },
-  {
-    id: 'automations',
-    title: 'Automations',
-    desc: 'Quiet systems that save time in the background. Your business runs smoother. You get your energy back.',
-    color: 'bg-teal/10',
-    borderColor: 'border-teal/20',
-    icon: (
-      <svg className="w-8 h-8 text-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-      </svg>
-    )
-  },
-  {
-    id: 'ai',
-    title: 'AI-powered Tools',
-    desc: 'Practical AI that supports your workflow instead of overwhelming it. Smart. Stable. Helpful.',
-    color: 'bg-plum/10',
-    borderColor: 'border-plum/20',
-    icon: (
-      <svg className="w-8 h-8 text-plum" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
-      </svg>
-    )
-  }
-];
 
 interface ServicesProps {
   onLearnMore: (serviceId: string) => void;
 }
+
+const tiers = [
+  {
+    id: 'starter',
+    title: 'Agent Starter',
+    agents: '1-3 Agents',
+    desc: 'One workflow. One problem. One system that solves it.',
+    accentBorder: 'border-t-terracotta',
+    accentText: 'text-terracotta',
+    accentBg: 'bg-terracotta/10',
+    badge: null,
+  },
+  {
+    id: 'system',
+    title: 'Agent System',
+    agents: '4-10 Agents',
+    desc: 'Multiple workflows working together. Agents that communicate and hand off tasks automatically.',
+    accentBorder: 'border-t-honey',
+    accentText: 'text-honey',
+    accentBg: 'bg-honey/10',
+    badge: 'Most Popular',
+  },
+  {
+    id: 'infrastructure',
+    title: 'Agent Infrastructure',
+    agents: '10+ Agents',
+    desc: 'A full operational system across your business. Every department connected.',
+    accentBorder: 'border-t-teal',
+    accentText: 'text-teal',
+    accentBg: 'bg-teal/10',
+    badge: null,
+  },
+];
 
 const Services: React.FC<ServicesProps> = ({ onLearnMore }) => {
   return (
     <section className="py-24 px-6 md:px-12 max-w-7xl mx-auto">
       <div className="mb-16">
         <h2 className="text-4xl md:text-5xl font-accent font-black mb-4">What we build</h2>
-        <div className="w-20 h-1 bg-terracotta rounded-full"></div>
+        <p className="text-xl text-charcoal/70 max-w-2xl leading-relaxed">
+          Multi-agent AI systems designed around your business. Three levels of
+          complexity. One standard of quality.
+        </p>
+        <div className="w-20 h-1 bg-terracotta rounded-full mt-6" aria-hidden="true"></div>
       </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {services.map((s, idx) => (
-          <div key={idx} className={`p-8 rounded-3xl border ${s.borderColor} ${s.color} card-overlap flex flex-col h-full`}>
-            <div className="mb-6 p-3 bg-white w-fit rounded-2xl shadow-sm">
-              {s.icon}
-            </div>
-            <h3 className="text-2xl font-accent font-bold mb-4">{s.title}</h3>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {tiers.map((tier) => (
+          <div
+            key={tier.id}
+            className={`relative bg-white border border-charcoal/5 ${tier.accentBorder} border-t-4 rounded-3xl p-8 flex flex-col h-full shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300`}
+          >
+            {tier.badge && (
+              <span className="absolute -top-3 right-6 bg-honey text-charcoal text-xs font-bold uppercase tracking-wider px-4 py-1 rounded-full shadow-sm">
+                {tier.badge}
+              </span>
+            )}
+
+            <span
+              className={`text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full w-fit mb-4 ${tier.accentBg} ${tier.accentText}`}
+            >
+              {tier.agents}
+            </span>
+
+            <h3 className="text-2xl font-accent font-bold mb-4">{tier.title}</h3>
+
             <p className="text-charcoal/70 mb-8 flex-grow leading-relaxed">
-              {s.desc}
+              {tier.desc}
             </p>
-            <button 
-              onClick={() => onLearnMore(s.id)}
-              className="text-sm font-semibold flex items-center gap-2 group text-charcoal/80 hover:text-charcoal transition-colors"
+
+            <button
+              onClick={() => onLearnMore(tier.id)}
+              className="text-sm font-semibold flex items-center gap-2 group text-charcoal/80 hover:text-charcoal transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta rounded"
             >
               Learn more
-              <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+              <svg
+                className="w-4 h-4 transition-transform group-hover:translate-x-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M9 5l7 7-7 7"
+                />
               </svg>
             </button>
           </div>

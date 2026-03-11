@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Blind Spot | {{ISSUE_TITLE}}</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Sora:wght@300;400;600&display=swap');
+    body, table, td, p, a, li { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    body { margin: 0; padding: 0; width: 100%; font-family: 'Sora', Arial, sans-serif; background-color: #FDFBF7; color: #1A1A1A; line-height: 1.7; }
+    .email-wrapper { max-width: 600px; margin: 0 auto; background-color: #FDFBF7; }
+    .email-header { text-align: center; padding: 40px 32px 32px; border-bottom: 1px solid rgba(26,26,26,0.08); }
+    .newsletter-name { font-family: 'Playfair Display', Georgia, serif; font-size: 28px; font-weight: 900; color: #1A1A1A; margin-bottom: 4px; }
+    .newsletter-tagline { font-size: 13px; color: rgba(26,26,26,0.5); letter-spacing: 1px; }
+    .issue-header { padding: 32px 32px 24px; text-align: center; }
+    .issue-number { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #E2725B; background: rgba(226,114,91,0.1); padding: 4px 14px; border-radius: 20px; margin-bottom: 16px; }
+    .issue-title { font-family: 'Playfair Display', Georgia, serif; font-size: 28px; font-weight: 700; line-height: 1.3; margin-bottom: 8px; }
+    .issue-date { font-size: 13px; color: rgba(26,26,26,0.4); }
+    .email-content { padding: 0 32px 32px; }
+    .email-content h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 22px; font-weight: 700; margin: 32px 0 12px; color: #1A1A1A; }
+    .email-content p { margin-bottom: 16px; color: rgba(26,26,26,0.8); font-size: 15px; }
+    .email-content ul { margin-bottom: 16px; padding-left: 20px; }
+    .email-content li { margin-bottom: 8px; color: rgba(26,26,26,0.8); font-size: 15px; }
+    .email-content blockquote { border-left: 3px solid #E2725B; padding: 12px 20px; margin: 24px 0; background: rgba(226,114,91,0.05); border-radius: 0 8px 8px 0; font-style: italic; color: rgba(26,26,26,0.7); }
+    .section-divider { text-align: center; padding: 24px 0; }
+    .section-divider span { display: inline-block; width: 40px; height: 1px; background: rgba(26,26,26,0.15); }
+    .highlight-box { background: #1A1A1A; color: #FDFBF7; padding: 28px; border-radius: 16px; margin: 24px 32px; }
+    .highlight-box h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 18px; font-weight: 700; margin-bottom: 8px; color: #EBC06D; }
+    .highlight-box p { color: rgba(253,251,247,0.7); font-size: 14px; margin-bottom: 16px; }
+    .highlight-box a { display: inline-block; background: #EBC06D; color: #1A1A1A; padding: 10px 24px; border-radius: 50px; font-weight: 600; text-decoration: none; font-size: 13px; }
+    .cta-section { text-align: center; padding: 32px; background: rgba(74,124,122,0.08); border-radius: 16px; margin: 24px 32px; }
+    .cta-section h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+    .cta-section p { font-size: 14px; color: rgba(26,26,26,0.6); margin-bottom: 16px; }
+    .cta-button { display: inline-block; background: #1A1A1A; color: #FDFBF7; padding: 12px 28px; border-radius: 50px; font-weight: 600; text-decoration: none; font-size: 14px; }
+    .email-footer { text-align: center; padding: 32px; border-top: 1px solid rgba(26,26,26,0.08); }
+    .email-footer .brand { font-family: 'Playfair Display', Georgia, serif; font-size: 16px; font-weight: 900; margin-bottom: 8px; color: #1A1A1A; }
+    .email-footer p { font-size: 12px; color: rgba(26,26,26,0.4); margin-bottom: 4px; }
+    .email-footer a { color: #E2725B; text-decoration: none; }
+    .email-footer a:hover { text-decoration: underline; }
+    @media only screen and (max-width: 600px) {
+      .email-content { padding: 0 20px 24px; }
+      .email-header { padding: 32px 20px 24px; }
+      .issue-title { font-size: 24px; }
+      .highlight-box { margin: 24px 20px; padding: 20px; }
+      .cta-section { margin: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="email-wrapper">
+
+    <!-- Header -->
+    <div class="email-header">
+      <div class="newsletter-name">The Blind Spot</div>
+      <div class="newsletter-tagline">by Digital Jaywalking</div>
+    </div>
+
+    <!-- Issue Header -->
+    <div class="issue-header">
+      <div class="issue-number">Issue {{ISSUE_NUMBER}}</div>
+      <h1 class="issue-title">{{ISSUE_TITLE}}</h1>
+      <div class="issue-date">{{ISSUE_DATE}}</div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="email-content">
+      {{NEWSLETTER_CONTENT}}
+    </div>
+
+    <!-- Section Divider -->
+    <div class="section-divider"><span></span></div>
+
+    <!-- Highlight Box (for featured content, course promo, lead magnet, etc.) -->
+    <div class="highlight-box">
+      <h3>{{HIGHLIGHT_TITLE}}</h3>
+      <p>{{HIGHLIGHT_DESCRIPTION}}</p>
+      <a href="{{HIGHLIGHT_CTA_URL}}">{{HIGHLIGHT_CTA_TEXT}}</a>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="cta-section">
+      <h3>Have a question or topic suggestion?</h3>
+      <p>Reply to this email or reach out at info@digitaljaywalking.com</p>
+      <a href="{{WEBSITE_URL}}" class="cta-button">Visit Digital Jaywalking</a>
+    </div>
+
+    <!-- Footer -->
+    <div class="email-footer">
+      <div class="brand">Digital Jaywalking</div>
+      <p>Durham, NC</p>
+      <p><a href="{{WEBSITE_URL}}">Website</a> &middot; <a href="{{LINKEDIN_URL}}">LinkedIn</a></p>
+      <p style="margin-top: 12px;">You are receiving this because you subscribed to The Blind Spot newsletter.</p>
+      <p><a href="{{UNSUBSCRIBE_URL}}">Unsubscribe</a></p>
+    </div>
+
+  </div>
+</body>
+</html>

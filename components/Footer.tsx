@@ -12,32 +12,34 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         <div>
           <button 
             onClick={() => onNavigate('home')} 
-            className="text-2xl font-accent font-black tracking-tight hover:opacity-80 transition-opacity"
+            className="text-2xl font-accent font-black tracking-tight hover:opacity-80 transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta rounded"
+            aria-label="Go to home page"
           >
             Digital Jaywalking
           </button>
-          <p className="text-sm text-charcoal/50 mt-2">© {new Date().getFullYear()} Digital Jaywalking, LLC. All rights reserved.</p>
+          <p className="text-sm text-charcoal/50 mt-2">&copy; {new Date().getFullYear()} Digital Jaywalking, LLC. All rights reserved.</p>
         </div>
         
         <div className="flex gap-12">
           <div className="flex flex-col gap-2">
             <span className="text-xs font-bold uppercase tracking-widest text-charcoal/40">Sitemap</span>
-            <button onClick={() => onNavigate('work')} className="text-left hover:text-terracotta transition-colors">Our Work</button>
-            <button onClick={() => onNavigate('approach')} className="text-left hover:text-terracotta transition-colors">Our Approach</button>
-            <button onClick={() => onNavigate('start')} className="text-left hover:text-terracotta transition-colors">Start a Project</button>
-            <button onClick={() => onNavigate('home')} className="text-left hover:text-terracotta transition-colors">Home</button>
+            <button onClick={() => onNavigate('studio')} className="text-left hover:text-terracotta transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta rounded underline-offset-4 hover:underline">Studio</button>
+            <button onClick={() => onNavigate('academy')} className="text-left hover:text-terracotta transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta rounded underline-offset-4 hover:underline">Academy</button>
+            <button onClick={() => onNavigate('blog')} className="text-left hover:text-terracotta transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta rounded underline-offset-4 hover:underline">Blog</button>
+            <button onClick={() => onNavigate('approach')} className="text-left hover:text-terracotta transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta rounded underline-offset-4 hover:underline">How We Build</button>
+            <button onClick={() => onNavigate('about')} className="text-left hover:text-terracotta transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta rounded underline-offset-4 hover:underline">About</button>
+            <button onClick={() => onNavigate('start')} className="text-left hover:text-terracotta transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta rounded underline-offset-4 hover:underline">Start a Project</button>
           </div>
           <div className="flex flex-col gap-2">
             <span className="text-xs font-bold uppercase tracking-widest text-charcoal/40">Connect</span>
-            <a href="mailto:info@digitaljaywalking.com" className="hover:text-terracotta transition-colors">Email</a>
-            <a href="#" className="hover:text-terracotta transition-colors">LinkedIn</a>
-            <a href="#" className="hover:text-terracotta transition-colors">Twitter</a>
+            <a href="mailto:info@digitaljaywalking.com" className="hover:text-terracotta transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta rounded underline-offset-4 hover:underline">Email</a>
+            <a href="https://linkedin.com/company/digital-jaywalking" target="_blank" rel="noopener noreferrer" className="hover:text-terracotta transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta rounded underline-offset-4 hover:underline">LinkedIn</a>
           </div>
         </div>
       </div>
       
       <div className="max-w-7xl mx-auto mt-12 text-center">
-        <p className="text-sm text-charcoal/30">
+        <p className="text-sm text-charcoal/50">
           Built with heart and intention. No em dashes were harmed in the making of this website.
         </p>
       </div>
