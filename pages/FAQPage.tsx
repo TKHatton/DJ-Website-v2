@@ -26,10 +26,6 @@ const faqs = [
     category: 'Working With Us',
     questions: [
       {
-        q: 'Do I get access to the source code?',
-        a: 'No. You get full access to use the system through clean interfaces, slash commands, and dashboards. The code stays in our private repositories, maintained and secured by us. You own the outcomes. We handle the infrastructure.'
-      },
-      {
         q: 'How long does a typical project take?',
         a: 'Agent Core projects usually take 2 to 4 weeks. Agent System builds take 4 to 8 weeks. Agent Scale projects are scoped individually based on complexity and number of departments involved.'
       },

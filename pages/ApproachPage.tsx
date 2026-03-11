@@ -50,7 +50,7 @@ const steps = [
 
 const differentiators = [
   'We build custom systems, not cookie-cutter automations. Every agent is designed for your specific workflows.',
-  'You never touch the code. You interact with the system through clean interfaces. The complexity stays behind the scenes.',
+  'You interact with the system through clean interfaces, dashboards, and commands. The complexity stays behind the scenes so you can focus on results.',
   'We design for how your business actually works, not how a template thinks it should work.',
   'Your data stays yours. Your system stays private. Security is built in from the start.',
 ];

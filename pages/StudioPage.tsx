@@ -15,7 +15,7 @@ const tiers = [
       'Discovery session to map your bottleneck',
       'Targeted system architecture',
       'Full build and deployment',
-      'Access to the running system (never the code)',
+      'Full access to your running system via dashboards and commands',
       'Handoff walkthrough and documentation'
     ],
     goodFor: 'Solo founders and small teams with one workflow that needs to stop being manual.',
@@ -75,10 +75,6 @@ const addOns = [
 ];
 
 const faqs = [
-  {
-    question: 'Do I get access to the code?',
-    answer: 'No. You get access to the system. Slash commands, dashboards, interfaces. The code stays in our private repos, maintained and secured by us. You own the outcomes, and we handle the infrastructure.'
-  },
   {
     question: 'What does a multi-agent system actually do?',
     answer: 'It coordinates multiple AI agents, each responsible for a specific task. They communicate, share context, and hand off work to each other automatically. Think of it like a team of specialists that never sleeps and never drops the ball.'
