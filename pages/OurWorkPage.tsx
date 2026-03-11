@@ -129,7 +129,7 @@ const OurWorkPage: React.FC<OurWorkPageProps> = ({ onNavigate }) => {
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-6">
               <button onClick={() => onNavigate('start')} className="bg-cream text-charcoal px-10 py-5 rounded-full font-bold hover:bg-honey transition-all text-lg">
-                Start a project
+                Get Started
               </button>
               <a href="mailto:info@digitaljaywalking.com" className="border border-cream/30 px-10 py-5 rounded-full font-bold hover:bg-white/10 transition-all text-lg flex items-center justify-center">
                 Tell us about your idea

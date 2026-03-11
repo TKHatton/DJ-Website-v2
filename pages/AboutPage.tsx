@@ -53,7 +53,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* Lenise (LT) Kenney */}
+          {/* Lenise */}
           <div className="bg-white p-10 md:p-12 rounded-[40px] border border-charcoal/5 hover:shadow-lg transition-all relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-32 h-32 bg-plum/5 rounded-full blur-2xl transition-all group-hover:w-48 group-hover:h-48" aria-hidden="true"></div>
             <div className="relative z-10">
@@ -61,10 +61,10 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                 <div className="w-3 h-3 bg-plum rounded-full" aria-hidden="true"></div>
                 <span className="text-xs uppercase tracking-[0.2em] font-bold text-plum">Co-founder</span>
               </div>
-              <h3 className="text-2xl md:text-3xl font-accent font-bold mb-6">Lenise (LT) Kenney</h3>
+              <h3 className="text-2xl md:text-3xl font-accent font-bold mb-6">Lenise</h3>
               <div className="space-y-4 text-charcoal/70 leading-relaxed">
                 <p>
-                  Builder, teacher, and systems thinker. LT is passionate about multi-agent AI architecture and making complex systems feel simple.
+                  Builder, teacher, and systems thinker. Lenise is passionate about multi-agent AI architecture and making complex systems feel simple.
                 </p>
                 <p>
                   She believes the best technology disappears into the background and just works. If a tool creates friction instead of removing it, something needs to change.
@@ -76,7 +76,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             </div>
           </div>
 
-          {/* Julian Kenney */}
+          {/* Julian */}
           <div className="bg-white p-10 md:p-12 rounded-[40px] border border-charcoal/5 hover:shadow-lg transition-all relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-32 h-32 bg-teal/5 rounded-full blur-2xl transition-all group-hover:w-48 group-hover:h-48" aria-hidden="true"></div>
             <div className="relative z-10">
@@ -84,13 +84,13 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                 <div className="w-3 h-3 bg-teal rounded-full" aria-hidden="true"></div>
                 <span className="text-xs uppercase tracking-[0.2em] font-bold text-teal">Co-founder</span>
               </div>
-              <h3 className="text-2xl md:text-3xl font-accent font-bold mb-6">Julian Kenney</h3>
+              <h3 className="text-2xl md:text-3xl font-accent font-bold mb-6">Julian</h3>
               <div className="space-y-4 text-charcoal/70 leading-relaxed">
                 <p>
                   Co-founder and partner in building Digital Jaywalking from the ground up. Julian brings a grounded perspective and steady presence to every decision the company makes.
                 </p>
                 <p>
-                  Together with LT, he is shaping a business that values integrity, thoughtful design, and real impact over noise.
+                  Together with Lenise, he is shaping a business that values integrity, thoughtful design, and real impact over noise.
                 </p>
               </div>
             </div>
@@ -179,7 +179,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               onClick={() => onNavigate('start')}
               className="bg-cream text-charcoal px-10 py-5 rounded-full font-bold hover:bg-honey transition-all text-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta"
             >
-              Start a project
+              Get Started
             </button>
           </div>
         </div>

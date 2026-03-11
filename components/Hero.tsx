@@ -7,17 +7,17 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
   return (
-    <section className="min-h-screen flex items-center px-6 md:px-12 pt-32 pb-20">
+    <section className="min-h-[80vh] flex items-center px-6 md:px-12 pt-32 pb-16">
       <div className="max-w-7xl mx-auto w-full">
-        <div className="max-w-4xl">
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-accent font-black leading-[0.95] tracking-tight">
-            Intelligent agents.
+        <div className="max-w-3xl">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-accent font-black leading-[0.95] tracking-tight">
+            We build the AI systems
             <br />
-            <span className="text-terracotta">Architected for you.</span>
+            <span className="text-terracotta">that run your operations.</span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-charcoal/70 mt-8 max-w-2xl leading-relaxed">
-            We design and build multi-agent AI systems that automate your workflows, connect your tools, and make your business run smarter. You get access to the system. We handle everything else.
+          <p className="text-lg md:text-xl text-charcoal/70 mt-8 max-w-2xl leading-relaxed">
+            Multi-agent architecture designed around your workflows. From a single automated process to a full operational backbone. You get access to the system. We handle everything under the hood.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 mt-10">
@@ -25,7 +25,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
               onClick={() => onNavigate('start')}
               className="bg-charcoal text-cream px-8 py-4 rounded-full font-medium hover:bg-charcoal/90 transition-all shadow-lg hover:shadow-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta"
             >
-              Start a project
+              Get Started
             </button>
             <button 
               onClick={() => onNavigate('studio')}
@@ -36,8 +36,8 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           </div>
         </div>
         
-        <div className="mt-16 flex flex-wrap gap-3">
-          {['Multi-Agent Systems', 'Workflow Automation', 'AI Architecture', 'Custom Integrations'].map((tag) => (
+        <div className="mt-12 flex flex-wrap gap-3">
+          {['Agent Architecture', 'Workflow Automation', 'Operational Systems', 'Custom Integrations'].map((tag) => (
             <span key={tag} className="text-xs font-medium uppercase tracking-widest text-charcoal/40 bg-charcoal/5 px-4 py-2 rounded-full">
               {tag}
             </span>

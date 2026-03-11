@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import StudioPage from './pages/StudioPage';
 import AcademyPage from './pages/AcademyPage';
 import BlogPage from './pages/BlogPage';
+import FAQPage from './pages/FAQPage';
 import ApproachPage from './pages/ApproachPage';
 import AboutPage from './pages/AboutPage';
 import StartAProjectPage from './pages/StartAProjectPage';
@@ -29,6 +30,8 @@ const App: React.FC = () => {
         return <StudioPage onNavigate={navigateTo} />;
       case 'academy':
         return <AcademyPage onNavigate={navigateTo} />;
+      case 'faq':
+        return <FAQPage onNavigate={navigateTo} />;
       case 'blog':
         return <BlogPage onNavigate={navigateTo} />;
       case 'approach':

@@ -32,7 +32,7 @@ const Invitation: React.FC<InvitationProps> = ({ onNavigate }) => {
               onClick={() => onNavigate('start')}
               className="bg-cream text-charcoal font-semibold px-8 py-3.5 rounded-full hover:bg-honey transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta"
             >
-              Start a project
+              Get Started
             </button>
             <a
               href="mailto:info@digitaljaywalking.com"

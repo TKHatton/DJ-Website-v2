@@ -14,7 +14,7 @@ const projects = [
   },
   {
     title: 'An AI content pipeline that maintains brand voice',
-    subtitle: 'Agent Infrastructure for a Marketing Team',
+    subtitle: 'Agent Scale for a Marketing Team',
     description:
       'A marketing team needed consistent content across four channels. We built an 8-agent system that drafts, reviews, schedules, and publishes content while enforcing brand guidelines at every step. The team reviews and approves. The agents handle the rest.',
     tags: ['Architecture', 'Content', 'Quality Control'],
@@ -25,7 +25,7 @@ const projects = [
   },
   {
     title: 'Workflow intelligence for a consulting firm',
-    subtitle: 'Agent Starter for Operations',
+    subtitle: 'Agent Core for Operations',
     description:
       'A consulting firm was losing track of project status, deadlines, and client communications. We built a 3-agent system that monitors project timelines, sends proactive updates, and flags at-risk deliverables before they become problems.',
     tags: ['Architecture', 'Monitoring', 'Alerts'],

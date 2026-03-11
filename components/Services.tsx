@@ -6,10 +6,10 @@ interface ServicesProps {
 
 const tiers = [
   {
-    id: 'starter',
-    title: 'Agent Starter',
-    agents: '1-3 Agents',
-    desc: 'One workflow. One problem. One system that solves it.',
+    id: 'core',
+    title: 'Agent Core',
+    scope: 'One workflow. One team.',
+    desc: 'You stop doing one thing by hand. We automate a specific bottleneck end-to-end.',
     accentBorder: 'border-t-terracotta',
     accentText: 'text-terracotta',
     accentBg: 'bg-terracotta/10',
@@ -18,18 +18,18 @@ const tiers = [
   {
     id: 'system',
     title: 'Agent System',
-    agents: '4-10 Agents',
-    desc: 'Multiple workflows working together. Agents that communicate and hand off tasks automatically.',
+    scope: 'Multiple workflows. Connected.',
+    desc: 'Your team stops passing work between tools and spreadsheets. Agents that communicate and coordinate across processes.',
     accentBorder: 'border-t-honey',
     accentText: 'text-honey',
     accentBg: 'bg-honey/10',
     badge: 'Most Popular',
   },
   {
-    id: 'infrastructure',
-    title: 'Agent Infrastructure',
-    agents: '10+ Agents',
-    desc: 'A full operational system across your business. Every department connected.',
+    id: 'scale',
+    title: 'Agent Scale',
+    scope: 'Full operational backbone.',
+    desc: 'Your business runs on a system, not on you remembering what to do next. Every department connected.',
     accentBorder: 'border-t-teal',
     accentText: 'text-teal',
     accentBg: 'bg-teal/10',
@@ -64,7 +64,7 @@ const Services: React.FC<ServicesProps> = ({ onLearnMore }) => {
             <span
               className={`text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full w-fit mb-4 ${tier.accentBg} ${tier.accentText}`}
             >
-              {tier.agents}
+              {tier.scope}
             </span>
 
             <h3 className="text-2xl font-accent font-bold mb-4">{tier.title}</h3>

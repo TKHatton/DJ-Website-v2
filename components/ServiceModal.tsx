@@ -158,7 +158,7 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ serviceId, onClose, onNavig
             className="group flex items-center gap-4 text-lg font-black text-charcoal hover:text-terracotta transition-colors"
           >
             <span className="text-2xl">👉</span>
-            <span className="underline underline-offset-8 decoration-2 decoration-charcoal/10 group-hover:decoration-terracotta/30">Start a project</span>
+            <span className="underline underline-offset-8 decoration-2 decoration-charcoal/10 group-hover:decoration-terracotta/30">Get Started</span>
           </button>
         </div>
       </div>

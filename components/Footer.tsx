@@ -27,8 +27,9 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <button onClick={() => onNavigate('academy')} className="text-left hover:text-terracotta transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta rounded underline-offset-4 hover:underline">Academy</button>
             <button onClick={() => onNavigate('blog')} className="text-left hover:text-terracotta transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta rounded underline-offset-4 hover:underline">Blog</button>
             <button onClick={() => onNavigate('approach')} className="text-left hover:text-terracotta transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta rounded underline-offset-4 hover:underline">How We Build</button>
+            <button onClick={() => onNavigate('faq')} className="text-left hover:text-terracotta transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta rounded underline-offset-4 hover:underline">FAQ</button>
             <button onClick={() => onNavigate('about')} className="text-left hover:text-terracotta transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta rounded underline-offset-4 hover:underline">About</button>
-            <button onClick={() => onNavigate('start')} className="text-left hover:text-terracotta transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta rounded underline-offset-4 hover:underline">Start a Project</button>
+            <button onClick={() => onNavigate('start')} className="text-left hover:text-terracotta transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta rounded underline-offset-4 hover:underline">Get Started</button>
           </div>
           <div className="flex flex-col gap-2">
             <span className="text-xs font-bold uppercase tracking-widest text-charcoal/40">Connect</span>

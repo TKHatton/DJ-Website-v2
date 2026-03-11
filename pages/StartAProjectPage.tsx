@@ -117,7 +117,7 @@ const StartAProjectPage: React.FC<StartAProjectPageProps> = ({ onNavigate }) => 
       <div className="py-24 px-6 md:px-12 lg:px-20">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h1 className="font-accent text-4xl md:text-5xl text-charcoal mb-4">
-            Start a Project
+            Get Started
           </h1>
           <p className="text-charcoal/70 text-lg leading-relaxed max-w-2xl mx-auto">
             You have workflows that could run smarter. Tell us about them. We

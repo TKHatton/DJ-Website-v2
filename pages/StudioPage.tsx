@@ -3,60 +3,60 @@ import React, { useState } from 'react';
 
 const tiers = [
   {
-    name: 'Agent Starter',
-    agents: '1 to 3 agents',
+    name: 'Agent Core',
+    scope: 'One workflow. One team.',
     accent: 'terracotta',
     color: 'bg-terracotta/10',
     borderColor: 'border-terracotta/20',
     textColor: 'text-terracotta',
     badge: null as string | null,
-    description: 'For businesses with one specific workflow problem to solve.',
+    description: 'You have a specific bottleneck that eats your time. We automate it end-to-end with a focused agent system built around that one workflow.',
     includes: [
-      'Discovery session to understand your bottleneck',
-      'System architecture and agent design',
+      'Discovery session to map your bottleneck',
+      'Targeted system architecture',
       'Full build and deployment',
       'Access to the running system (never the code)',
       'Handoff walkthrough and documentation'
     ],
-    goodFor: 'Solo founders, small teams, and businesses with a specific bottleneck that needs solving now.',
+    goodFor: 'Solo founders and small teams with one workflow that needs to stop being manual.',
     price: 'Starting at $X,XXX'
   },
   {
     name: 'Agent System',
-    agents: '4 to 10 agents',
+    scope: 'Multiple workflows. Connected.',
     accent: 'honey',
     color: 'bg-honey/10',
     borderColor: 'border-honey/20',
     textColor: 'text-honey',
     badge: 'Most Popular',
-    description: 'For businesses with multiple connected workflows to automate.',
+    description: 'Your workflows do not exist in isolation. Neither should your agents. We orchestrate multiple processes so they communicate, hand off tasks, and share context automatically.',
     includes: [
       'Deep discovery across multiple workflows',
-      'Full orchestration between agents',
+      'Cross-functional agent orchestration',
       'Complex integrations with your existing tools',
-      'Agents that communicate and hand off tasks to each other',
+      'Agents that communicate and coordinate autonomously',
       'System access, dashboards, and documentation'
     ],
-    goodFor: 'Growing businesses, operations teams, and companies with multi-step processes that need to talk to each other.',
+    goodFor: 'Growing businesses with multi-step processes across teams that need to work together without manual handoffs.',
     price: 'Starting at $X,XXX'
   },
   {
-    name: 'Agent Infrastructure',
-    agents: '10+ agents',
+    name: 'Agent Scale',
+    scope: 'Full operational backbone.',
     accent: 'teal',
     color: 'bg-teal/10',
     borderColor: 'border-teal/20',
     textColor: 'text-teal',
     badge: null as string | null,
-    description: 'A full operational system across your business.',
+    description: 'Your entire business runs on a system, not on you remembering what to do next. We build the operational infrastructure that connects departments, automates decisions, and keeps everything moving.',
     includes: [
       'Comprehensive discovery across departments',
-      'Multi-department agent architecture',
-      'Cross-team workflows and data flow',
+      'Full operational system architecture',
+      'Cross-department workflows and data flow',
       'Monitoring, logging, and system health dashboards',
       'Ongoing architecture support during rollout'
     ],
-    goodFor: 'Established businesses with multi-department operations ready for a connected, intelligent infrastructure.',
+    goodFor: 'Established businesses ready to replace scattered tools and manual processes with one intelligent, connected system.',
     price: 'Starting at $XX,XXX'
   }
 ];
@@ -85,7 +85,7 @@ const faqs = [
   },
   {
     question: 'How long does a typical build take?',
-    answer: 'Agent Starters usually take 2 to 4 weeks. Agent Systems take 4 to 8 weeks. Infrastructure projects are scoped individually based on the complexity and number of departments involved.'
+    answer: 'Agent Core projects usually take 2 to 4 weeks. Agent System builds take 4 to 8 weeks. Agent Scale projects are scoped individually based on the complexity and number of departments involved.'
   },
   {
     question: 'What if I need changes after delivery?',
@@ -145,7 +145,7 @@ const StudioPage: React.FC<StudioPageProps> = ({ onNavigate }) => {
 
                 <div className="mb-6">
                   <span className={`text-xs font-bold uppercase tracking-widest ${tier.textColor}`}>
-                    {tier.agents}
+                    {tier.scope}
                   </span>
                 </div>
 
@@ -308,7 +308,7 @@ const StudioPage: React.FC<StudioPageProps> = ({ onNavigate }) => {
               onClick={() => onNavigate('start')}
               className="bg-charcoal text-cream px-10 py-5 rounded-full font-bold hover:bg-terracotta transition-all text-lg shadow-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta"
             >
-              Start a project
+              Get Started
             </button>
             <a
               href="mailto:info@digitaljaywalking.com"

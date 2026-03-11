@@ -60,13 +60,13 @@ const whyLearnWithUs = [
 
 const instructors = [
   {
-    name: 'LT Kenney',
+    name: 'Lenise',
     role: 'Co-founder',
     description: 'Builds multi-agent AI systems and teaches others how to think about automation, workflows, and AI architecture. Focused on making complex technology accessible and useful.',
     accent: 'text-plum'
   },
   {
-    name: 'Julian Kenney',
+    name: 'Julian',
     role: 'Co-founder',
     description: 'Brings a strategic lens to technology and operations. Focused on helping businesses understand where AI fits into their growth and how to adopt it with confidence.',
     accent: 'text-teal'

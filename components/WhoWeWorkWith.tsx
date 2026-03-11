@@ -29,7 +29,7 @@ const WhoWeWorkWith: React.FC<WhoWeWorkWithProps> = ({ onNavigate }) => {
             onClick={() => onNavigate('start')}
             className="bg-charcoal text-cream px-10 py-5 rounded-full font-semibold hover:bg-terracotta transition-all shadow-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta"
           >
-            Start a project
+            Get Started
           </button>
         </div>
 

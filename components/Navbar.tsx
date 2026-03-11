@@ -11,7 +11,8 @@ const navLinks = [
   { path: 'academy', label: 'Academy', color: 'honey' },
   { path: 'blog', label: 'Blog', color: 'teal' },
   { path: 'about', label: 'About', color: 'plum' },
-  { path: 'start', label: 'Start a Project', color: 'terracotta' },
+  { path: 'faq', label: 'FAQ', color: 'teal' },
+  { path: 'start', label: 'Get Started', color: 'terracotta' },
 ];
 
 const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPath }) => {
