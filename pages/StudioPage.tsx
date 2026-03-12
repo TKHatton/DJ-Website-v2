@@ -295,24 +295,26 @@ const StudioPage: React.FC<StudioPageProps> = ({ onNavigate }) => {
       <AgentDemo onNavigate={onNavigate} />
 
       {/* CTA */}
-      <section className="pt-24 pb-12 max-w-7xl mx-auto px-6 md:px-12 text-center">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-4xl md:text-6xl font-accent font-black mb-8">
+      <section className="relative py-32 bg-charcoal overflow-hidden">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-terracotta/15 rounded-full blur-[120px] pointer-events-none"></div>
+        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-honey/10 rounded-full blur-[100px] pointer-events-none"></div>
+        <div className="relative z-10 max-w-3xl mx-auto px-6 md:px-12 text-center">
+          <h2 className="text-4xl md:text-6xl font-accent font-black mb-8 text-cream">
             Ready to build something?
           </h2>
-          <p className="text-xl text-charcoal/70 mb-12 leading-relaxed">
+          <p className="text-xl text-cream/60 mb-12 leading-relaxed">
             Tell us what is slowing you down. We will show you what an agent system can do about it.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-6">
             <button
               onClick={() => onNavigate('start')}
-              className="bg-charcoal text-cream px-10 py-5 rounded-full font-bold hover:bg-terracotta transition-all text-lg shadow-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta"
+              className="bg-terracotta text-cream px-10 py-5 rounded-full font-bold hover:bg-terracotta/80 transition-all text-lg shadow-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-honey"
             >
               Get Started
             </button>
             <a
               href="mailto:info@digitaljaywalking.com"
-              className="border border-charcoal/20 text-charcoal px-10 py-5 rounded-full font-bold hover:bg-honey/10 transition-all text-lg flex items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta"
+              className="border border-cream/20 text-cream px-10 py-5 rounded-full font-bold hover:bg-cream/10 transition-all text-lg flex items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-honey"
             >
               Ask us a question
             </a>
