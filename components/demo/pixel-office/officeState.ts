@@ -5,6 +5,7 @@ import {
   CAMERA_LERP_SPEED,
 } from './constants';
 import { createCharacter, updateCharacter } from './characters';
+import { WHITEBOARD_PROGRESS_SPRITE, WHITEBOARD_FULL_SPRITE, WHITEBOARD_SPRITE } from './sprites';
 import { createDJOfficeLayout, getBlockedTiles, layoutToFurnitureInstances, layoutToSeats, layoutToTileMap } from './layout';
 import { findPath, getWalkableTiles } from './tileMap';
 import type {
@@ -16,6 +17,7 @@ import type {
   TileType as TileTypeVal,
 } from './types';
 import { CharacterState, Direction } from './types';
+import type { WhiteboardTarget } from './types';
 
 export class OfficeState {
   layout: OfficeLayout;
@@ -29,6 +31,7 @@ export class OfficeState {
   activeAgentId: number | null = null;
   officePhase: 'idle' | 'active' | 'complete' = 'idle';
   whiteboardProgress: number = 0;
+  private whiteboardLocations: Array<{ standCol: number; standRow: number; facingDir: number }> = [];
 
   constructor(layout?: OfficeLayout) {
     this.layout = layout || createDJOfficeLayout();
@@ -37,6 +40,19 @@ export class OfficeState {
     this.blockedTiles = getBlockedTiles(this.layout.furniture);
     this.furniture = layoutToFurnitureInstances(this.layout.furniture);
     this.walkableTiles = getWalkableTiles(this.tileMap, this.blockedTiles);
+    // Compute whiteboard stand positions (tiles adjacent to whiteboards)
+    for (const f of this.layout.furniture) {
+      if (f.type === 'whiteboard') {
+        // Whiteboard is 2x1 tiles. Agent stands in front of it.
+        // Bottom wall whiteboard (row 12): stand at row 11, face DOWN
+        // Top wall whiteboard (row 1): stand at row 2, face UP
+        if (f.row >= 10) {
+          this.whiteboardLocations.push({ standCol: f.col, standRow: f.row - 1, facingDir: Direction.DOWN });
+        } else {
+          this.whiteboardLocations.push({ standCol: f.col, standRow: f.row + 1, facingDir: Direction.UP });
+        }
+      }
+    }
     // Initialize camera to center of office
     const cx = this.layout.cols * TILE_SIZE / 2;
     const cy = this.layout.rows * TILE_SIZE / 2;
@@ -78,10 +94,32 @@ export class OfficeState {
     const ch = this.characters.get(id);
     if (!ch) return;
     ch.isActive = active;
+    if (active && this.whiteboardLocations.length > 0) {
+      // Only specific agents visit the whiteboard (not everyone)
+      // Agent 1 uses whiteboard-0 (left room), Agent 4 uses whiteboard-1 (right room)
+      const whiteboardAgents = [1, 4];
+      if (whiteboardAgents.includes(id)) {
+        const wbIdx = id <= 2 ? 0 : Math.min(1, this.whiteboardLocations.length - 1);
+        const wb = this.whiteboardLocations[wbIdx];
+        if (wb) {
+          ch.whiteboardTarget = {
+            col: wb.standCol,
+            row: wb.standRow,
+            facingDir: wb.facingDir as any,
+          };
+          ch.whiteboardTimer = 0;
+        }
+      }
+      // Update whiteboard sprites progressively
+      this.whiteboardProgress = Math.min(this.whiteboardProgress + 1, 6);
+      this.updateWhiteboardSprites();
+    }
     if (!active) {
       ch.seatTimer = -1; // sentinel: skip long rest on arrival
       ch.path = [];
       ch.moveProgress = 0;
+      ch.whiteboardTarget = null;
+      ch.whiteboardTimer = 0;
     }
   }
 
@@ -138,6 +176,8 @@ export class OfficeState {
       });
     } else if (newPhase === 'idle' && wasComplete) {
       // Transition from complete to idle: reset all characters to desks
+      this.whiteboardProgress = 0;
+      this.updateWhiteboardSprites();
       for (const ch of this.characters.values()) {
         ch.state = CharacterState.IDLE;
         ch.isActive = false;
@@ -145,6 +185,8 @@ export class OfficeState {
         ch.bubbleTimer = 0;
         ch.frame = 0;
         ch.frameTimer = 0;
+        ch.whiteboardTarget = null;
+        ch.whiteboardTimer = 0;
         if (ch.seatId) {
           const seat = this.seats.get(ch.seatId);
           if (seat) {
@@ -171,6 +213,29 @@ export class OfficeState {
 
   private ownSeatKey(ch: Character): string | null {
     return this.getSeatKey(ch);
+  }
+
+  private updateWhiteboardSprites(): void {
+    // Swap whiteboard sprites based on progress
+    const wbSprite = this.whiteboardProgress >= 4
+      ? WHITEBOARD_FULL_SPRITE
+      : this.whiteboardProgress >= 2
+        ? WHITEBOARD_PROGRESS_SPRITE
+        : WHITEBOARD_SPRITE;
+
+    // Find whiteboard furniture instances and update their sprites
+    const wbFurniture = this.layout.furniture.filter(f => f.type === 'whiteboard');
+    for (const wbPlaced of wbFurniture) {
+      const x = wbPlaced.col * 16;
+      const y = wbPlaced.row * 16;
+      // Find matching instance by position
+      for (const inst of this.furniture) {
+        if (inst.x === x && inst.y === y) {
+          inst.sprite = wbSprite;
+          break;
+        }
+      }
+    }
   }
 
   update(dt: number): void {

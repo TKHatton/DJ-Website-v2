@@ -204,12 +204,18 @@ const AgentDemo: React.FC<AgentDemoProps> = ({ onNavigate }) => {
             Live Demo
           </span>
           <h2 className="text-4xl md:text-5xl font-accent font-black mt-3 mb-4">
-            See multi-agent AI in action.
+            What does a multi-agent system actually look like?
           </h2>
           <p className="text-lg text-charcoal/60 max-w-2xl leading-relaxed">
-            Pick a story, customize the details, and watch 6 AI agents coordinate
-            behind the scenes to build something together. This is a simplified
-            visualization of how our agent systems work.
+            Below is a working example. Six AI agents take random inputs you
+            provide, divide the work between them, and coordinate to produce
+            a single creative output: a unique story. The pixel office is a
+            simplified visualization of what that coordination looks like in
+            real time.
+          </p>
+          <p className="text-base text-charcoal/50 max-w-2xl leading-relaxed mt-3">
+            Now imagine that instead of a story, those agents are handling your
+            intake forms, scheduling, reporting, or client onboarding.
           </p>
           <div className="w-20 h-1 bg-terracotta rounded-full mt-6" aria-hidden="true" />
         </div>

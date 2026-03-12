@@ -24,7 +24,7 @@ import {
   BUBBLE_DOTS_DURATION_SEC,
 } from './constants';
 import { findPath } from './tileMap';
-import type { Character, Seat, TileType as TileTypeVal, SpriteData } from './types';
+import type { Character, Seat, TileType as TileTypeVal, SpriteData, WhiteboardTarget } from './types';
 import { CharacterState, Direction } from './types';
 import type { CharacterSprites } from './sprites';
 
@@ -60,7 +60,7 @@ export function createCharacter(
   const center = tileCenter(col, row);
   return {
     id,
-    state: CharacterState.IDLE,
+    state: seat ? CharacterState.TYPE : CharacterState.IDLE,
     dir: seat ? seat.facingDir : Direction.DOWN,
     x: center.x,
     y: center.y,
@@ -77,9 +77,11 @@ export function createCharacter(
     wanderLimit: randomInt(WANDER_MOVES_BEFORE_REST_MIN, WANDER_MOVES_BEFORE_REST_MAX),
     isActive: false,
     seatId,
-    seatTimer: 0,
+    seatTimer: seat ? randomRange(15, 45) : 0,
     bubble: 'none',
     bubbleTimer: 0,
+    whiteboardTarget: null,
+    whiteboardTimer: 0,
   };
 }
 
@@ -130,6 +132,26 @@ export function updateCharacter(
         }
       }
 
+      // During active phase, ALL agents stay at desks typing
+      // But if at whiteboard, count down timer then go to desk
+      if (officePhase === 'active') {
+        if (ch.whiteboardTarget && ch.whiteboardTimer > 0) {
+          ch.whiteboardTimer -= dt;
+          if (ch.whiteboardTimer <= 0) {
+            // Done writing on whiteboard, go to desk
+            ch.whiteboardTarget = null;
+            ch.whiteboardTimer = 0;
+            ch.state = CharacterState.IDLE;
+            ch.bubble = 'gear';
+            ch.bubbleTimer = 0;
+            ch.frame = 0;
+            ch.frameTimer = 0;
+          }
+          break;
+        }
+        break;
+      }
+
       if (!ch.isActive) {
         if (ch.seatTimer > 0) {
           ch.seatTimer -= dt;
@@ -156,6 +178,39 @@ export function updateCharacter(
       ch.frame = 0;
       if (ch.seatTimer < 0) ch.seatTimer = 0;
 
+      // During active phase, ALL agents go straight to their desks
+      if (officePhase === 'active' && ch.seatId) {
+        const seat = seats.get(ch.seatId);
+        if (seat) {
+          if (ch.tileCol === seat.seatCol && ch.tileRow === seat.seatRow) {
+            ch.state = CharacterState.TYPE;
+            ch.dir = seat.facingDir;
+            ch.frame = 0;
+            ch.frameTimer = 0;
+            ch.bubble = ch.isActive ? 'gear' : 'none';
+            ch.bubbleTimer = 0;
+            break;
+          }
+          const seatKey = seat.seatCol + ',' + seat.seatRow;
+          blockedTiles.delete(seatKey);
+          const pathToSeat = findPath(ch.tileCol, ch.tileRow, seat.seatCol, seat.seatRow, tileMap, blockedTiles);
+          blockedTiles.add(seatKey);
+          if (pathToSeat.length > 0) {
+            ch.path = pathToSeat;
+            ch.moveProgress = 0;
+            ch.state = CharacterState.WALK;
+            ch.frame = 0;
+            ch.frameTimer = 0;
+          } else {
+            // Can't path to seat, just start typing where we are
+            ch.state = CharacterState.TYPE;
+            ch.frame = 0;
+            ch.frameTimer = 0;
+          }
+        }
+        break;
+      }
+
       if (officePhase === 'idle' && ch.seatId && !ch.isActive) {
         const seat = seats.get(ch.seatId);
         if (seat && ch.tileCol === seat.seatCol && ch.tileRow === seat.seatRow) {
@@ -169,6 +224,33 @@ export function updateCharacter(
       }
 
       if (ch.isActive) {
+        // If agent has a whiteboard target, go there first
+        if (ch.whiteboardTarget) {
+          const wb = ch.whiteboardTarget;
+          if (ch.tileCol === wb.col && ch.tileRow === wb.row) {
+            // Already at whiteboard - start writing
+            ch.state = CharacterState.TYPE;
+            ch.dir = wb.facingDir;
+            ch.frame = 0;
+            ch.frameTimer = 0;
+            ch.bubble = 'lightbulb';
+            ch.bubbleTimer = 0;
+            ch.whiteboardTimer = 2.5 + Math.random() * 1.5; // 2.5-4 seconds
+            break;
+          }
+          const wbPath = findPath(ch.tileCol, ch.tileRow, wb.col, wb.row, tileMap, blockedTiles);
+          if (wbPath.length > 0) {
+            ch.path = wbPath;
+            ch.moveProgress = 0;
+            ch.state = CharacterState.WALK;
+            ch.frame = 0;
+            ch.frameTimer = 0;
+            break;
+          }
+          // Can't reach whiteboard, skip to desk
+          ch.whiteboardTarget = null;
+        }
+
         if (!ch.seatId) {
           ch.state = CharacterState.TYPE;
           ch.frame = 0;
@@ -265,6 +347,20 @@ export function updateCharacter(
         ch.y = center.y;
 
         if (ch.isActive) {
+          // Check if arrived at whiteboard target
+          if (ch.whiteboardTarget) {
+            const wb = ch.whiteboardTarget;
+            if (ch.tileCol === wb.col && ch.tileRow === wb.row) {
+              ch.state = CharacterState.TYPE;
+              ch.dir = wb.facingDir;
+              ch.bubble = 'lightbulb';
+              ch.bubbleTimer = 0;
+              ch.whiteboardTimer = 2.5 + Math.random() * 1.5;
+              ch.frame = 0;
+              ch.frameTimer = 0;
+              break;
+            }
+          }
           if (!ch.seatId) {
             ch.state = CharacterState.TYPE;
             ch.bubble = 'gear';
@@ -329,15 +425,28 @@ export function updateCharacter(
         ch.moveProgress = 0;
       }
 
-      if (ch.isActive && ch.seatId) {
-        const seat = seats.get(ch.seatId);
-        if (seat) {
+      if (ch.isActive) {
+        // If heading to whiteboard, path to whiteboard
+        if (ch.whiteboardTarget) {
+          const wb = ch.whiteboardTarget;
           const lastStep = ch.path[ch.path.length - 1];
-          if (!lastStep || lastStep.col !== seat.seatCol || lastStep.row !== seat.seatRow) {
-            const newPath = findPath(ch.tileCol, ch.tileRow, seat.seatCol, seat.seatRow, tileMap, blockedTiles);
+          if (!lastStep || lastStep.col !== wb.col || lastStep.row !== wb.row) {
+            const newPath = findPath(ch.tileCol, ch.tileRow, wb.col, wb.row, tileMap, blockedTiles);
             if (newPath.length > 0) {
               ch.path = newPath;
               ch.moveProgress = 0;
+            }
+          }
+        } else if (ch.seatId) {
+          const seat = seats.get(ch.seatId);
+          if (seat) {
+            const lastStep = ch.path[ch.path.length - 1];
+            if (!lastStep || lastStep.col !== seat.seatCol || lastStep.row !== seat.seatRow) {
+              const newPath = findPath(ch.tileCol, ch.tileRow, seat.seatCol, seat.seatRow, tileMap, blockedTiles);
+              if (newPath.length > 0) {
+                ch.path = newPath;
+                ch.moveProgress = 0;
+              }
             }
           }
         }

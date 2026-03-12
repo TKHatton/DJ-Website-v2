@@ -7,10 +7,10 @@ export const WALK_FRAME_DURATION_SEC = 0.15;
 export const TYPE_FRAME_DURATION_SEC = 0.3;
 export const WANDER_PAUSE_MIN_SEC = 2.0;
 export const WANDER_PAUSE_MAX_SEC = 12.0;
-export const WANDER_MOVES_BEFORE_REST_MIN = 3;
-export const WANDER_MOVES_BEFORE_REST_MAX = 6;
-export const SEAT_REST_MIN_SEC = 8.0;
-export const SEAT_REST_MAX_SEC = 20.0;
+export const WANDER_MOVES_BEFORE_REST_MIN = 1;
+export const WANDER_MOVES_BEFORE_REST_MAX = 2;
+export const SEAT_REST_MIN_SEC = 40.0;
+export const SEAT_REST_MAX_SEC = 120.0;
 
 // Rendering
 export const CHARACTER_SITTING_OFFSET_PX = 6;
@@ -29,9 +29,9 @@ export const FLOOR_FALLBACK_COLOR = '#808080';
 export const FLOOR_GRID_ALPHA = 0.12;
 
 // Calm office (pre-generation)
-export const CALM_IDLE_PAUSE_MIN_SEC = 8.0;
-export const CALM_IDLE_PAUSE_MAX_SEC = 25.0;
-export const CALM_STAND_CHANCE = 0.15;
+export const CALM_IDLE_PAUSE_MIN_SEC = 3.0;
+export const CALM_IDLE_PAUSE_MAX_SEC = 8.0;
+export const CALM_STAND_CHANCE = 0.05;
 export const CALM_TYPE_FRAME_DURATION_SEC = 0.5;
 
 // Active work mode

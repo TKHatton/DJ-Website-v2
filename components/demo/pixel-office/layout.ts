@@ -191,33 +191,29 @@ export function createDJOfficeLayout(): OfficeLayout {
     { uid: 'pc-5', type: 'pc', col: 12, row: 9 },
     { uid: 'lamp-5', type: 'lamp', col: 13, row: 9 },
 
-    // === PLANTS (generous placement for life/color) ===
+    // === PLANTS (corners and wall edges only) ===
     { uid: 'plant-0', type: 'plant', col: 1, row: 1 },
     { uid: 'plant-1', type: 'plant_tall', col: 8, row: 1 },
-    { uid: 'plant-2', type: 'plant', col: 1, row: 6 },
-    { uid: 'plant-3', type: 'plant_tall', col: 9, row: 5 },
     { uid: 'cactus-0', type: 'cactus', col: 1, row: 12 },
     { uid: 'plant-5', type: 'plant', col: 20, row: 1 },
-    { uid: 'plant-6', type: 'plant_tall', col: 20, row: 6 },
     { uid: 'plant-7', type: 'plant', col: 20, row: 12 },
-    { uid: 'cactus-1', type: 'cactus', col: 9, row: 12 },
-    { uid: 'plant-8', type: 'plant', col: 11, row: 12 },
 
-    // === STORAGE & WALL ITEMS ===
+    // === WHITEBOARDS (against walls) ===
+    { uid: 'whiteboard-0', type: 'whiteboard', col: 5, row: 12 },
+    { uid: 'whiteboard-1', type: 'whiteboard', col: 17, row: 1 },
+
+    // === STORAGE (against walls) ===
     { uid: 'bookshelf-0', type: 'bookshelf', col: 8, row: 8 },
-    { uid: 'bookshelf-1', type: 'bookshelf', col: 19, row: 5 },
-    { uid: 'bookshelf-2', type: 'bookshelf', col: 1, row: 9 },
-    { uid: 'whiteboard-0', type: 'whiteboard', col: 16, row: 8 },
+    { uid: 'bookshelf-1', type: 'bookshelf', col: 19, row: 8 },
 
     // Windows on top walls
     { uid: 'window-0', type: 'window', col: 3, row: 0 },
     { uid: 'window-1', type: 'window', col: 14, row: 0 },
 
-    // === MISC ITEMS ===
-    { uid: 'cooler-0', type: 'cooler', col: 5, row: 12 },
-    { uid: 'coffee-0', type: 'coffee_machine', col: 7, row: 12 },
+    // === MISC ITEMS (against walls) ===
+    { uid: 'cooler-0', type: 'cooler', col: 7, row: 12 },
+    { uid: 'coffee-0', type: 'coffee_machine', col: 8, row: 12 },
     { uid: 'server-0', type: 'server_rack', col: 11, row: 1 },
-    { uid: 'rug-0', type: 'rug', col: 14, row: 6 },
   ];
 
   // Tile colors: uniform warm tones per room (no checkerboard)

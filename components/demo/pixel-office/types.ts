@@ -89,6 +89,12 @@ export interface OfficeLayout {
   tileColors?: Array<FloorColor | null>;
 }
 
+export interface WhiteboardTarget {
+  col: number;
+  row: number;
+  facingDir: Direction;
+}
+
 export interface Character {
   id: number;
   state: CharacterState;
@@ -111,4 +117,8 @@ export interface Character {
   seatTimer: number;
   bubble: 'none' | 'gear' | 'lightbulb' | 'check' | 'dots';
   bubbleTimer: number;
+  /** If set, agent walks to whiteboard first before desk */
+  whiteboardTarget: WhiteboardTarget | null;
+  /** Duration to write on whiteboard before going to desk */
+  whiteboardTimer: number;
 }
