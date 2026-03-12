@@ -158,42 +158,42 @@ export function createDJOfficeLayout(): OfficeLayout {
   const furniture: PlacedFurniture[] = [
     // === LEFT ROOM: 3 desks with chairs + PCs + lamps ===
 
-    // Desk 0 at (2,2) with PC and lamp
+    // Desk 0 at (2,2) with laptop and lamp
     { uid: 'desk-0', type: 'desk', col: 2, row: 2 },
     { uid: 'chair-0', type: 'chair', col: 3, row: 4 },
-    { uid: 'pc-0', type: 'pc', col: 2, row: 2 },
+    { uid: 'laptop-0', type: 'laptop', col: 2, row: 2 },
     { uid: 'lamp-0', type: 'lamp', col: 3, row: 2 },
 
-    // Desk 1 at (5,2) with PC and lamp
+    // Desk 1 at (5,2) with laptop and lamp
     { uid: 'desk-1', type: 'desk', col: 5, row: 2 },
     { uid: 'chair-1', type: 'chair', col: 6, row: 4 },
-    { uid: 'pc-1', type: 'pc', col: 5, row: 2 },
+    { uid: 'laptop-1', type: 'laptop', col: 5, row: 2 },
     { uid: 'lamp-1', type: 'lamp', col: 6, row: 2 },
 
-    // Desk 2 at (2,8) with PC and lamp
+    // Desk 2 at (2,8) with laptop and lamp
     { uid: 'desk-2', type: 'desk', col: 2, row: 8 },
     { uid: 'chair-2', type: 'chair', col: 3, row: 7 },
-    { uid: 'pc-2', type: 'pc', col: 2, row: 9 },
+    { uid: 'laptop-2', type: 'laptop', col: 2, row: 9 },
     { uid: 'lamp-2', type: 'lamp', col: 3, row: 9 },
 
-    // === RIGHT ROOM: 3 desks with chairs + PCs + lamps ===
+    // === RIGHT ROOM: 3 desks with chairs + laptops + lamps ===
 
-    // Desk 3 at (12,2) with PC and lamp
+    // Desk 3 at (12,2) with laptop and lamp
     { uid: 'desk-3', type: 'desk', col: 12, row: 2 },
     { uid: 'chair-3', type: 'chair', col: 13, row: 4 },
-    { uid: 'pc-3', type: 'pc', col: 12, row: 2 },
+    { uid: 'laptop-3', type: 'laptop', col: 12, row: 2 },
     { uid: 'lamp-3', type: 'lamp', col: 13, row: 2 },
 
-    // Desk 4 at (15,2) with PC and lamp
+    // Desk 4 at (15,2) with laptop and lamp
     { uid: 'desk-4', type: 'desk', col: 15, row: 2 },
     { uid: 'chair-4', type: 'chair', col: 16, row: 4 },
-    { uid: 'pc-4', type: 'pc', col: 15, row: 2 },
+    { uid: 'laptop-4', type: 'laptop', col: 15, row: 2 },
     { uid: 'lamp-4', type: 'lamp', col: 16, row: 2 },
 
-    // Desk 5 at (12,8) with PC and lamp
+    // Desk 5 at (12,8) with laptop and lamp
     { uid: 'desk-5', type: 'desk', col: 12, row: 8 },
     { uid: 'chair-5', type: 'chair', col: 13, row: 7 },
-    { uid: 'pc-5', type: 'pc', col: 12, row: 9 },
+    { uid: 'laptop-5', type: 'laptop', col: 12, row: 9 },
     { uid: 'lamp-5', type: 'lamp', col: 13, row: 9 },
 
     // === PLANTS (corners and wall edges only) ===

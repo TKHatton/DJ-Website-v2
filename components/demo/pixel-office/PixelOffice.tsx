@@ -134,7 +134,7 @@ const PixelOffice: React.FC<PixelOfficeProps> = ({ phase, revealIndex, agentCoun
           office.layout.tileColors,
           office.layout.cols,
           office.layout.rows,
-          office.camera,
+          // Camera follow disabled — map fits in viewport, use simple centering
         );
       },
     });

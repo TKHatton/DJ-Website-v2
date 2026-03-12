@@ -15,6 +15,8 @@ import StoryResult from './demo/StoryResult';
 import DemoLimitReached from './demo/DemoLimitReached';
 import DemoError from './demo/DemoError';
 
+const DEV_MOCK = (import.meta as any).env?.DEV ?? false;
+
 type DemoPhase =
   | 'select'
   | 'customize'
@@ -103,6 +105,22 @@ const AgentDemo: React.FC<AgentDemoProps> = ({ onNavigate }) => {
     setFinalStory('');
     setRevealIndex(-1);
     setErrorMessage('');
+
+    if (DEV_MOCK) {
+      setTimeout(() => {
+        setAgentOutputs([
+          { id: 'world-builder', summary: 'Built a rich enchanted forest with ancient trees and hidden glades.' },
+          { id: 'pathfinder', summary: 'Mapped the winding paths through the dark woods.' },
+          { id: 'strategist', summary: 'Planned the safest approach to the destination.' },
+          { id: 'chaos-engine', summary: 'Added unexpected twists and dangerous encounters.' },
+          { id: 'moral-weaver', summary: 'Wove in the lesson about courage and kindness.' },
+        ]);
+        setFinalStory('Once upon a time in a land far away, a brave young hero set out on a journey that would change everything...');
+        setPhase('revealing');
+        setRevealIndex(0);
+      }, 500);
+      return;
+    }
 
     try {
       const response = await fetch('/api/generate-story', {

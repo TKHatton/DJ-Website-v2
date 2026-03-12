@@ -239,6 +239,34 @@ export const PC_SPRITE: SpriteData = (() => {
   ];
 })();
 
+/** Laptop: 16x16 - open laptop with blue screen glow */
+export const LAPTOP_SPRITE: SpriteData = (() => {
+  const F = '#444444'; // frame / body
+  const S = '#333333'; // screen bezel
+  const B = '#5588CC'; // screen glow
+  const L = '#77AAEE'; // screen highlight
+  const K = '#555555'; // keyboard
+  const T = '#666666'; // trackpad / keys
+  return [
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, S, S, S, S, S, S, S, S, _, _, _, _],
+    [_, _, _, _, S, B, B, B, B, B, B, S, _, _, _, _],
+    [_, _, _, _, S, B, L, L, L, L, B, S, _, _, _, _],
+    [_, _, _, _, S, B, L, L, L, L, B, S, _, _, _, _],
+    [_, _, _, _, S, B, B, B, B, B, B, S, _, _, _, _],
+    [_, _, _, _, S, S, S, S, S, S, S, S, _, _, _, _],
+    [_, _, _, F, F, F, F, F, F, F, F, F, F, _, _, _],
+    [_, _, _, F, K, K, K, K, K, K, K, K, F, _, _, _],
+    [_, _, _, F, K, T, T, T, T, T, T, K, F, _, _, _],
+    [_, _, _, F, K, K, K, K, K, K, K, K, F, _, _, _],
+    [_, _, _, F, F, F, F, F, F, F, F, F, F, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+  ];
+})();
+
 /** Desk lamp: 16x16 - top-down lamp with light cone */
 export const LAMP_SPRITE: SpriteData = (() => {
   const Y = '#FFDD55';
@@ -495,6 +523,7 @@ export const FURNITURE_CATALOG: FurnitureCatalogEntry[] = [
   { type: 'window', label: 'Window', footprintW: 2, footprintH: 1, sprite: WINDOW_SPRITE, isDesk: false, category: 'decor', backgroundTiles: 1 },
   { type: 'cactus', label: 'Cactus', footprintW: 1, footprintH: 1, sprite: CACTUS_SPRITE, isDesk: false, category: 'decor' },
   { type: 'pc', label: 'PC Monitor', footprintW: 1, footprintH: 1, sprite: PC_SPRITE, isDesk: false, category: 'electronics' },
+  { type: 'laptop', label: 'Laptop', footprintW: 1, footprintH: 1, sprite: LAPTOP_SPRITE, isDesk: false, category: 'electronics' },
   { type: 'lamp', label: 'Desk Lamp', footprintW: 1, footprintH: 1, sprite: LAMP_SPRITE, isDesk: false, category: 'decor' }
 ];
 
