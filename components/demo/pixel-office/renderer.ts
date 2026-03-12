@@ -2,8 +2,10 @@ import {
   CHARACTER_SITTING_OFFSET_PX,
   CHARACTER_Z_SORT_OFFSET,
   TILE_SIZE,
-  WALL_COLOR,
+  WALL_COLOR_DARK,
+  WALL_COLOR_LIGHT,
   FLOOR_FALLBACK_COLOR,
+  FLOOR_GRID_ALPHA,
 } from './constants';
 import { getCachedSprite } from './spriteCache';
 import { getCharacterSprites, getBubbleSprite } from './sprites';
@@ -64,20 +66,51 @@ function renderTileGrid(
   const tmRows = tileMap.length;
   const tmCols = tmRows > 0 ? tileMap[0].length : 0;
   const layoutCols = cols ?? tmCols;
+  const brickH = Math.max(1, Math.round(s / 4));
 
   for (let r = 0; r < tmRows; r++) {
     for (let c = 0; c < tmCols; c++) {
       const tile = tileMap[r][c];
       if (tile === TileType.VOID) continue;
 
+      const tx = offsetX + c * s;
+      const ty = offsetY + r * s;
+
       if (tile === TileType.WALL) {
-        ctx.fillStyle = WALL_COLOR;
+        // Brick pattern: alternating dark/light rows with offset
+        const halfW = Math.round(s / 2);
+        for (let by = 0; by < s; by += brickH) {
+          const rowIdx = Math.floor(by / brickH);
+          const isLight = rowIdx % 2 === 0;
+          ctx.fillStyle = isLight ? WALL_COLOR_LIGHT : WALL_COLOR_DARK;
+          const brickOffset = rowIdx % 2 === 1 ? halfW : 0;
+          const drawH = Math.min(brickH, s - by);
+
+          // Draw two half-bricks with offset for staggered pattern
+          ctx.fillRect(tx, ty + by, s, drawH);
+          // Draw mortar line (1px darker line between bricks)
+          if (brickH > 2) {
+            ctx.fillStyle = WALL_COLOR_DARK;
+            ctx.fillRect(tx + brickOffset, ty + by, 1, drawH);
+            if (brickOffset + halfW < s) {
+              ctx.fillRect(tx + brickOffset + halfW, ty + by, 1, drawH);
+            }
+          }
+        }
       } else {
+        // Floor tile
         const colorIdx = r * layoutCols + c;
         const color = tileColors?.[colorIdx];
         ctx.fillStyle = color ? floorColorToHex(color) : FLOOR_FALLBACK_COLOR;
+        ctx.fillRect(tx, ty, s, s);
+
+        // Grid lines on right and bottom edges
+        if (FLOOR_GRID_ALPHA > 0) {
+          ctx.fillStyle = `rgba(0,0,0,${FLOOR_GRID_ALPHA})`;
+          ctx.fillRect(tx + s - zoom, ty, zoom, s); // right edge
+          ctx.fillRect(tx, ty + s - zoom, s, zoom); // bottom edge
+        }
       }
-      ctx.fillRect(offsetX + c * s, offsetY + r * s, s, s);
     }
   }
 }

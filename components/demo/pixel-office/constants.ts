@@ -21,9 +21,12 @@ export const MAX_DELTA_TIME_SEC = 0.1;
 export const INACTIVE_SEAT_TIMER_MIN_SEC = 1.0;
 export const INACTIVE_SEAT_TIMER_RANGE_SEC = 2.0;
 
-// Wall color
+// Wall colors (brick pattern)
 export const WALL_COLOR = '#2A2A3A';
+export const WALL_COLOR_DARK = '#252535';
+export const WALL_COLOR_LIGHT = '#2F2F42';
 export const FLOOR_FALLBACK_COLOR = '#808080';
+export const FLOOR_GRID_ALPHA = 0.08;
 
 // Calm office (pre-generation)
 export const CALM_IDLE_PAUSE_MIN_SEC = 8.0;

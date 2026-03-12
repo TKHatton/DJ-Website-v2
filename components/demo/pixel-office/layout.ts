@@ -189,8 +189,8 @@ export function createDJOfficeLayout(): OfficeLayout {
 
     // Plants in corners
     { uid: 'plant-0', type: 'plant', col: 1, row: 1 },
-    { uid: 'plant-1', type: 'plant', col: 8, row: 1 },
-    { uid: 'plant-2', type: 'plant', col: 1, row: 12 },
+    { uid: 'plant-1', type: 'plant_tall', col: 8, row: 1 },
+    { uid: 'cactus-0', type: 'cactus', col: 1, row: 12 },
     { uid: 'plant-3', type: 'plant', col: 20, row: 1 },
     { uid: 'plant-4', type: 'plant', col: 20, row: 12 },
 
@@ -203,15 +203,32 @@ export function createDJOfficeLayout(): OfficeLayout {
 
     // Water cooler in left room
     { uid: 'cooler-0', type: 'cooler', col: 5, row: 12 },
+    // Windows on top walls
+    { uid: 'window-0', type: 'window', col: 3, row: 0 },
+    { uid: 'window-1', type: 'window', col: 14, row: 0 },
+
+    // Coffee machine near cooler in left room
+    { uid: 'coffee-0', type: 'coffee_machine', col: 7, row: 12 },
+
+    // Server rack in right room
+    { uid: 'server-0', type: 'server_rack', col: 11, row: 1 },
+
+    // Rug in center of right room
+    { uid: 'rug-0', type: 'rug', col: 14, row: 6 },
   ];
 
-  // Tile colors: warm beige for left room, warm brown for right room
-  const leftColor: FloorColor = { h: 35, s: 30, b: 15, c: 0 };
-  const rightColor: FloorColor = { h: 25, s: 45, b: 5, c: 10 };
+  // Tile colors: checkerboard pattern per room
+  const leftColorA: FloorColor = { h: 35, s: 30, b: 15, c: 0 };
+  const leftColorB: FloorColor = { h: 35, s: 28, b: 22, c: 0 };
+  const rightColorA: FloorColor = { h: 25, s: 45, b: 5, c: 10 };
+  const rightColorB: FloorColor = { h: 25, s: 42, b: 12, c: 10 };
   const tileColors: Array<FloorColor | null> = tiles.map((tile, i) => {
     if (tile === W) return null;
     const c = i % cols;
-    return c < 10 ? leftColor : rightColor;
+    const r = Math.floor(i / cols);
+    const isAlt = (r + c) % 2 === 0;
+    if (c < 10) return isAlt ? leftColorA : leftColorB;
+    return isAlt ? rightColorA : rightColorB;
   });
 
   return { version: 1, cols, rows, tiles, furniture, tileColors };
