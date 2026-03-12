@@ -37,6 +37,11 @@ export function layoutToFurnitureInstances(furniture: PlacedFurniture[]): Furnit
       zY = (item.row + 1) * TILE_SIZE;
     }
 
+    // Desktop items (PCs, lamps) render on top of desks
+    if (entry.category === 'electronics' || item.type === 'lamp') {
+      zY = y + TILE_SIZE * 2 + 0.5;
+    }
+
     instances.push({ sprite: entry.sprite, x, y, zY });
   }
   return instances;

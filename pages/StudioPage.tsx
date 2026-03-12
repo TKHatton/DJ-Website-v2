@@ -239,7 +239,7 @@ const StudioPage: React.FC<StudioPageProps> = ({ onNavigate }) => {
 
       {/* Pricing Note */}
       <section className="py-24 max-w-7xl mx-auto px-6 md:px-12">
-        <div className="bg-charcoal text-cream rounded-[60px] p-12 md:p-20 relative overflow-hidden">
+        <div className="bg-teal text-cream rounded-[60px] p-12 md:p-20 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-honey/10 rounded-full blur-3xl pointer-events-none"></div>
           <div className="relative z-10 max-w-3xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-accent font-bold mb-8">A note on pricing</h2>
@@ -295,14 +295,14 @@ const StudioPage: React.FC<StudioPageProps> = ({ onNavigate }) => {
       <AgentDemo onNavigate={onNavigate} />
 
       {/* CTA */}
-      <section className="relative py-32 bg-charcoal overflow-hidden">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-terracotta/15 rounded-full blur-[120px] pointer-events-none"></div>
-        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-honey/10 rounded-full blur-[100px] pointer-events-none"></div>
+      <section className="relative py-32 bg-cream overflow-hidden">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-terracotta/10 rounded-full blur-[120px] pointer-events-none"></div>
+        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-honey/15 rounded-full blur-[100px] pointer-events-none"></div>
         <div className="relative z-10 max-w-3xl mx-auto px-6 md:px-12 text-center">
-          <h2 className="text-4xl md:text-6xl font-accent font-black mb-8 text-cream">
+          <h2 className="text-4xl md:text-6xl font-accent font-black mb-8 text-charcoal">
             Ready to build something?
           </h2>
-          <p className="text-xl text-cream/60 mb-12 leading-relaxed">
+          <p className="text-xl text-charcoal/60 mb-12 leading-relaxed">
             Tell us what is slowing you down. We will show you what an agent system can do about it.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-6">
@@ -314,7 +314,7 @@ const StudioPage: React.FC<StudioPageProps> = ({ onNavigate }) => {
             </button>
             <a
               href="mailto:info@digitaljaywalking.com"
-              className="border border-cream/20 text-cream px-10 py-5 rounded-full font-bold hover:bg-cream/10 transition-all text-lg flex items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-honey"
+              className="border border-charcoal/20 text-charcoal px-10 py-5 rounded-full font-bold hover:bg-charcoal/5 transition-all text-lg flex items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-honey"
             >
               Ask us a question
             </a>
