@@ -1,12 +1,16 @@
+/**
+ * Pixel Office renderer.
+ * Rendering pipeline ported from pixel-agents reference.
+ * Custom features: phase-aware behavior, celebrate, camera follow, custom bubbles.
+ */
+
 import {
   CHARACTER_SITTING_OFFSET_PX,
   CHARACTER_Z_SORT_OFFSET,
   TILE_SIZE,
-  WALL_COLOR_DARK,
-  WALL_COLOR_LIGHT,
-  FLOOR_FALLBACK_COLOR,
-  FLOOR_GRID_ALPHA,
 } from './constants';
+import { getColorizedFloorSprite, hasFloorSprites, WALL_COLOR } from './floorTiles';
+import { hasWallSprites, getWallInstances, wallColorToHex } from './wallTiles';
 import { getCachedSprite } from './spriteCache';
 import { getCharacterSprites, getBubbleSprite } from './sprites';
 import { getCharacterSprite } from './characters';
@@ -20,38 +24,10 @@ import type {
 } from './types';
 import { CharacterState, TileType } from './types';
 
-// Simple HSL to hex conversion for floor coloring
-function hslToHex(h: number, s: number, l: number): string {
-  const c = (1 - Math.abs(2 * l - 1)) * s;
-  const hp = h / 60;
-  const x = c * (1 - Math.abs((hp % 2) - 1));
-  let r1 = 0, g1 = 0, b1 = 0;
-  if (hp < 1) { r1 = c; g1 = x; }
-  else if (hp < 2) { r1 = x; g1 = c; }
-  else if (hp < 3) { g1 = c; b1 = x; }
-  else if (hp < 4) { g1 = x; b1 = c; }
-  else if (hp < 5) { r1 = x; b1 = c; }
-  else { r1 = c; b1 = x; }
-  const m = l - c / 2;
-  const toHex = (v: number) => Math.max(0, Math.min(255, Math.round((v + m) * 255))).toString(16).padStart(2, '0');
-  return `#${toHex(r1)}${toHex(g1)}${toHex(b1)}`;
-}
+const FALLBACK_FLOOR_COLOR = '#808080';
+const GRID_LINE_COLOR = 'rgba(255,255,255,0.12)';
 
-function floorColorToHex(color: FloorColor): string {
-  let lightness = 0.4; // base floor lightness
-  if (color.b !== 0) lightness += color.b / 200;
-  if (color.c !== 0) {
-    const factor = (100 + color.c) / 100;
-    lightness = 0.5 + (lightness - 0.5) * factor;
-  }
-  lightness = Math.max(0, Math.min(1, lightness));
-  return hslToHex(color.h, color.s / 100, lightness);
-}
-
-interface ZDrawable {
-  zY: number;
-  draw: (ctx: CanvasRenderingContext2D) => void;
-}
+// ── Tile grid ─────────────────────────────────────────────────
 
 function renderTileGrid(
   ctx: CanvasRenderingContext2D,
@@ -63,56 +39,71 @@ function renderTileGrid(
   cols?: number,
 ): void {
   const s = TILE_SIZE * zoom;
+  const useSpriteFloors = hasFloorSprites();
   const tmRows = tileMap.length;
   const tmCols = tmRows > 0 ? tileMap[0].length : 0;
   const layoutCols = cols ?? tmCols;
-  const brickH = Math.max(1, Math.round(s / 4));
 
   for (let r = 0; r < tmRows; r++) {
     for (let c = 0; c < tmCols; c++) {
       const tile = tileMap[r][c];
       if (tile === TileType.VOID) continue;
 
-      const tx = offsetX + c * s;
-      const ty = offsetY + r * s;
-
-      if (tile === TileType.WALL) {
-        // Brick pattern: alternating dark/light rows with offset
-        const halfW = Math.round(s / 2);
-        for (let by = 0; by < s; by += brickH) {
-          const rowIdx = Math.floor(by / brickH);
-          const isLight = rowIdx % 2 === 0;
-          ctx.fillStyle = isLight ? WALL_COLOR_LIGHT : WALL_COLOR_DARK;
-          const brickOffset = rowIdx % 2 === 1 ? halfW : 0;
-          const drawH = Math.min(brickH, s - by);
-
-          // Draw two half-bricks with offset for staggered pattern
-          ctx.fillRect(tx, ty + by, s, drawH);
-          // Draw mortar line (1px darker line between bricks)
-          if (brickH > 2) {
-            ctx.fillStyle = WALL_COLOR_DARK;
-            ctx.fillRect(tx + brickOffset, ty + by, 1, drawH);
-            if (brickOffset + halfW < s) {
-              ctx.fillRect(tx + brickOffset + halfW, ty + by, 1, drawH);
-            }
-          }
+      if (tile === TileType.WALL || !useSpriteFloors) {
+        // Wall tiles or fallback: solid color
+        if (tile === TileType.WALL) {
+          const colorIdx = r * layoutCols + c;
+          const wallColor = tileColors?.[colorIdx];
+          ctx.fillStyle = wallColor ? wallColorToHex(wallColor) : WALL_COLOR;
+        } else {
+          ctx.fillStyle = FALLBACK_FLOOR_COLOR;
         }
-      } else {
-        // Floor tile
-        const colorIdx = r * layoutCols + c;
-        const color = tileColors?.[colorIdx];
-        ctx.fillStyle = color ? floorColorToHex(color) : FLOOR_FALLBACK_COLOR;
-        ctx.fillRect(tx, ty, s, s);
-
-        // Grid lines on right and bottom edges
-        if (FLOOR_GRID_ALPHA > 0) {
-          ctx.fillStyle = `rgba(0,0,0,${FLOOR_GRID_ALPHA})`;
-          ctx.fillRect(tx + s - zoom, ty, zoom, s); // right edge
-          ctx.fillRect(tx, ty + s - zoom, s, zoom); // bottom edge
-        }
+        ctx.fillRect(offsetX + c * s, offsetY + r * s, s, s);
+        continue;
       }
+
+      // Floor tile: colorized sprite
+      const colorIdx = r * layoutCols + c;
+      const color = tileColors?.[colorIdx] ?? { h: 0, s: 0, b: 0, c: 0 };
+      const sprite = getColorizedFloorSprite(tile, color);
+      const cached = getCachedSprite(sprite, zoom);
+      ctx.drawImage(cached, offsetX + c * s, offsetY + r * s);
     }
   }
+}
+
+// ── Grid overlay (subtle white lines) ──────────────────────────
+
+function renderGridOverlay(
+  ctx: CanvasRenderingContext2D,
+  offsetX: number,
+  offsetY: number,
+  zoom: number,
+  cols: number,
+  rows: number,
+): void {
+  const s = TILE_SIZE * zoom;
+  ctx.strokeStyle = GRID_LINE_COLOR;
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  for (let c = 0; c <= cols; c++) {
+    const x = offsetX + c * s + 0.5;
+    ctx.moveTo(x, offsetY);
+    ctx.lineTo(x, offsetY + rows * s);
+  }
+  for (let r = 0; r <= rows; r++) {
+    const y = offsetY + r * s + 0.5;
+    ctx.moveTo(offsetX, y);
+    ctx.lineTo(offsetX + cols * s, y);
+  }
+  ctx.stroke();
+}
+
+// ── Z-sorted scene ─────────────────────────────────────────────
+
+interface ZDrawable {
+  zY: number;
+  draw: (ctx: CanvasRenderingContext2D) => void;
 }
 
 function renderScene(
@@ -125,7 +116,7 @@ function renderScene(
 ): void {
   const drawables: ZDrawable[] = [];
 
-  // Furniture
+  // Furniture (includes wall instances when wall sprites are loaded)
   for (const f of furniture) {
     const cached = getCachedSprite(f.sprite, zoom);
     const fx = offsetX + f.x * zoom;
@@ -143,7 +134,7 @@ function renderScene(
     const cached = getCachedSprite(spriteData, zoom);
     const sittingOffset = ch.state === CharacterState.TYPE ? CHARACTER_SITTING_OFFSET_PX : 0;
 
-    // Celebrate bounce: sine-wave Y offset when celebrating and arrived at gathering point
+    // Celebrate bounce
     let celebrateBounce = 0;
     if (ch.state === CharacterState.CELEBRATE && ch.path.length === 0) {
       celebrateBounce = Math.sin(ch.frameTimer * 4) * 2 * zoom;
@@ -156,7 +147,7 @@ function renderScene(
     drawables.push({
       zY: charZY,
       draw: (c) => {
-        // Monitor glow for active typing characters
+        // Monitor glow for active typing
         if (ch.state === CharacterState.TYPE && ch.isActive) {
           const glowAlpha = 0.15 + Math.sin(Date.now() / 300) * 0.05;
           c.fillStyle = `rgba(100, 200, 255, ${glowAlpha})`;
@@ -190,6 +181,8 @@ function renderScene(
   }
 }
 
+// ── Main render frame ──────────────────────────────────────────
+
 export function renderFrame(
   ctx: CanvasRenderingContext2D,
   canvasWidth: number,
@@ -203,7 +196,6 @@ export function renderFrame(
   layoutRows?: number,
   camera?: Camera,
 ): void {
-  // Clear
   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
   const cols = layoutCols ?? (tileMap.length > 0 ? tileMap[0].length : 0);
@@ -213,7 +205,6 @@ export function renderFrame(
   let offsetY: number;
 
   if (camera) {
-    // Camera-based offset calculation
     const halfVW = canvasWidth / (2 * zoom);
     const halfVH = canvasHeight / (2 * zoom);
     const clampedX = Math.max(halfVW, Math.min(cols * TILE_SIZE - halfVW, camera.x));
@@ -221,16 +212,22 @@ export function renderFrame(
     offsetX = Math.floor(canvasWidth / 2 - clampedX * zoom);
     offsetY = Math.floor(canvasHeight / 2 - clampedY * zoom);
   } else {
-    // Fallback: center map in viewport
     const mapW = cols * TILE_SIZE * zoom;
     const mapH = rows * TILE_SIZE * zoom;
     offsetX = Math.floor((canvasWidth - mapW) / 2);
     offsetY = Math.floor((canvasHeight - mapH) / 2);
   }
 
-  // Draw tiles
+  // Draw floor tiles + wall base colors
   renderTileGrid(ctx, tileMap, offsetX, offsetY, zoom, tileColors, layoutCols);
 
-  // Draw furniture + characters (z-sorted)
-  renderScene(ctx, furniture, characters, offsetX, offsetY, zoom);
+  // Draw grid overlay (subtle white lines, matching reference)
+  renderGridOverlay(ctx, offsetX, offsetY, zoom, cols, rows);
+
+  // Build wall instances for z-sorting (auto-tiled wall sprites)
+  const wallInstances = hasWallSprites() ? getWallInstances(tileMap, tileColors, layoutCols) : [];
+  const allFurniture = wallInstances.length > 0 ? [...wallInstances, ...furniture] : furniture;
+
+  // Draw walls + furniture + characters (z-sorted)
+  renderScene(ctx, allFurniture, characters, offsetX, offsetY, zoom);
 }

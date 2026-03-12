@@ -3,6 +3,7 @@ import { OfficeState } from './officeState';
 import { startGameLoop } from './gameLoop';
 import { renderFrame } from './renderer';
 import { loadCharacterSpriteSheets } from './sprites';
+import { loadWallSpriteSheet } from './wallSpriteLoader';
 
 interface PixelOfficeProps {
   /** Current demo phase */
@@ -23,7 +24,7 @@ const PixelOffice: React.FC<PixelOfficeProps> = ({ phase, revealIndex, agentCoun
   // Initialize: load sprite sheets then create office state
   useEffect(() => {
     let cancelled = false;
-    loadCharacterSpriteSheets().then(() => {
+    Promise.all([loadCharacterSpriteSheets(), loadWallSpriteSheet()]).then(() => {
       if (cancelled) return;
       const office = new OfficeState();
       // Add agents with palette indices

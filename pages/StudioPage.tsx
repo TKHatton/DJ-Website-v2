@@ -20,7 +20,7 @@ const tiers = [
       'Handoff walkthrough and documentation'
     ],
     goodFor: 'Solo founders and small teams with one workflow that needs to stop being manual.',
-    price: 'Starting at $X,XXX'
+    price: 'Starting at $1,500'
   },
   {
     name: 'Agent System',
@@ -39,7 +39,7 @@ const tiers = [
       'System access, dashboards, and documentation'
     ],
     goodFor: 'Growing businesses with multi-step processes across teams that need to work together without manual handoffs.',
-    price: 'Starting at $X,XXX'
+    price: 'Starting at $5,000'
   },
   {
     name: 'Agent Scale',
@@ -58,7 +58,7 @@ const tiers = [
       'Ongoing architecture support during rollout'
     ],
     goodFor: 'Established businesses ready to replace scattered tools and manual processes with one intelligent, connected system.',
-    price: 'Starting at $XX,XXX'
+    price: 'Starting at $15,000'
   }
 ];
 

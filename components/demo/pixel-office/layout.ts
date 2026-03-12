@@ -151,84 +151,83 @@ export function createDJOfficeLayout(): OfficeLayout {
   //     -> desk tile (col, row) is directly below -> faces DOWN
   // ----------------------------------------------------------------
   const furniture: PlacedFurniture[] = [
-    // === LEFT ROOM: 3 desks with chairs ===
+    // === LEFT ROOM: 3 desks with chairs + PCs + lamps ===
 
-    // Desk 0 at (2,2): tiles (2,2)(3,2)(2,3)(3,3)
-    // Chair 0 at (3,4): adjacent to desk tile (3,3) above -> faces UP
+    // Desk 0 at (2,2) with PC and lamp
     { uid: 'desk-0', type: 'desk', col: 2, row: 2 },
     { uid: 'chair-0', type: 'chair', col: 3, row: 4 },
+    { uid: 'pc-0', type: 'pc', col: 2, row: 2 },
+    { uid: 'lamp-0', type: 'lamp', col: 3, row: 2 },
 
-    // Desk 1 at (5,2): tiles (5,2)(6,2)(5,3)(6,3)
-    // Chair 1 at (6,4): adjacent to desk tile (6,3) above -> faces UP
+    // Desk 1 at (5,2) with PC and lamp
     { uid: 'desk-1', type: 'desk', col: 5, row: 2 },
     { uid: 'chair-1', type: 'chair', col: 6, row: 4 },
+    { uid: 'pc-1', type: 'pc', col: 5, row: 2 },
+    { uid: 'lamp-1', type: 'lamp', col: 6, row: 2 },
 
-    // Desk 2 at (2,8): tiles (2,8)(3,8)(2,9)(3,9)
-    // Chair 2 at (3,7): adjacent to desk tile (3,8) below -> faces DOWN
+    // Desk 2 at (2,8) with PC and lamp
     { uid: 'desk-2', type: 'desk', col: 2, row: 8 },
     { uid: 'chair-2', type: 'chair', col: 3, row: 7 },
+    { uid: 'pc-2', type: 'pc', col: 2, row: 9 },
+    { uid: 'lamp-2', type: 'lamp', col: 3, row: 9 },
 
-    // === RIGHT ROOM: 3 desks with chairs + whiteboard ===
+    // === RIGHT ROOM: 3 desks with chairs + PCs + lamps ===
 
-    // Desk 3 at (12,2): tiles (12,2)(13,2)(12,3)(13,3)
-    // Chair 3 at (13,4): adjacent to desk tile (13,3) above -> faces UP
+    // Desk 3 at (12,2) with PC and lamp
     { uid: 'desk-3', type: 'desk', col: 12, row: 2 },
     { uid: 'chair-3', type: 'chair', col: 13, row: 4 },
+    { uid: 'pc-3', type: 'pc', col: 12, row: 2 },
+    { uid: 'lamp-3', type: 'lamp', col: 13, row: 2 },
 
-    // Desk 4 at (15,2): tiles (15,2)(16,2)(15,3)(16,3)
-    // Chair 4 at (16,4): adjacent to desk tile (16,3) above -> faces UP
+    // Desk 4 at (15,2) with PC and lamp
     { uid: 'desk-4', type: 'desk', col: 15, row: 2 },
     { uid: 'chair-4', type: 'chair', col: 16, row: 4 },
+    { uid: 'pc-4', type: 'pc', col: 15, row: 2 },
+    { uid: 'lamp-4', type: 'lamp', col: 16, row: 2 },
 
-    // Desk 5 at (12,8): tiles (12,8)(13,8)(12,9)(13,9)
-    // Chair 5 at (13,7): adjacent to desk tile (13,8) below -> faces DOWN
+    // Desk 5 at (12,8) with PC and lamp
     { uid: 'desk-5', type: 'desk', col: 12, row: 8 },
     { uid: 'chair-5', type: 'chair', col: 13, row: 7 },
+    { uid: 'pc-5', type: 'pc', col: 12, row: 9 },
+    { uid: 'lamp-5', type: 'lamp', col: 13, row: 9 },
 
-    // === DECORATIONS ===
-
-    // Plants in corners
+    // === PLANTS (generous placement for life/color) ===
     { uid: 'plant-0', type: 'plant', col: 1, row: 1 },
     { uid: 'plant-1', type: 'plant_tall', col: 8, row: 1 },
+    { uid: 'plant-2', type: 'plant', col: 1, row: 6 },
+    { uid: 'plant-3', type: 'plant_tall', col: 9, row: 5 },
     { uid: 'cactus-0', type: 'cactus', col: 1, row: 12 },
-    { uid: 'plant-3', type: 'plant', col: 20, row: 1 },
-    { uid: 'plant-4', type: 'plant', col: 20, row: 12 },
+    { uid: 'plant-5', type: 'plant', col: 20, row: 1 },
+    { uid: 'plant-6', type: 'plant_tall', col: 20, row: 6 },
+    { uid: 'plant-7', type: 'plant', col: 20, row: 12 },
+    { uid: 'cactus-1', type: 'cactus', col: 9, row: 12 },
+    { uid: 'plant-8', type: 'plant', col: 11, row: 12 },
 
-    // Bookshelves along walls (1x2 footprint each)
+    // === STORAGE & WALL ITEMS ===
     { uid: 'bookshelf-0', type: 'bookshelf', col: 8, row: 8 },
     { uid: 'bookshelf-1', type: 'bookshelf', col: 19, row: 5 },
-
-    // Whiteboard in right room (2x1 footprint)
+    { uid: 'bookshelf-2', type: 'bookshelf', col: 1, row: 9 },
     { uid: 'whiteboard-0', type: 'whiteboard', col: 16, row: 8 },
 
-    // Water cooler in left room
-    { uid: 'cooler-0', type: 'cooler', col: 5, row: 12 },
     // Windows on top walls
     { uid: 'window-0', type: 'window', col: 3, row: 0 },
     { uid: 'window-1', type: 'window', col: 14, row: 0 },
 
-    // Coffee machine near cooler in left room
+    // === MISC ITEMS ===
+    { uid: 'cooler-0', type: 'cooler', col: 5, row: 12 },
     { uid: 'coffee-0', type: 'coffee_machine', col: 7, row: 12 },
-
-    // Server rack in right room
     { uid: 'server-0', type: 'server_rack', col: 11, row: 1 },
-
-    // Rug in center of right room
     { uid: 'rug-0', type: 'rug', col: 14, row: 6 },
   ];
 
-  // Tile colors: checkerboard pattern per room
-  const leftColorA: FloorColor = { h: 35, s: 30, b: 15, c: 0 };
-  const leftColorB: FloorColor = { h: 35, s: 28, b: 22, c: 0 };
-  const rightColorA: FloorColor = { h: 25, s: 45, b: 5, c: 10 };
-  const rightColorB: FloorColor = { h: 25, s: 42, b: 12, c: 10 };
+  // Tile colors: uniform warm tones per room (no checkerboard)
+  const leftColor: FloorColor = { h: 35, s: 30, b: 15, c: 0 };
+  const rightColor: FloorColor = { h: 35, s: 28, b: 12, c: 0 };
   const tileColors: Array<FloorColor | null> = tiles.map((tile, i) => {
     if (tile === W) return null;
     const c = i % cols;
-    const r = Math.floor(i / cols);
-    const isAlt = (r + c) % 2 === 0;
-    if (c < 10) return isAlt ? leftColorA : leftColorB;
-    return isAlt ? rightColorA : rightColorB;
+    if (c < 10) return leftColor;
+    return rightColor;
   });
 
   return { version: 1, cols, rows, tiles, furniture, tileColors };

@@ -26,7 +26,7 @@ export const WALL_COLOR = '#2A2A3A';
 export const WALL_COLOR_DARK = '#252535';
 export const WALL_COLOR_LIGHT = '#2F2F42';
 export const FLOOR_FALLBACK_COLOR = '#808080';
-export const FLOOR_GRID_ALPHA = 0.08;
+export const FLOOR_GRID_ALPHA = 0.12;
 
 // Calm office (pre-generation)
 export const CALM_IDLE_PAUSE_MIN_SEC = 8.0;

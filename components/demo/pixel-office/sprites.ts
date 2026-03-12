@@ -5,225 +5,265 @@ const _ = '';
 
 // ─── Furniture Sprites ────────────────────────────────────────
 
-/** Square desk: 32x32 pixels (2x2 tiles) - wood desk with monitor, keyboard, and coffee mug */
+/** Square desk: 32x32 pixels (2x2 tiles) - 3/4 perspective with front panel */
 export const DESK_SPRITE: SpriteData = (() => {
-  const Wl = '#B8922E';
-  const Wm = '#A07828';
-  const Wd = '#8B6914';
-  const We = '#6B4E0A';
-  const Sc = '#222233';
-  const Sg = '#44BB66';
-  const Sb = '#4488CC';
-  const Sr = '#CC4444';
-  const Mf = '#555555';
-  const Kb = '#444444';
-  const Kk = '#666666';
-  const Cw = '#FFFFFF';
-  const Cb = '#8B4513';
+  const W = '#8B6914'; // wood edge
+  const L = '#A07828'; // lighter wood
+  const S = '#B8922E'; // surface
+  const D = '#6B4E0A'; // dark edge/shadow
+  const F = '#7A5A10'; // front panel
+  const Fd = '#5C4308'; // front panel dark
+  const Fl = '#9A7420'; // front panel highlight
   const rows: string[][] = [];
+  // Top surface (visible from above)
   rows.push(new Array(32).fill(_));
-  rows.push([_, We,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,We, _]);
-  rows.push([_, Wd,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wd, _]);
-  rows.push([_, Wd,Wl,Wm,Wl,Wl,Wl,Wl,Wl,Wl,Mf,Mf,Mf,Mf,Mf,Mf,Mf,Mf,Mf,Mf,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wd, _]);
-  rows.push([_, Wd,Wm,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Mf,Sc,Sc,Sc,Sc,Sc,Sc,Sc,Sc,Mf,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wm,Wd, _]);
-  rows.push([_, Wd,Wl,Wl,Wm,Wl,Wl,Wl,Wl,Wl,Mf,Sc,Sg,Sg,Sc,Sb,Sc,Sc,Sc,Mf,Wl,Wl,Wl,Wl,Wl,Wl,Cw,Cw,Wl,Wl,Wd, _]);
-  rows.push([_, Wd,Wl,Wl,Wl,Wl,Wm,Wl,Wl,Wl,Mf,Sc,Sc,Sb,Sb,Sc,Sr,Sc,Sc,Mf,Wl,Wl,Wl,Wl,Wl,Wl,Cw,Cb,Wl,Wl,Wd, _]);
-  rows.push([_, Wd,Wm,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Mf,Sc,Sr,Sc,Sg,Sg,Sc,Sc,Sc,Mf,Wl,Wl,Wl,Wl,Wl,Wl,Cw,Cb,Wl,Wl,Wd, _]);
-  rows.push([_, Wd,Wl,Wl,Wl,Wm,Wl,Wl,Wl,Wl,Mf,Sc,Sc,Sc,Sb,Sc,Sg,Sg,Sc,Mf,Wl,Wl,Wl,Wl,Wl,Wl,Cw,Cb,Wl,Wl,Wd, _]);
-  rows.push([_, Wd,Wl,Wl,Wl,Wl,Wl,Wm,Wl,Wl,Mf,Sc,Sg,Sc,Sc,Sr,Sc,Sb,Sc,Mf,Wl,Wl,Wl,Wl,Wl,Wl,Cw,Cb,Wl,Wl,Wd, _]);
-  rows.push([_, Wd,Wl,Wm,Wl,Wl,Wl,Wl,Wl,Wl,Mf,Sc,Sc,Sb,Sc,Sg,Sc,Sc,Sc,Mf,Wl,Wl,Wl,Wl,Wl,Wl,Cw,Cw,Wl,Wl,Wd, _]);
-  rows.push([_, Wd,Wl,Wl,Wl,Wl,Wl,Wl,Wm,Wl,Mf,Sc,Sr,Sc,Sc,Sc,Sb,Sb,Sc,Mf,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wd, _]);
-  rows.push([_, Wd,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Mf,Mf,Mf,Mf,Mf,Mf,Mf,Mf,Mf,Mf,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wd, _]);
-  rows.push([_, Wd,Wm,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Mf,Mf,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wm,Wl,Wd, _]);
-  rows.push([_, Wd,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Mf,Mf,Mf,Mf,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wd, _]);
-  rows.push([_, Wd,Wl,Wl,Wm,Wl,Wl,Wl,Wl,Kb,Kb,Kb,Kb,Kb,Kb,Kb,Kb,Kb,Kb,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wm,Wd, _]);
-  rows.push([_, Wd,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Kb,Kk,Kk,Kk,Kk,Kk,Kk,Kk,Kk,Kb,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wd, _]);
-  rows.push([_, Wd,Wl,Wl,Wl,Wl,Wm,Wl,Wl,Kb,Kk,Kk,Kk,Kk,Kk,Kk,Kk,Kk,Kb,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wd, _]);
-  rows.push([_, Wd,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Kb,Kb,Kb,Kb,Kb,Kb,Kb,Kb,Kb,Kb,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wd, _]);
-  rows.push([_, Wd,Wm,Wm,Wl,Wl,Wl,Wl,Wm,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wm,Wl,Wl,Wl,Wl,Wm,Wl,Wl,Wl,Wm,Wm,Wd, _]);
-  rows.push([_, Wd,Wl,Wl,Wl,Wm,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wm,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wd, _]);
-  rows.push([_, Wd,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wm,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wl,Wm,Wl,Wl,Wl,Wl,Wd, _]);
-  rows.push([_, We,Wm,Wm,Wm,Wm,Wm,Wm,Wm,Wm,Wm,Wm,Wm,Wm,Wm,Wm,Wm,Wm,Wm,Wm,Wm,Wm,Wm,Wm,Wm,Wm,Wm,Wm,Wm,Wm,We, _]);
-  rows.push([_, We,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,Wd,We, _]);
-  rows.push([_, _,We,We, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _,We,We, _]);
-  rows.push([_, _,We,We, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _,We,We, _]);
-  rows.push([_, _,We,We, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _,We,We, _]);
-  rows.push([_, _,We,We, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _,We,We, _]);
-  rows.push([_, _,We,We, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _,We,We, _]);
-  rows.push([_, _,We,We, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _,We,We, _]);
-  rows.push(new Array(32).fill(_));
-  rows.push(new Array(32).fill(_));
-  return rows;
-})();
-
-/** Plant in pot: 16x24 - bushy plant with leaf clusters and terracotta pot */
-export const PLANT_SPRITE: SpriteData = (() => {
-  const Gl = '#5DAF57';
-  const Gm = '#3D8B37';
-  const Gd = '#2D6B27';
-  const T  = '#6B4E0A';
-  const Pb = '#8B5E3C';
-  const Pr = '#A0714A';
-  const Pd = '#6B4226';
-  const rows: string[][] = [];
-  rows.push(new Array(16).fill(_));
-  rows.push(new Array(16).fill(_));
-  rows.push([_,_,_,_,_,_,_,Gl,Gm,_,_,_,_,_,_,_]);
-  rows.push([_,_,_,_,_,Gl,Gm,Gm,Gl,Gm,_,_,_,_,_,_]);
-  rows.push([_,_,_,_,Gm,Gl,Gd,Gm,Gm,Gd,Gl,_,_,_,_,_]);
-  rows.push([_,_,_,Gl,Gm,Gd,Gm,Gl,Gl,Gm,Gd,Gm,Gl,_,_,_]);
-  rows.push([_,_,Gm,Gd,Gl,Gm,Gd,Gm,Gm,Gd,Gm,Gl,Gd,Gm,_,_]);
-  rows.push([_,_,Gl,Gm,Gd,Gl,Gm,Gl,Gl,Gm,Gl,Gd,Gm,Gl,_,_]);
-  rows.push([_,_,Gm,Gl,Gm,Gd,Gd,Gm,Gm,Gd,Gd,Gm,Gl,Gm,_,_]);
-  rows.push([_,_,_,Gd,Gm,Gl,Gm,Gd,Gd,Gm,Gl,Gm,Gd,_,_,_]);
-  rows.push([_,_,_,Gm,Gd,Gm,Gl,Gm,Gm,Gl,Gm,Gd,Gm,_,_,_]);
-  rows.push([_,_,_,_,Gm,Gd,Gm,Gl,Gl,Gm,Gd,Gm,_,_,_,_]);
-  rows.push([_,_,_,_,_,Gm,Gd,Gm,Gm,Gd,Gm,_,_,_,_,_]);
-  rows.push([_,_,_,_,_,_,_,T,T,_,_,_,_,_,_,_]);
-  rows.push([_,_,_,_,_,_,_,T,T,_,_,_,_,_,_,_]);
-  rows.push([_,_,_,_,Pr,Pr,Pr,Pr,Pr,Pr,Pr,Pr,_,_,_,_]);
-  rows.push([_,_,_,_,Pd,Pb,Pb,Pb,Pb,Pb,Pb,Pd,_,_,_,_]);
-  rows.push([_,_,_,_,_,Pb,Pb,Pb,Pb,Pb,Pb,_,_,_,_,_]);
-  rows.push([_,_,_,_,_,Pb,Pd,Pb,Pb,Pd,Pb,_,_,_,_,_]);
-  rows.push([_,_,_,_,_,Pd,Pb,Pb,Pb,Pb,Pd,_,_,_,_,_]);
-  rows.push([_,_,_,_,_,_,Pd,Pb,Pb,Pd,_,_,_,_,_,_]);
-  rows.push(new Array(16).fill(_));
-  rows.push(new Array(16).fill(_));
-  rows.push(new Array(16).fill(_));
-  return rows;
-})();
-
-/** Bookshelf: 16x32 (1x2 tiles) - with varied book heights, globe ornament */
-export const BOOKSHELF_SPRITE: SpriteData = (() => {
-  const W  = '#6B4E0A';
-  const S  = '#8B6914';
-  const Sd = '#5A3D08';
-  const B1 = '#CC4444';
-  const B2 = '#4488CC';
-  const B3 = '#44AA66';
-  const B4 = '#AA55CC';
-  const B5 = '#CCAA33';
-  const B6 = '#DD7733';
-  const Gl = '#DDC060';
-  const Gd = '#BBA040';
-  const rows: string[][] = [];
-  rows.push([_,_,W,W,W,W,W,W,W,W,W,W,W,W,_,_]);
-  rows.push([_,_,W,S,S,S,S,S,S,S,S,S,S,W,_,_]);
-  rows.push([_,_,W,S,S,S,S,S,S,S,Gd,Gl,Gl,W,_,_]);
-  rows.push([_,_,W,B1,B1,B2,B2,S,S,S,Gl,Gl,Gl,W,_,_]);
-  rows.push([_,_,W,B1,B1,B2,B2,B3,B3,S,Gd,Gl,Gd,W,_,_]);
-  rows.push([_,_,W,B1,B1,B2,B2,B3,B3,B4,B4,S,S,W,_,_]);
-  rows.push([_,_,W,B1,B1,B2,B2,B3,B3,B4,B4,B5,B5,W,_,_]);
-  rows.push([_,_,W,W,W,W,W,W,W,W,W,W,W,W,_,_]);
-  rows.push([_,_,W,Sd,Sd,Sd,Sd,Sd,Sd,Sd,Sd,Sd,Sd,W,_,_]);
-  rows.push([_,_,W,S,B5,B5,S,B6,B6,B1,B1,S,S,W,_,_]);
-  rows.push([_,_,W,B3,B5,B5,B6,B6,B6,B1,B1,B4,S,W,_,_]);
-  rows.push([_,_,W,B3,B5,B5,B6,B4,B6,B1,B1,B4,B2,W,_,_]);
-  rows.push([_,_,W,B3,B5,B5,B6,B6,B4,B1,B1,B4,B2,W,_,_]);
-  rows.push([_,_,W,W,W,W,W,W,W,W,W,W,W,W,_,_]);
-  rows.push([_,_,W,Sd,Sd,Sd,Sd,Sd,Sd,Sd,Sd,Sd,Sd,W,_,_]);
-  rows.push([_,_,W,S,S,B2,B2,B4,B4,S,B6,B6,S,W,_,_]);
-  rows.push([_,_,W,B4,S,B2,B2,B4,B4,B5,B6,B6,B1,W,_,_]);
-  rows.push([_,_,W,B4,B3,B2,B2,B4,B4,B5,B6,B6,B1,W,_,_]);
-  rows.push([_,_,W,B4,B3,B2,B2,B4,B4,B5,B6,B6,B1,W,_,_]);
-  rows.push([_,_,W,W,W,W,W,W,W,W,W,W,W,W,_,_]);
-  for (let i = 0; i < 12; i++) {
-    const row = new Array(16).fill(_) as string[];
-    row[2] = W; row[3] = W; row[12] = W; row[13] = W;
-    rows.push(row);
+  rows.push([_, ...new Array(30).fill(W), _]);
+  rows.push([_, W, ...new Array(28).fill(L), W, _]);
+  for (let r = 0; r < 3; r++) {
+    rows.push([_, W, ...new Array(28).fill(S), W, _]);
   }
-  return rows;
-})();
-
-/** Water cooler: 16x16 - with water jug gradient, red tap, and paper cup */
-export const COOLER_SPRITE: SpriteData = (() => {
-  const Wt = '#AAD4FF';
-  const Wm = '#88BBEE';
-  const Wl = '#6699CC';
-  const Bb = '#DDDDDD';
-  const Bd = '#CCCCCC';
-  const Rd = '#CC4444';
-  const Ba = '#999999';
-  const Bk = '#AAAAAA';
-  const Cw = '#FFFFFF';
-  const Cd = '#EEEEEE';
-  const rows: string[][] = [];
-  rows.push(new Array(16).fill(_));
-  rows.push([_,_,_,_,_,_,_,Wt,Wt,_,_,_,_,_,_,_]);
-  rows.push([_,_,_,_,_,Wt,Wt,Wt,Wt,Wt,Wt,_,_,_,_,_]);
-  rows.push([_,_,_,_,_,Wt,Wm,Wt,Wt,Wm,Wt,_,_,_,_,_]);
-  rows.push([_,_,_,_,_,Wm,Wm,Wm,Wm,Wm,Wm,_,_,_,_,_]);
-  rows.push([_,_,_,_,_,Wl,Wm,Wl,Wl,Wm,Wl,_,_,_,_,_]);
-  rows.push([_,_,_,_,Ba,Bb,Bb,Bb,Bb,Bb,Bb,Ba,_,_,_,_]);
-  rows.push([_,_,_,_,Ba,Bb,Bb,Bb,Bb,Bb,Bb,Ba,_,_,_,_]);
-  rows.push([_,_,_,_,Ba,Bb,Bb,Rd,Rd,Bb,Bb,Ba,_,Cw,_,_]);
-  rows.push([_,_,_,_,Ba,Bb,Bb,Rd,Bd,Bb,Bb,Ba,_,Cw,_,_]);
-  rows.push([_,_,_,_,Ba,Bb,Bd,Bd,Bb,Bb,Bd,Ba,_,Cw,_,_]);
-  rows.push([_,_,_,_,Ba,Bd,Bd,Bd,Bd,Bd,Bd,Ba,_,Cw,Cd,_]);
-  rows.push([_,_,_,Ba,Ba,Ba,Ba,Ba,Ba,Ba,Ba,Ba,Ba,_,_,_]);
-  rows.push([_,_,_,_,Ba,_,_,Ba,Ba,_,_,Ba,_,_,_,_]);
-  rows.push([_,_,_,Bk,Ba,Bk,_,Ba,Ba,_,Bk,Ba,Bk,_,_,_]);
-  rows.push(new Array(16).fill(_));
-  return rows;
-})();
-
-/** Whiteboard: 32x16 (2x1 tiles) - with diagram boxes, arrows, and marker tray */
-export const WHITEBOARD_SPRITE: SpriteData = (() => {
-  const F  = '#EEEEEE';
-  const B  = '#888888';
-  const Bs = '#777777';
-  const E  = '#AAAAAA';
-  const Lb = '#4488CC';
-  const Lr = '#CC4444';
-  const Lg = '#44AA66';
-  const Ln = '#999999';
-  const Tr = '#777777';
-  const rows: string[][] = [];
+  rows.push([_, D, ...new Array(28).fill(W), D, _]);
+  for (let r = 0; r < 4; r++) {
+    rows.push([_, W, ...new Array(28).fill(S), W, _]);
+  }
+  rows.push([_, W, ...new Array(28).fill(L), W, _]);
+  for (let r = 0; r < 4; r++) {
+    rows.push([_, W, ...new Array(28).fill(S), W, _]);
+  }
+  // Front edge transition (thick lip)
+  rows.push([_, D, ...new Array(28).fill(D), D, _]);
+  rows.push([_, D, ...new Array(28).fill(W), D, _]);
+  // Front panel face (visible side of desk)
+  rows.push([_, D, Fl, ...new Array(26).fill(F), Fl, D, _]);
+  for (let r = 0; r < 3; r++) {
+    rows.push([_, D, ...new Array(28).fill(F), D, _]);
+  }
+  rows.push([_, D, ...new Array(28).fill(Fd), D, _]);
+  // Legs
+  rows.push([_, D, D, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, D, D, _]);
+  rows.push([_, D, D, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, D, D, _]);
   rows.push(new Array(32).fill(_));
-  rows.push([_,_,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,_,_]);
-  rows.push([_,_,B,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,Bs,_,_]);
-  rows.push([_,_,B,F,F,Lb,Lb,Lb,Lb,F,F,F,F,F,F,F,F,F,F,F,F,Lr,Lr,Lr,Lr,F,F,F,F,Bs,_,_]);
-  rows.push([_,_,B,F,F,Lb,F,F,Lb,F,Ln,Ln,Ln,Ln,F,F,F,F,Ln,Ln,Ln,Lr,F,F,Lr,F,F,F,F,Bs,_,_]);
-  rows.push([_,_,B,F,F,Lb,Lb,Lb,Lb,F,F,F,F,Ln,F,F,F,Ln,F,F,F,Lr,Lr,Lr,Lr,F,F,F,F,Bs,_,_]);
-  rows.push([_,_,B,F,F,F,F,F,F,F,F,F,F,Ln,F,F,F,Ln,F,F,F,F,F,F,F,F,F,F,F,Bs,_,_]);
-  rows.push([_,_,B,F,F,F,F,F,F,F,F,F,Lb,Lb,Lb,Lb,Lb,Lb,Lb,Lb,F,F,F,F,F,F,F,F,F,Bs,_,_]);
-  rows.push([_,_,B,F,F,F,F,F,F,F,F,F,Lb,F,F,Lg,Lg,F,F,Lb,F,F,F,F,F,F,F,F,F,Bs,_,_]);
-  rows.push([_,_,B,F,F,F,F,F,F,F,F,F,Lb,Lb,Lb,Lb,Lb,Lb,Lb,Lb,F,F,F,F,F,F,F,F,F,Bs,_,_]);
-  rows.push([_,_,B,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,Bs,_,_]);
-  rows.push([_,_,B,Tr,Tr,Tr,Tr,Tr,Tr,Tr,Tr,Tr,Tr,Tr,Tr,Tr,Tr,Tr,Tr,Tr,Tr,Tr,Tr,Tr,Tr,Tr,Tr,Tr,Tr,Bs,_,_]);
-  rows.push([_,_,Bs,Bs,Bs,Bs,Bs,Bs,Lr,Lr,Bs,Lb,Lb,Bs,Lg,Lg,Bs,Bs,Bs,Bs,Bs,Bs,Bs,Bs,Bs,Bs,Bs,Bs,Bs,Bs,_,_]);
-  rows.push([_,_,_,_,_,_,_,_,_,_,_,_,_,_,E,E,E,E,_,_,_,_,_,_,_,_,_,_,_,_,_,_]);
-  rows.push([_,_,_,_,_,_,_,_,_,_,_,_,_,_,E,_,_,E,_,_,_,_,_,_,_,_,_,_,_,_,_,_]);
-  rows.push([_,_,_,_,_,_,_,_,_,_,_,_,_,_,E,_,_,E,_,_,_,_,_,_,_,_,_,_,_,_,_,_]);
+  rows.push(new Array(32).fill(_));
   return rows;
 })();
 
-/** Chair: 16x16 - dark gray office chair with armrests and wheels */
+/** Plant in pot: 16x24 */
+export const PLANT_SPRITE: SpriteData = (() => {
+  const G = '#3D8B37';
+  const D = '#2D6B27';
+  const T = '#6B4E0A';
+  const P = '#B85C3A';
+  const R = '#8B4422';
+  return [
+    [_, _, _, _, _, _, G, G, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, G, G, G, G, _, _, _, _, _, _, _],
+    [_, _, _, _, G, G, D, G, G, G, _, _, _, _, _, _],
+    [_, _, _, G, G, D, G, G, D, G, G, _, _, _, _, _],
+    [_, _, G, G, G, G, G, G, G, G, G, G, _, _, _, _],
+    [_, G, G, D, G, G, G, G, G, G, D, G, G, _, _, _],
+    [_, G, G, G, G, D, G, G, D, G, G, G, G, _, _, _],
+    [_, _, G, G, G, G, G, G, G, G, G, G, _, _, _, _],
+    [_, _, _, G, G, G, D, G, G, G, G, _, _, _, _, _],
+    [_, _, _, _, G, G, G, G, G, G, _, _, _, _, _, _],
+    [_, _, _, _, _, G, G, G, G, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, T, T, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, T, T, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, T, T, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, R, R, R, R, R, _, _, _, _, _, _],
+    [_, _, _, _, R, P, P, P, P, P, R, _, _, _, _, _],
+    [_, _, _, _, R, P, P, P, P, P, R, _, _, _, _, _],
+    [_, _, _, _, R, P, P, P, P, P, R, _, _, _, _, _],
+    [_, _, _, _, R, P, P, P, P, P, R, _, _, _, _, _],
+    [_, _, _, _, R, P, P, P, P, P, R, _, _, _, _, _],
+    [_, _, _, _, R, P, P, P, P, P, R, _, _, _, _, _],
+    [_, _, _, _, _, R, P, P, P, R, _, _, _, _, _, _],
+    [_, _, _, _, _, _, R, R, R, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+  ];
+})();
+
+/** Bookshelf: 16x32 (1x2 tiles) */
+export const BOOKSHELF_SPRITE: SpriteData = (() => {
+  const W = '#8B6914';
+  const D = '#6B4E0A';
+  const R = '#CC4444';
+  const B = '#4477AA';
+  const G = '#44AA66';
+  const Y = '#CCAA33';
+  const P = '#9955AA';
+  return [
+    [_, W, W, W, W, W, W, W, W, W, W, W, W, W, W, _],
+    [W, D, D, D, D, D, D, D, D, D, D, D, D, D, D, W],
+    [W, D, R, R, B, B, G, G, Y, Y, R, R, B, B, D, W],
+    [W, D, R, R, B, B, G, G, Y, Y, R, R, B, B, D, W],
+    [W, D, R, R, B, B, G, G, Y, Y, R, R, B, B, D, W],
+    [W, D, R, R, B, B, G, G, Y, Y, R, R, B, B, D, W],
+    [W, D, R, R, B, B, G, G, Y, Y, R, R, B, B, D, W],
+    [W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W],
+    [W, D, D, D, D, D, D, D, D, D, D, D, D, D, D, W],
+    [W, D, P, P, Y, Y, B, B, G, G, P, P, R, R, D, W],
+    [W, D, P, P, Y, Y, B, B, G, G, P, P, R, R, D, W],
+    [W, D, P, P, Y, Y, B, B, G, G, P, P, R, R, D, W],
+    [W, D, P, P, Y, Y, B, B, G, G, P, P, R, R, D, W],
+    [W, D, P, P, Y, Y, B, B, G, G, P, P, R, R, D, W],
+    [W, D, P, P, Y, Y, B, B, G, G, P, P, R, R, D, W],
+    [W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W],
+    [W, D, D, D, D, D, D, D, D, D, D, D, D, D, D, W],
+    [W, D, G, G, R, R, P, P, B, B, Y, Y, G, G, D, W],
+    [W, D, G, G, R, R, P, P, B, B, Y, Y, G, G, D, W],
+    [W, D, G, G, R, R, P, P, B, B, Y, Y, G, G, D, W],
+    [W, D, G, G, R, R, P, P, B, B, Y, Y, G, G, D, W],
+    [W, D, G, G, R, R, P, P, B, B, Y, Y, G, G, D, W],
+    [W, D, G, G, R, R, P, P, B, B, Y, Y, G, G, D, W],
+    [W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W],
+    [W, D, D, D, D, D, D, D, D, D, D, D, D, D, D, W],
+    [W, D, D, D, D, D, D, D, D, D, D, D, D, D, D, W],
+    [W, D, D, D, D, D, D, D, D, D, D, D, D, D, D, W],
+    [W, D, D, D, D, D, D, D, D, D, D, D, D, D, D, W],
+    [W, D, D, D, D, D, D, D, D, D, D, D, D, D, D, W],
+    [W, D, D, D, D, D, D, D, D, D, D, D, D, D, D, W],
+    [W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W],
+    [_, W, W, W, W, W, W, W, W, W, W, W, W, W, W, _],
+  ];
+})();
+
+/** Water cooler: 16x24 */
+export const COOLER_SPRITE: SpriteData = (() => {
+  const W = '#CCDDEE';
+  const L = '#88BBDD';
+  const D = '#999999';
+  const B = '#666666';
+  return [
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, D, D, D, D, D, D, _, _, _, _, _],
+    [_, _, _, _, D, L, L, L, L, L, L, D, _, _, _, _],
+    [_, _, _, _, D, L, L, L, L, L, L, D, _, _, _, _],
+    [_, _, _, _, D, L, L, L, L, L, L, D, _, _, _, _],
+    [_, _, _, _, D, L, L, L, L, L, L, D, _, _, _, _],
+    [_, _, _, _, D, L, L, L, L, L, L, D, _, _, _, _],
+    [_, _, _, _, _, D, D, D, D, D, D, _, _, _, _, _],
+    [_, _, _, _, _, D, W, W, W, W, D, _, _, _, _, _],
+    [_, _, _, _, _, D, W, W, W, W, D, _, _, _, _, _],
+    [_, _, _, _, _, D, W, W, W, W, D, _, _, _, _, _],
+    [_, _, _, _, _, D, W, W, W, W, D, _, _, _, _, _],
+    [_, _, _, _, _, D, W, W, W, W, D, _, _, _, _, _],
+    [_, _, _, _, D, D, W, W, W, W, D, D, _, _, _, _],
+    [_, _, _, _, D, W, W, W, W, W, W, D, _, _, _, _],
+    [_, _, _, _, D, W, W, W, W, W, W, D, _, _, _, _],
+    [_, _, _, _, D, D, D, D, D, D, D, D, _, _, _, _],
+    [_, _, _, _, _, D, B, B, B, B, D, _, _, _, _, _],
+    [_, _, _, _, _, D, B, B, B, B, D, _, _, _, _, _],
+    [_, _, _, _, _, D, B, B, B, B, D, _, _, _, _, _],
+    [_, _, _, _, D, D, B, B, B, B, D, D, _, _, _, _],
+    [_, _, _, _, D, B, B, B, B, B, B, D, _, _, _, _],
+    [_, _, _, _, D, D, D, D, D, D, D, D, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+  ];
+})();
+
+/** Whiteboard: 32x16 (2x1 tiles) - hangs on wall */
+export const WHITEBOARD_SPRITE: SpriteData = (() => {
+  const F = '#AAAAAA';
+  const W = '#EEEEFF';
+  const M = '#CC4444';
+  const B = '#4477AA';
+  return [
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, _],
+    [_, F, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, F, _],
+    [_, F, W, W, M, M, M, W, W, W, W, W, B, B, B, B, W, W, W, W, W, W, W, M, W, W, W, W, W, W, F, _],
+    [_, F, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, B, B, W, W, M, W, W, W, W, W, W, F, _],
+    [_, F, W, W, W, W, M, M, M, M, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, B, B, W, W, F, _],
+    [_, F, W, W, W, W, W, W, W, W, W, W, W, B, B, B, W, W, W, W, W, W, W, W, W, W, W, W, W, W, F, _],
+    [_, F, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, M, M, M, W, W, W, W, W, W, W, F, _],
+    [_, F, W, M, M, W, W, W, W, W, W, W, W, W, W, W, B, B, W, W, W, W, W, W, W, W, W, W, W, W, F, _],
+    [_, F, W, W, W, W, W, W, B, B, B, W, W, W, W, W, W, W, W, W, W, W, W, W, M, M, M, M, W, W, F, _],
+    [_, F, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, F, _],
+    [_, F, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, W, F, _],
+    [_, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+  ];
+})();
+
+/** Chair: 16x16 - top-down desk chair */
 export const CHAIR_SPRITE: SpriteData = (() => {
-  const Bk = '#555555';
-  const Hl = '#777777';
-  const Am = '#666666';
-  const Po = '#444444';
-  const Wh = '#333333';
-  const Fr = '#4A4A4A';
-  const rows: string[][] = [];
-  rows.push(new Array(16).fill(_));
-  rows.push([_,_,_,_,_,Bk,Bk,Bk,Bk,Bk,Bk,_,_,_,_,_]);
-  rows.push([_,_,_,_,_,Bk,Hl,Hl,Hl,Hl,Bk,_,_,_,_,_]);
-  rows.push([_,_,_,_,_,Bk,Hl,Bk,Bk,Hl,Bk,_,_,_,_,_]);
-  rows.push([_,_,_,_,_,Bk,Bk,Bk,Bk,Bk,Bk,_,_,_,_,_]);
-  rows.push([_,_,_,_,Am,Fr,Fr,Fr,Fr,Fr,Fr,Am,_,_,_,_]);
-  rows.push([_,_,_,_,Am,Bk,Hl,Hl,Hl,Hl,Bk,Am,_,_,_,_]);
-  rows.push([_,_,_,_,Am,Bk,Hl,Bk,Bk,Hl,Bk,Am,_,_,_,_]);
-  rows.push([_,_,_,_,Am,Bk,Bk,Bk,Bk,Bk,Bk,Am,_,_,_,_]);
-  rows.push([_,_,_,_,_,Fr,Fr,Fr,Fr,Fr,Fr,_,_,_,_,_]);
-  rows.push([_,_,_,_,_,_,_,Po,Po,_,_,_,_,_,_,_]);
-  rows.push([_,_,_,_,_,_,_,Po,Po,_,_,_,_,_,_,_]);
-  rows.push([_,_,_,_,_,Po,Po,Po,Po,Po,Po,_,_,_,_,_]);
-  rows.push([_,_,_,_,Wh,_,Po,_,_,Po,_,Wh,_,_,_,_]);
-  rows.push([_,_,_,Wh,Wh,_,_,_,_,_,_,Wh,Wh,_,_,_]);
-  rows.push(new Array(16).fill(_));
-  return rows;
+  const W = '#8B6914';
+  const D = '#6B4E0A';
+  const B = '#5C3D0A';
+  const S = '#A07828';
+  return [
+    [_, _, _, _, _, D, D, D, D, D, D, _, _, _, _, _],
+    [_, _, _, _, D, B, B, B, B, B, B, D, _, _, _, _],
+    [_, _, _, _, D, B, S, S, S, S, B, D, _, _, _, _],
+    [_, _, _, _, D, B, S, S, S, S, B, D, _, _, _, _],
+    [_, _, _, _, D, B, S, S, S, S, B, D, _, _, _, _],
+    [_, _, _, _, D, B, S, S, S, S, B, D, _, _, _, _],
+    [_, _, _, _, D, B, S, S, S, S, B, D, _, _, _, _],
+    [_, _, _, _, D, B, S, S, S, S, B, D, _, _, _, _],
+    [_, _, _, _, D, B, S, S, S, S, B, D, _, _, _, _],
+    [_, _, _, _, D, B, B, B, B, B, B, D, _, _, _, _],
+    [_, _, _, _, _, D, D, D, D, D, D, _, _, _, _, _],
+    [_, _, _, _, _, _, D, W, W, D, _, _, _, _, _, _],
+    [_, _, _, _, _, _, D, W, W, D, _, _, _, _, _, _],
+    [_, _, _, _, _, D, D, D, D, D, D, _, _, _, _, _],
+    [_, _, _, _, _, D, _, _, _, _, D, _, _, _, _, _],
+    [_, _, _, _, _, D, _, _, _, _, D, _, _, _, _, _],
+  ];
+})();
+
+/** PC monitor: 16x16 - top-down monitor on stand */
+export const PC_SPRITE: SpriteData = (() => {
+  const F = '#555555';
+  const S = '#3A3A5C';
+  const B = '#6688CC';
+  const D = '#444444';
+  return [
+    [_, _, _, F, F, F, F, F, F, F, F, F, F, _, _, _],
+    [_, _, _, F, S, S, S, S, S, S, S, S, F, _, _, _],
+    [_, _, _, F, S, B, B, B, B, B, B, S, F, _, _, _],
+    [_, _, _, F, S, B, B, B, B, B, B, S, F, _, _, _],
+    [_, _, _, F, S, B, B, B, B, B, B, S, F, _, _, _],
+    [_, _, _, F, S, B, B, B, B, B, B, S, F, _, _, _],
+    [_, _, _, F, S, B, B, B, B, B, B, S, F, _, _, _],
+    [_, _, _, F, S, B, B, B, B, B, B, S, F, _, _, _],
+    [_, _, _, F, S, S, S, S, S, S, S, S, F, _, _, _],
+    [_, _, _, F, F, F, F, F, F, F, F, F, F, _, _, _],
+    [_, _, _, _, _, _, _, D, D, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, D, D, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, D, D, D, D, _, _, _, _, _, _],
+    [_, _, _, _, _, D, D, D, D, D, D, _, _, _, _, _],
+    [_, _, _, _, _, D, D, D, D, D, D, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+  ];
+})();
+
+/** Desk lamp: 16x16 - top-down lamp with light cone */
+export const LAMP_SPRITE: SpriteData = (() => {
+  const Y = '#FFDD55';
+  const L = '#FFEE88';
+  const D = '#888888';
+  const B = '#555555';
+  const G = '#FFFFCC';
+  return [
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, G, G, G, G, _, _, _, _, _, _],
+    [_, _, _, _, _, G, Y, Y, Y, Y, G, _, _, _, _, _],
+    [_, _, _, _, G, Y, Y, L, L, Y, Y, G, _, _, _, _],
+    [_, _, _, _, Y, Y, L, L, L, L, Y, Y, _, _, _, _],
+    [_, _, _, _, Y, Y, L, L, L, L, Y, Y, _, _, _, _],
+    [_, _, _, _, _, Y, Y, Y, Y, Y, Y, _, _, _, _, _],
+    [_, _, _, _, _, _, D, D, D, D, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, D, D, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, D, D, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, D, D, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, _, D, D, _, _, _, _, _, _, _],
+    [_, _, _, _, _, _, D, D, D, D, _, _, _, _, _, _],
+    [_, _, _, _, _, B, B, B, B, B, B, _, _, _, _, _],
+    [_, _, _, _, _, B, B, B, B, B, B, _, _, _, _, _],
+    [_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _],
+  ];
 })();
 
 /** Tall plant variant: 16x24 (1x1 tile) - tall narrow trunk with leaf clusters */
@@ -453,7 +493,9 @@ export const FURNITURE_CATALOG: FurnitureCatalogEntry[] = [
   { type: 'server_rack', label: 'Server Rack', footprintW: 1, footprintH: 2, sprite: SERVER_RACK_SPRITE, isDesk: false, category: 'tech' },
   { type: 'rug', label: 'Rug', footprintW: 2, footprintH: 1, sprite: RUG_SPRITE, isDesk: false, category: 'decor', backgroundTiles: 1 },
   { type: 'window', label: 'Window', footprintW: 2, footprintH: 1, sprite: WINDOW_SPRITE, isDesk: false, category: 'decor', backgroundTiles: 1 },
-  { type: 'cactus', label: 'Cactus', footprintW: 1, footprintH: 1, sprite: CACTUS_SPRITE, isDesk: false, category: 'decor' }
+  { type: 'cactus', label: 'Cactus', footprintW: 1, footprintH: 1, sprite: CACTUS_SPRITE, isDesk: false, category: 'decor' },
+  { type: 'pc', label: 'PC Monitor', footprintW: 1, footprintH: 1, sprite: PC_SPRITE, isDesk: false, category: 'electronics' },
+  { type: 'lamp', label: 'Desk Lamp', footprintW: 1, footprintH: 1, sprite: LAMP_SPRITE, isDesk: false, category: 'decor' }
 ];
 
 export function getCatalogEntry(type: string): FurnitureCatalogEntry | undefined {
