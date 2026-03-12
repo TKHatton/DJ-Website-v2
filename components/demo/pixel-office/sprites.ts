@@ -422,10 +422,22 @@ export const CACTUS_SPRITE: SpriteData = (() => {
   return rows;
 })();
 
-// ─── Character Sprites (re-exported from characterSprites.ts) ──
+// ─── Character Sprites ──────────────────────────────────────────
+// Prefers PNG sprite sheets when loaded, falls back to code-based sprites
 
-export { getCharacterSprites, CHARACTER_PALETTES } from "./characterSprites";
-export type { CharacterSprites, CharPalette } from "./characterSprites";
+import { getLoadedCharacterSprites } from './spriteSheetLoader';
+import { getCharacterSprites as getCodeCharacterSprites, CHARACTER_PALETTES as CODE_PALETTES } from './characterSprites';
+export type { CharacterSprites, CharPalette } from './characterSprites';
+export { loadCharacterSpriteSheets, hasLoadedSpriteSheets } from './spriteSheetLoader';
+export const CHARACTER_PALETTES = CODE_PALETTES;
+
+export function getCharacterSprites(palette: number) {
+  // Prefer PNG sprite sheets if loaded
+  const loaded = getLoadedCharacterSprites(palette);
+  if (loaded) return loaded;
+  // Fallback to code-based sprites
+  return getCodeCharacterSprites(palette);
+}
 
 // ─── Furniture Catalog ────────────────────────────────────────
 

@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { OfficeState } from './officeState';
 import { startGameLoop } from './gameLoop';
 import { renderFrame } from './renderer';
+import { loadCharacterSpriteSheets } from './sprites';
 
 interface PixelOfficeProps {
   /** Current demo phase */
@@ -17,15 +18,22 @@ const PixelOffice: React.FC<PixelOfficeProps> = ({ phase, revealIndex, agentCoun
   const containerRef = useRef<HTMLDivElement>(null);
   const officeRef = useRef<OfficeState | null>(null);
   const [zoom, setZoom] = useState(5);
+  const [ready, setReady] = useState(false);
 
-  // Initialize office state once
+  // Initialize: load sprite sheets then create office state
   useEffect(() => {
-    const office = new OfficeState();
-    // Add agents with palette indices
-    for (let i = 0; i < Math.min(agentCount, 6); i++) {
-      office.addAgent(i, i);
-    }
-    officeRef.current = office;
+    let cancelled = false;
+    loadCharacterSpriteSheets().then(() => {
+      if (cancelled) return;
+      const office = new OfficeState();
+      // Add agents with palette indices
+      for (let i = 0; i < Math.min(agentCount, 6); i++) {
+        office.addAgent(i, i);
+      }
+      officeRef.current = office;
+      setReady(true);
+    });
+    return () => { cancelled = true; };
   }, [agentCount]);
 
   // Respond to phase/revealIndex changes
@@ -134,7 +142,7 @@ const PixelOffice: React.FC<PixelOfficeProps> = ({ phase, revealIndex, agentCoun
       stop();
       observer.disconnect();
     };
-  }, [zoom]);
+  }, [zoom, ready]);
 
   return (
     <div
