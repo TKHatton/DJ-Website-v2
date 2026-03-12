@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import AgentDemo from '../components/AgentDemo';
 
 const tiers = [
   {
@@ -289,6 +290,9 @@ const StudioPage: React.FC<StudioPageProps> = ({ onNavigate }) => {
           ))}
         </div>
       </section>
+
+      {/* Live Demo */}
+      <AgentDemo onNavigate={onNavigate} />
 
       {/* CTA */}
       <section className="pt-24 pb-12 max-w-7xl mx-auto px-6 md:px-12 text-center">

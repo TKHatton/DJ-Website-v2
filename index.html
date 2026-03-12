@@ -172,6 +172,23 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
+
+        /* System Architecture: Smooth arrow flow */
+        @keyframes architecture-flow {
+            to { stroke-dashoffset: -20; }
+        }
+        .animate-architecture-flow {
+            animation: architecture-flow 1.5s linear infinite;
+        }
+
+        /* System Architecture: Node fade-in */
+        @keyframes node-appear {
+            from { opacity: 0; transform: scale(0.9) translateY(8px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .animate-node-appear {
+            animation: node-appear 0.4s ease-out forwards;
+        }
     </style>
     <script>
         tailwind.config = {
