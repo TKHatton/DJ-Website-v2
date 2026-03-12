@@ -17,6 +17,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           >
             Digital Jaywalking
           </button>
+          <p className="text-sm text-charcoal/60 mt-1">AI systems that run your operations.</p>
           <p className="text-sm text-charcoal/50 mt-2">&copy; {new Date().getFullYear()} Digital Jaywalking, LLC. All rights reserved.</p>
         </div>
         

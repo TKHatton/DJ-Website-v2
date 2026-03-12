@@ -13,7 +13,7 @@ export const SEAT_REST_MIN_SEC = 8.0;
 export const SEAT_REST_MAX_SEC = 20.0;
 
 // Rendering
-export const CHARACTER_SITTING_OFFSET_PX = 6;
+export const CHARACTER_SITTING_OFFSET_PX = 10;
 export const CHARACTER_Z_SORT_OFFSET = 0.5;
 export const MAX_DELTA_TIME_SEC = 0.1;
 
