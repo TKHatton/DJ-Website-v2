@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { OfficeState } from './officeState';
 import { startGameLoop } from './gameLoop';
-import { renderFrame } from './renderer';
+import { renderFrame, invalidateTileCache } from './renderer';
 import { loadCharacterSpriteSheets } from './sprites';
 import { loadWallSpriteSheet } from './wallSpriteLoader';
 
@@ -20,6 +20,28 @@ const PixelOffice: React.FC<PixelOfficeProps> = ({ phase, revealIndex, agentCoun
   const officeRef = useRef<OfficeState | null>(null);
   const [zoom, setZoom] = useState(5);
   const [ready, setReady] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const isVisibleRef = useRef(true);
+
+  // Detect mobile
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
+  // IntersectionObserver: pause game loop when off-screen
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { isVisibleRef.current = entry.isIntersecting; },
+      { threshold: 0.1 },
+    );
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
 
   // Initialize: load sprite sheets then create office state
   useEffect(() => {
@@ -82,9 +104,9 @@ const PixelOffice: React.FC<PixelOfficeProps> = ({ phase, revealIndex, agentCoun
     if (!container) return;
     const width = container.clientWidth;
     // Office is 22 tiles x 16px = 352px base width
-    // Calculate zoom to fill container
-    const idealZoom = Math.floor(width / 352);
-    const newZoom = Math.max(5, Math.min(8, idealZoom));
+    // Use fractional zoom for smooth fit; no minimum floor so office always fits
+    const idealZoom = width / 352;
+    const newZoom = Math.max(0.8, Math.min(8, idealZoom));
     setZoom(newZoom);
   }, []);
 
@@ -112,7 +134,9 @@ const PixelOffice: React.FC<PixelOfficeProps> = ({ phase, revealIndex, agentCoun
     };
 
     resizeCanvas();
-    const observer = new ResizeObserver(() => resizeCanvas());
+    // Invalidate tile cache on resize since dimensions changed
+    invalidateTileCache();
+    const observer = new ResizeObserver(() => { resizeCanvas(); invalidateTileCache(); });
     observer.observe(container);
 
     const dpr = window.devicePixelRatio || 1;
@@ -120,9 +144,11 @@ const PixelOffice: React.FC<PixelOfficeProps> = ({ phase, revealIndex, agentCoun
 
     const stop = startGameLoop(canvas, {
       update: (dt) => {
+        if (!isVisibleRef.current) return;
         office.update(dt);
       },
       render: (ctx) => {
+        if (!isVisibleRef.current) return;
         renderFrame(
           ctx,
           canvas.width,
@@ -150,7 +176,7 @@ const PixelOffice: React.FC<PixelOfficeProps> = ({ phase, revealIndex, agentCoun
       ref={containerRef}
       className="w-full overflow-hidden rounded-2xl md:rounded-3xl"
       style={{
-        height: '400px',
+        height: isMobile ? '280px' : '400px',
         background: '#1E1E2E',
       }}
     >

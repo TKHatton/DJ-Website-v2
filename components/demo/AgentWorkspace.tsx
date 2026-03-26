@@ -46,7 +46,7 @@ const AgentWorkspace: React.FC<AgentWorkspaceProps> = ({
     : null;
 
   return (
-    <div className="relative bg-charcoal rounded-[60px] p-6 md:p-10 lg:p-12 mb-8 overflow-hidden mx-4 md:mx-0">
+    <div className="relative bg-charcoal rounded-[32px] md:rounded-[60px] p-4 md:p-10 lg:p-12 mb-8 overflow-hidden mx-2 md:mx-0">
       {/* Background decorations */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-terracotta/5 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
       <div className="absolute bottom-0 left-0 w-48 h-48 bg-teal/5 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />

@@ -27,6 +27,53 @@ import { CharacterState, TileType } from './types';
 const FALLBACK_FLOOR_COLOR = '#808080';
 const GRID_LINE_COLOR = 'rgba(255,255,255,0.12)';
 
+// ── Static tile grid cache ────────────────────────────────────
+// The tile grid + grid overlay never change once drawn, so we cache them
+// to an offscreen canvas and blit once per frame instead of re-drawing
+// hundreds of tiles. This dramatically speeds up both mobile and desktop.
+
+let cachedTileCanvas: HTMLCanvasElement | null = null;
+let cachedTileKey = '';
+
+function getCachedTileGrid(
+  tileMap: TileTypeVal[][],
+  offsetX: number,
+  offsetY: number,
+  zoom: number,
+  canvasWidth: number,
+  canvasHeight: number,
+  tileColors?: Array<FloorColor | null>,
+  layoutCols?: number,
+  layoutRows?: number,
+): HTMLCanvasElement {
+  // Cache key based on dimensions and zoom — invalidate if viewport resizes
+  const key = `${canvasWidth}:${canvasHeight}:${zoom}`;
+  if (cachedTileCanvas && cachedTileKey === key) {
+    return cachedTileCanvas;
+  }
+
+  const offscreen = document.createElement('canvas');
+  offscreen.width = canvasWidth;
+  offscreen.height = canvasHeight;
+  const ctx = offscreen.getContext('2d')!;
+  ctx.imageSmoothingEnabled = false;
+
+  const cols = layoutCols ?? (tileMap.length > 0 ? tileMap[0].length : 0);
+  const rows = layoutRows ?? tileMap.length;
+
+  renderTileGrid(ctx, tileMap, offsetX, offsetY, zoom, tileColors, layoutCols);
+  renderGridOverlay(ctx, offsetX, offsetY, zoom, cols, rows);
+
+  cachedTileCanvas = offscreen;
+  cachedTileKey = key;
+  return offscreen;
+}
+
+export function invalidateTileCache(): void {
+  cachedTileCanvas = null;
+  cachedTileKey = '';
+}
+
 // ── Tile grid ─────────────────────────────────────────────────
 
 function renderTileGrid(
@@ -218,11 +265,12 @@ export function renderFrame(
     offsetY = Math.floor((canvasHeight - mapH) / 2);
   }
 
-  // Draw floor tiles + wall base colors
-  renderTileGrid(ctx, tileMap, offsetX, offsetY, zoom, tileColors, layoutCols);
-
-  // Draw grid overlay (subtle white lines, matching reference)
-  renderGridOverlay(ctx, offsetX, offsetY, zoom, cols, rows);
+  // Draw cached tile grid + grid overlay (single blit instead of per-tile draws)
+  const tileGridCanvas = getCachedTileGrid(
+    tileMap, offsetX, offsetY, zoom,
+    canvasWidth, canvasHeight, tileColors, layoutCols, layoutRows,
+  );
+  ctx.drawImage(tileGridCanvas, 0, 0);
 
   // Build wall instances for z-sorting (auto-tiled wall sprites)
   const wallInstances = hasWallSprites() ? getWallInstances(tileMap, tileColors, layoutCols) : [];

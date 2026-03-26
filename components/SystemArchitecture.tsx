@@ -38,11 +38,11 @@ const tiers: TierConfig[] = [
     accentHex: '#E2725B',
     accentClass: 'terracotta',
     nodes: [
-      { id: 'trigger', label: 'Customer Inquiry', description: 'New message arrives via form or email', type: 'trigger', x: 5, y: 42, mx: 50, my: 5 },
-      { id: 'intake', label: 'Intake Agent', description: 'Extracts name, intent, and urgency', type: 'agent', x: 25, y: 42, mx: 50, my: 22 },
-      { id: 'router', label: 'Router Agent', description: 'Determines the right response path', type: 'agent', x: 45, y: 42, mx: 50, my: 39 },
-      { id: 'response', label: 'Response Agent', description: 'Drafts and sends a personalized reply', type: 'agent', x: 65, y: 42, mx: 50, my: 56 },
-      { id: 'output', label: 'Reply Sent', description: 'Customer gets a response in minutes', type: 'output', x: 85, y: 42, mx: 50, my: 73 },
+      { id: 'trigger', label: 'Customer Inquiry', description: 'New message arrives via form or email', type: 'trigger', x: 5, y: 42, mx: 50, my: 10 },
+      { id: 'intake', label: 'Intake Agent', description: 'Extracts name, intent, and urgency', type: 'agent', x: 25, y: 42, mx: 50, my: 28 },
+      { id: 'router', label: 'Router Agent', description: 'Determines the right response path', type: 'agent', x: 45, y: 42, mx: 50, my: 46 },
+      { id: 'response', label: 'Response Agent', description: 'Drafts and sends a personalized reply', type: 'agent', x: 65, y: 42, mx: 50, my: 64 },
+      { id: 'output', label: 'Reply Sent', description: 'Customer gets a response in minutes', type: 'output', x: 85, y: 42, mx: 50, my: 82 },
     ],
     connections: [
       { from: 'trigger', to: 'intake' },
@@ -58,14 +58,14 @@ const tiers: TierConfig[] = [
     accentHex: '#EBC06D',
     accentClass: 'honey',
     nodes: [
-      { id: 'trigger', label: 'New Lead', description: 'Contact submits an inquiry', type: 'trigger', x: 3, y: 40, mx: 50, my: 3 },
-      { id: 'intake', label: 'Intake Agent', description: 'Scores urgency and fit', type: 'agent', x: 20, y: 40, mx: 50, my: 14 },
-      { id: 'schedule', label: 'Scheduling Agent', description: 'Books the discovery call', type: 'agent', x: 40, y: 18, mx: 50, my: 25 },
-      { id: 'prep', label: 'Prep Agent', description: 'Researches lead, builds briefing', type: 'agent', x: 58, y: 18, mx: 50, my: 36 },
-      { id: 'crm', label: 'CRM Agent', description: 'Updates pipeline, logs activity', type: 'agent', x: 40, y: 65, mx: 50, my: 58 },
-      { id: 'store', label: 'CRM Database', description: 'All lead data, always current', type: 'store', x: 58, y: 65, mx: 50, my: 69 },
-      { id: 'followup', label: 'Follow-Up Agent', description: 'Sends confirmations and recaps', type: 'agent', x: 76, y: 40, mx: 50, my: 47 },
-      { id: 'output', label: 'Call Booked', description: 'Lead confirmed, prepped, tracked', type: 'output', x: 92, y: 40, mx: 50, my: 80 },
+      { id: 'trigger', label: 'New Lead', description: 'Contact submits an inquiry', type: 'trigger', x: 3, y: 40, mx: 50, my: 5 },
+      { id: 'intake', label: 'Intake Agent', description: 'Scores urgency and fit', type: 'agent', x: 20, y: 40, mx: 50, my: 17 },
+      { id: 'schedule', label: 'Scheduling Agent', description: 'Books the discovery call', type: 'agent', x: 40, y: 18, mx: 28, my: 30 },
+      { id: 'prep', label: 'Prep Agent', description: 'Researches lead, builds briefing', type: 'agent', x: 58, y: 18, mx: 72, my: 30 },
+      { id: 'crm', label: 'CRM Agent', description: 'Updates pipeline, logs activity', type: 'agent', x: 40, y: 65, mx: 28, my: 44 },
+      { id: 'store', label: 'CRM Database', description: 'All lead data, always current', type: 'store', x: 58, y: 65, mx: 72, my: 44 },
+      { id: 'followup', label: 'Follow-Up Agent', description: 'Sends confirmations and recaps', type: 'agent', x: 76, y: 40, mx: 50, my: 58 },
+      { id: 'output', label: 'Call Booked', description: 'Lead confirmed, prepped, tracked', type: 'output', x: 92, y: 40, mx: 50, my: 72 },
     ],
     connections: [
       { from: 'trigger', to: 'intake' },
@@ -86,16 +86,16 @@ const tiers: TierConfig[] = [
     accentHex: '#4A7C7A',
     accentClass: 'teal',
     nodes: [
-      { id: 'trigger', label: 'Business Event', description: 'A lead, ticket, or milestone fires', type: 'trigger', x: 3, y: 42, mx: 50, my: 2 },
-      { id: 'orchestrator', label: 'Orchestrator', description: 'Routes tasks across the system', type: 'agent', x: 22, y: 42, mx: 50, my: 12 },
-      { id: 'sales', label: 'Sales Intake', description: 'Qualifies leads, routes to pipeline', type: 'agent', x: 42, y: 12, mx: 30, my: 24 },
-      { id: 'support', label: 'Support Agent', description: 'Triages tickets, resolves issues', type: 'agent', x: 42, y: 72, mx: 70, my: 24 },
-      { id: 'onboarding', label: 'Onboarding Agent', description: 'Provisions accounts, sends welcome', type: 'agent', x: 58, y: 12, mx: 30, my: 36 },
-      { id: 'project', label: 'Project Agent', description: 'Creates timelines, tracks milestones', type: 'agent', x: 58, y: 42, mx: 70, my: 36 },
-      { id: 'finance', label: 'Finance Agent', description: 'Invoices, payments, overdue flags', type: 'agent', x: 58, y: 72, mx: 50, my: 48 },
-      { id: 'store', label: 'Central Data Store', description: 'Shared memory for all agents', type: 'store', x: 42, y: 42, mx: 50, my: 60 },
-      { id: 'reporting', label: 'Reporting Agent', description: 'Aggregates data into dashboards', type: 'agent', x: 78, y: 42, mx: 50, my: 72 },
-      { id: 'dashboard', label: 'Live Dashboard', description: 'Real-time visibility, full operation', type: 'output', x: 92, y: 42, mx: 50, my: 84 },
+      { id: 'trigger', label: 'Business Event', description: 'A lead, ticket, or milestone fires', type: 'trigger', x: 3, y: 42, mx: 50, my: 4 },
+      { id: 'orchestrator', label: 'Orchestrator', description: 'Routes tasks across the system', type: 'agent', x: 22, y: 42, mx: 50, my: 14 },
+      { id: 'sales', label: 'Sales Intake', description: 'Qualifies leads, routes to pipeline', type: 'agent', x: 42, y: 12, mx: 28, my: 26 },
+      { id: 'support', label: 'Support Agent', description: 'Triages tickets, resolves issues', type: 'agent', x: 42, y: 72, mx: 72, my: 26 },
+      { id: 'onboarding', label: 'Onboarding Agent', description: 'Provisions accounts, sends welcome', type: 'agent', x: 58, y: 12, mx: 28, my: 38 },
+      { id: 'project', label: 'Project Agent', description: 'Creates timelines, tracks milestones', type: 'agent', x: 58, y: 42, mx: 72, my: 38 },
+      { id: 'finance', label: 'Finance Agent', description: 'Invoices, payments, overdue flags', type: 'agent', x: 58, y: 72, mx: 50, my: 50 },
+      { id: 'store', label: 'Central Data Store', description: 'Shared memory for all agents', type: 'store', x: 42, y: 42, mx: 50, my: 62 },
+      { id: 'reporting', label: 'Reporting Agent', description: 'Aggregates data into dashboards', type: 'agent', x: 78, y: 42, mx: 50, my: 74 },
+      { id: 'dashboard', label: 'Live Dashboard', description: 'Real-time visibility, full operation', type: 'output', x: 92, y: 42, mx: 50, my: 86 },
     ],
     connections: [
       { from: 'trigger', to: 'orchestrator' },
@@ -171,7 +171,7 @@ function DiagramNodeCard({
         left: x + '%',
         top: y + '%',
         transform: 'translate(-50%, -50%)',
-        width: isMobile ? '140px' : '160px',
+        width: isMobile ? '125px' : '160px',
         background: bgColor,
         border: '1.5px ' + (node.type === 'trigger' ? 'dashed' : 'solid') + ' ' + borderColor,
         borderRadius: '16px',
@@ -273,10 +273,11 @@ function SvgConnections({
         const to = getNodeCenter(conn.to);
         const dx = to.cx - from.cx;
         const dy = to.cy - from.cy;
-        const cp1x = from.cx + dx * 0.4;
-        const cp1y = from.cy;
-        const cp2x = to.cx - dx * 0.4;
-        const cp2y = to.cy;
+        // On mobile, flow is primarily vertical so use vertical control points
+        const cp1x = isMobile ? from.cx : from.cx + dx * 0.4;
+        const cp1y = isMobile ? from.cy + dy * 0.4 : from.cy;
+        const cp2x = isMobile ? to.cx : to.cx - dx * 0.4;
+        const cp2y = isMobile ? to.cy - dy * 0.4 : to.cy;
         const d = 'M ' + from.cx + ' ' + from.cy + ' C ' + cp1x + ' ' + cp1y + ', ' + cp2x + ' ' + cp2y + ', ' + to.cx + ' ' + to.cy;
 
         return (
@@ -329,10 +330,10 @@ const SystemArchitecture: React.FC<SystemArchitectureProps> = ({ onNavigate }) =
 
   const containerHeight = isMobile
     ? currentTier.id === 'scale'
-      ? 680
+      ? 780
       : currentTier.id === 'system'
-      ? 560
-      : 480
+      ? 620
+      : 520
     : currentTier.id === 'scale'
     ? 420
     : 340;
