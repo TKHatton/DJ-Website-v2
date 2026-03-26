@@ -13,10 +13,14 @@ The digitaljaywalking.com website looked great on desktop but had three critical
 ## Changes Made
 
 ### 1. SystemArchitecture.tsx — Mobile diagram layout
-- Redesigned mobile coordinates (mx/my) for all 3 tiers: Core uses vertical flow with wider spacing, System and Scale use 2-column layouts (mx: 28/72%) to spread nodes left and right
+- Redesigned mobile coordinates (mx/my) for all 3 tiers: Core uses vertical flow with wider spacing, System and Scale use 2-column layouts (mx: 32/68%) centered within the container
 - Fixed SVG Bezier curves: mobile now uses vertical control points (cp1y = from.cy + dy*0.4) instead of horizontal, so arrows flow top-to-bottom
 - Increased mobile container heights: Core 480->520, System 560->620, Scale 680->780
-- Reduced mobile node width from 140px to 125px
+- Reduced mobile node width from 140px to 115px
+
+### 1b. index.html — CSS animation transform fix (follow-up)
+- **Root cause bug**: The `animate-node-appear` keyframes ended with `transform: scale(1) translateY(0)`, which replaced the inline `translate(-50%, -50%)` centering transform due to `animation-fill-mode: forwards`. This caused all nodes to render from their percentage position as a left edge instead of centered, pushing right-column nodes off-screen on mobile.
+- **Fix**: Added `translate(-50%, -50%)` to both `from` and `to` keyframes so centering persists after the animation completes
 
 ### 2. PixelOffice.tsx — Zoom and visibility fix
 - Removed zoom floor: changed from Math.max(5, ...) to Math.max(0.8, ...) with fractional zoom so the office always fits the container width
