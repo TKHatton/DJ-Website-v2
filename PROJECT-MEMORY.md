@@ -7,7 +7,8 @@ The main website for Digital Jaywalking, LLC. A company that designs and builds 
 - React 19 + TypeScript
 - Vite 6 (build tool)
 - Tailwind CSS (via CDN in index.html)
-- Single-page app with client-side routing (no React Router, custom state-based routing)
+- Single-page app with hash-based routing (e.g., `#studio`, `#discovery`)
+- Netlify Functions for form submissions (Resend for email)
 - Deployed on Netlify at digitaljaywalkingv2.netlify.app (will move to primary domain)
 
 ## Brand
@@ -27,7 +28,8 @@ The main website for Digital Jaywalking, LLC. A company that designs and builds 
 | blog | BlogPage.tsx | Against Traffic blog + The Blind Spot newsletter signup + lead magnet |
 | approach | ApproachPage.tsx | How We Build (5-step process) |
 | about | AboutPage.tsx | Co-founder bios, company story, values |
-| start | StartAProjectPage.tsx | Project intake form |
+| start | StartAProjectPage.tsx | Project intake form (connected to Resend) |
+| discovery | DiscoveryFormPage.tsx | Build Brief form (noindex, send to clients before calls) |
 
 ## Service Model
 - **Agent Starter** (1-3 agents): Single workflow solutions
@@ -38,11 +40,24 @@ The main website for Digital Jaywalking, LLC. A company that designs and builds 
 - Clients get ACCESS to systems (slash commands, dashboards), never the code. Repos stay private.
 
 ## Key Files
-- App.tsx: Main router
+- App.tsx: Main router with hash-based navigation
 - components/Navbar.tsx: Fixed nav with mobile menu
 - components/Footer.tsx: Sitemap, links, em dash joke
+- pages/DiscoveryFormPage.tsx: Build Brief wizard form (7 sections)
+- netlify/functions/submit-intake.mts: Intake form email handler
+- netlify/functions/submit-discovery.mts: Build Brief email handler
+- hooks/useDocumentHead.ts: Manages title, meta description, robots tags
+- lib/schemas.ts: JSON-LD schemas and page metadata
 - templates/blog-post-template.html: Against Traffic blog post HTML template
 - templates/newsletter-template.html: The Blind Spot newsletter HTML template
+- DISCOVERY-QUESTIONNAIRE.md: Script for client discovery calls
+
+## Environment Variables (Netlify)
+```
+RESEND_API_KEY=re_xxxxx
+NOTIFY_EMAIL=your@email.com
+ANTHROPIC_API_KEY=sk-ant-xxxxx (for story generator)
+```
 
 ## Design Patterns
 - Rounded corners: rounded-[40px] for cards, rounded-[60px] for dark sections

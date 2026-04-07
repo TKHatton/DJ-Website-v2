@@ -48,6 +48,8 @@ const investmentOptions = [
 
 const StartAProjectPage: React.FC<StartAProjectPageProps> = ({ onNavigate }) => {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -80,11 +82,32 @@ const StartAProjectPage: React.FC<StartAProjectPageProps> = ({ onNavigate }) => 
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const response = await fetch('/api/submit-intake', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || 'Something went wrong');
+      }
+
+      setSubmitted(true);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error ? error.message : 'Failed to submit. Please try again.'
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -368,11 +391,17 @@ const StartAProjectPage: React.FC<StartAProjectPageProps> = ({ onNavigate }) => 
           </div>
 
           <div className="text-center space-y-4">
+            {submitError && (
+              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-2xl mb-4">
+                {submitError}
+              </div>
+            )}
             <button
               type="submit"
-              className="bg-charcoal text-cream font-semibold px-10 py-4 rounded-full hover:bg-terracotta transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta"
+              disabled={isSubmitting}
+              className="bg-charcoal text-cream font-semibold px-10 py-4 rounded-full hover:bg-terracotta transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Submit your project
+              {isSubmitting ? 'Submitting...' : 'Submit your project'}
             </button>
             <p className="text-charcoal/50 text-sm">
               Have questions instead? Reach out at{" "}
