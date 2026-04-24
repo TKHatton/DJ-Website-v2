@@ -9,6 +9,7 @@ interface NavbarProps {
 const navLinks = [
   { path: 'studio', label: 'Studio', color: 'terracotta' },
   { path: 'academy', label: 'Academy', color: 'honey' },
+  { path: 'products', label: 'Products', color: 'honey' },
   { path: 'blog', label: 'Blog', color: 'teal' },
   { path: 'about', label: 'About', color: 'plum' },
   { path: 'faq', label: 'FAQ', color: 'teal' },

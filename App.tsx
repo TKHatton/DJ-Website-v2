@@ -38,6 +38,7 @@ import ApproachPage from './pages/ApproachPage';
 import AboutPage from './pages/AboutPage';
 import StartAProjectPage from './pages/StartAProjectPage';
 import DiscoveryFormPage from './pages/DiscoveryFormPage';
+import ProductsPage from './pages/ProductsPage';
 
 /** Map each route to its JSON-LD schemas */
 function getSchemasForPage(page: string): object[] {
@@ -128,6 +129,8 @@ const App: React.FC = () => {
         return <StartAProjectPage onNavigate={navigateTo} />;
       case 'discovery':
         return <DiscoveryFormPage onNavigate={navigateTo} />;
+      case 'products':
+        return <ProductsPage onNavigate={navigateTo} />;
       default:
         return <Home onNavigate={navigateTo} />;
     }
