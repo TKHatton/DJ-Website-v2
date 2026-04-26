@@ -3,11 +3,13 @@
   "configurations": [
     {
       "name": "dj-website-dev",
-      "runtimeExecutable": "C:/Program Files/nodejs/node.exe",
+      "runtimeExecutable": "npx",
       "runtimeArgs": [
-        "node_modules/vite/bin/vite.js",
-        "--port",
-        "5173"
+        "serve",
+        "brand",
+        "--listen",
+        "5173",
+        "--no-clipboard"
       ],
       "port": 5173
     }
