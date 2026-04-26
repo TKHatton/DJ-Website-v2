@@ -6,12 +6,12 @@
 <meta name="theme-color" content="#FAFAF7">
 
 <title>DJ Academy. Don't want to buy it. Want to build it.</title>
-<meta name="description" content="DJ Academy teaches the craft behind everything in the Digital Jaywalking Studio. Live sessions, self-paced courses, and the book Protect Your Genius by Lenise Kenney.">
+<meta name="description" content="DJ Academy teaches the craft behind everything in the Digital Jaywalking Studio. Live sessions, self-paced courses, the book Protect Your Genius by Lenise Kenney, and upcoming events.">
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://digitaljaywalking.com/academy">
 <meta property="og:title" content="DJ Academy. Don't want to buy it. Want to build it.">
-<meta property="og:description" content="Live sessions, self-paced courses, and the book Protect Your Genius.">
+<meta property="og:description" content="Live sessions, self-paced courses, the book Protect Your Genius, and upcoming events.">
 <meta property="og:site_name" content="Digital Jaywalking">
 
 <link rel="canonical" href="https://digitaljaywalking.com/academy">
@@ -20,6 +20,57 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/main.css">
+
+<style>
+.event-list { list-style: none; padding: 0; margin: 0; }
+.event-entry {
+  display: grid;
+  grid-template-columns: 220px 1fr auto;
+  gap: 32px;
+  align-items: start;
+  padding: 28px 0;
+  border-bottom: 0.5px solid var(--line);
+}
+.event-entry:first-child { padding-top: 8px; }
+.event-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1.4px;
+  color: var(--slate);
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+.event-meta strong { color: var(--ink); display: block; font-weight: 500; }
+.event-body h3 {
+  font-size: 20px;
+  margin: 0 0 8px;
+  letter-spacing: -0.014em;
+}
+.event-body p {
+  font-size: 14px;
+  color: #3F3D38;
+  margin: 0;
+  line-height: 1.6;
+}
+.event-cta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.4px;
+  color: var(--ink);
+  border: 0.5px solid var(--ink);
+  padding: 9px 14px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: all 160ms ease;
+}
+.event-cta:hover { background: var(--ink); color: var(--bone); }
+@media (max-width: 720px) {
+  .event-entry { grid-template-columns: 1fr; gap: 12px; }
+  .event-cta { justify-self: start; }
+}
+</style>
 
 <script type="application/ld+json">
 {
@@ -87,20 +138,33 @@
   <div class="container">
     <p class="eyebrow">01 / Course catalog</p>
     <h2 id="courses-h2">What we teach.</h2>
-    <p style="color: var(--slate); max-width: 560px; margin: 0 0 40px;">Live sessions are taught directly. Self-paced courses come as video plus written companion material. Pricing varies. Some are free.</p>
+    <p style="color: var(--slate); max-width: 560px; margin: 0 0 40px;">Live sessions are taught directly. Multi-session courses include written companion material. Pricing varies by format. Some are free.</p>
 
     <div class="product-grid">
 
-      <a href="#beginner" class="product-card">
+      <a href="#meetings-course" class="product-card">
         <div class="card-meta-row">
-          <p class="card-category">Beginner · Live · 3 sessions</p>
-          <span class="pill pill-shipping">Enrolling</span>
+          <p class="card-category">Intermediate · Live · Multi-session</p>
+          <span class="pill pill-soon">Coming Soon</span>
         </div>
-        <h3>Three Gears.<br>Build your first agent.</h3>
-        <p class="card-desc">A three-session live curriculum for working professionals who already know Claude or ChatGPT and want to build a real agent. No code required to start. Real results by the end.</p>
+        <h3>Running Better Meetings with AI.</h3>
+        <p class="card-desc">A working professional's guide to running meetings that don't waste time. Live AI-assisted note-taking, agenda design, action item tracking, and post-meeting follow-through.</p>
         <div class="card-footer">
-          <p class="card-price waitlist">Pricing on request</p>
-          <span class="card-cta card-cta-signal">Apply →</span>
+          <p class="card-price waitlist">Apply for the next cohort</p>
+          <span class="card-cta card-cta-signal">Get on the list →</span>
+        </div>
+      </a>
+
+      <a href="#better-or-faster" class="product-card">
+        <div class="card-meta-row">
+          <p class="card-category">Beginner · Live · 60 minutes</p>
+          <span class="pill pill-soon">Scheduling</span>
+        </div>
+        <h3>Is AI Making You Better<br>or Just Faster?</h3>
+        <p class="card-desc">A live talk drawing from the book Protect Your Genius. The questions to ask before you let AI into your work. Built for working professionals who use AI but worry about losing themselves in it.</p>
+        <div class="card-footer">
+          <p class="card-price waitlist">Free or low-cost depending on venue</p>
+          <span class="card-cta card-cta-signal">Get on the list →</span>
         </div>
       </a>
 
@@ -112,7 +176,7 @@
         <h3>MAOS Masterclass.<br>Building agentic systems that work.</h3>
         <p class="card-desc">A deep session on capability-scoped agents. Why fewer agents backed by better infrastructure beat forty single-task agents on cost, speed, accuracy, and reliability.</p>
         <div class="card-footer">
-          <p class="card-price waitlist">Pricing on request</p>
+          <p class="card-price waitlist">Cohort pricing on inquiry</p>
           <span class="card-cta card-cta-signal">Get on the list →</span>
         </div>
       </a>
@@ -121,12 +185,60 @@
   </div>
 </section>
 
+<section class="page-section" id="events" aria-labelledby="events-h2">
+  <div class="container">
+    <p class="eyebrow">02 / Where we'll be</p>
+    <h2 id="events-h2">Upcoming events.</h2>
+    <p style="color: var(--slate); max-width: 560px; margin: 0 0 32px;">Live talks, workshops, and online sessions. Some are open to the public. Some are private cohorts. Pick what fits.</p>
+
+    <ul class="event-list" style="max-width: 920px;">
+
+      <li class="event-entry">
+        <div class="event-meta">
+          <strong>May 2026</strong>
+          LinkedIn Live
+        </div>
+        <div class="event-body">
+          <h3>Is AI Making You Better or Just Faster?</h3>
+          <p>A live talk drawing from the book. The questions to ask before you let AI into your work. The line between augmentation and erosion. Free.</p>
+        </div>
+        <a href="/contact?type=event-rsvp" class="event-cta">Save the date →</a>
+      </li>
+
+      <li class="event-entry">
+        <div class="event-meta">
+          <strong>July 18, 2026</strong>
+          TBA
+        </div>
+        <div class="event-body">
+          <h3>DJ Summit.</h3>
+          <p>Inaugural Digital Jaywalking studio summit. Topics, speakers, and schedule announced soon. Get on the list for the first announcement.</p>
+        </div>
+        <a href="/contact?type=event-rsvp" class="event-cta">Get on the list →</a>
+      </li>
+
+      <li class="event-entry">
+        <div class="event-meta">
+          <strong>TBA</strong>
+          LinkedIn or Facebook Live
+        </div>
+        <div class="event-body">
+          <h3>Running Better Meetings with AI.</h3>
+          <p>A live introduction to the course. What it covers, who it's for, what you'll walk away with. Free.</p>
+        </div>
+        <a href="/contact?type=event-rsvp" class="event-cta">Save the date →</a>
+      </li>
+
+    </ul>
+  </div>
+</section>
+
 <section class="page-section" id="book" aria-labelledby="book-h2" style="background: var(--ink); color: var(--bone); border-top: 0;">
   <div class="container">
     <div class="academy-grid">
 
       <div>
-        <p class="eyebrow eyebrow-on-dark" style="color: var(--signal);">02 / The book</p>
+        <p class="eyebrow eyebrow-on-dark" style="color: var(--signal);">03 / The book</p>
         <h2 id="book-h2" style="color: var(--bone);">Protect Your Genius.</h2>
         <p style="color: var(--muted); max-width: 480px; font-size: 16px; line-height: 1.7;">Lenise's book on the art of using AI without diluting your voice. Written for the people who actually do the creative work, the strategic thinking, the writing. Not a book about prompts. A book about taste, judgment, direction, and integrity.</p>
 
@@ -153,33 +265,48 @@
   </div>
 </section>
 
-<section class="page-section" id="beginner" aria-labelledby="beginner-h2">
+<section class="page-section" id="meetings-course" aria-labelledby="meetings-h2">
   <div class="container">
     <div style="max-width: 720px;">
-      <p class="eyebrow">03 / Beginner agent course</p>
-      <h2 id="beginner-h2">Three Gears.</h2>
-      <p>A three-session live course built for working women (and anyone else) who already use Claude or ChatGPT and want to take the next step. We move from "I use AI" to "I built an agent that runs without me." Three sessions. Real outputs. No code required, but you'll see what's underneath.</p>
+      <p class="eyebrow">04 / Running Better Meetings with AI</p>
+      <h2 id="meetings-h2">Running Better Meetings with AI.</h2>
+      <p>A working professional's guide to running meetings that don't waste time. Multi-session, live. We cover live AI-assisted note-taking, agenda design, action item tracking, and post-meeting follow-through. Practical and immediately usable. You leave with a system you can run on your next meeting.</p>
 
       <ul class="feature-list" style="margin-top: 24px;">
-        <li>Session 1. The First Gear: scoping a useful agent.</li>
-        <li>Session 2. The Second Gear: building it without coding.</li>
-        <li>Session 3. The Third Gear: making it run on its own.</li>
-        <li>Two-page handout. Reference material for after.</li>
-        <li>Live group, small cohorts. 10 to 20 attendees per session.</li>
-        <li>Recordings included if you miss a session.</li>
+        <li>Pre-meeting agenda design</li>
+        <li>Live note-taking with AI assistance</li>
+        <li>Action item capture and assignment</li>
+        <li>Decision log and follow-up workflow</li>
+        <li>Recording and transcript handling</li>
+        <li>The privacy and consent rules nobody talks about</li>
       </ul>
 
       <div style="margin-top: 32px;">
-        <a href="/contact?type=academy-beginner" class="btn btn-primary">Apply for the next cohort →</a>
+        <a href="/contact?type=academy-meetings" class="btn btn-primary">Apply for the next cohort →</a>
       </div>
     </div>
   </div>
 </section>
 
-<section class="page-section" id="masterclass" aria-labelledby="masterclass-h2" style="background: var(--paper); border-top: 0;">
+<section class="page-section" id="better-or-faster" aria-labelledby="bof-h2" style="background: var(--paper); border-top: 0;">
   <div class="container">
     <div style="max-width: 720px;">
-      <p class="eyebrow">04 / MAOS Masterclass</p>
+      <p class="eyebrow">05 / Is AI Making You Better or Just Faster?</p>
+      <h2 id="bof-h2">Is AI making you better<br>or just faster?</h2>
+      <p>A live talk drawing from <em>Protect Your Genius</em>. The questions to ask before you let AI into your work. The line between augmentation and erosion. Built for working professionals who use AI but worry about losing themselves in it.</p>
+      <p>Delivered as a 60-minute live session. Suitable for LinkedIn Lives, conference stages, in-house team sessions, and community gatherings.</p>
+
+      <div style="margin-top: 32px;">
+        <a href="/contact?type=academy-bof" class="btn btn-primary">Get on the list →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page-section" id="masterclass" aria-labelledby="masterclass-h2">
+  <div class="container">
+    <div style="max-width: 720px;">
+      <p class="eyebrow">06 / MAOS Masterclass</p>
       <h2 id="masterclass-h2">Building agentic systems<br>that actually work.</h2>
       <p>An advanced 90 to 120 minute session for builders, operators, and technical leaders who want to design real agentic systems. Five modules, five outcomes. The session walks through capability-scoped agent design, the reasoning behind it, and the failure modes of the "forty single-task agents" approach.</p>
 
@@ -199,13 +326,12 @@
   </div>
 </section>
 
-<section class="page-section" id="speaking" aria-labelledby="speaking-h2">
+<section class="page-section" id="speaking" aria-labelledby="speaking-h2" style="background: var(--paper); border-top: 0;">
   <div class="container">
     <div style="max-width: 720px;">
-      <p class="eyebrow">05 / Speaking and events</p>
+      <p class="eyebrow">07 / Speaking and events</p>
       <h2 id="speaking-h2">Bring us in.</h2>
       <p>We speak at conferences, lead corporate workshops, and run private cohorts for teams that want to actually use AI without losing what makes them good. Topics range from agent design to writing voice to operational systems.</p>
-      <p>Recent and upcoming: APWA NC automation workshop (Greensboro, June 2026). More TBA.</p>
       <a href="/contact?type=speaking" class="btn" style="margin-top: 12px;">Inquire about speaking →</a>
     </div>
   </div>
@@ -247,10 +373,10 @@
       <div class="footer-col">
         <h4>Studio</h4>
         <ul>
-          <li><a href="/studio/inboxtosheet">InboxToSheet</a></li>
-          <li><a href="/studio/foldersort">FolderSort</a></li>
-          <li><a href="/studio">All products →</a></li>
+          <li><a href="/studio/operational-system-template">Operational System</a></li>
+          <li><a href="/studio/run-the-books">Run the Books</a></li>
           <li><a href="/contact?type=custom-build">Custom builds</a></li>
+          <li><a href="/studio">All products →</a></li>
         </ul>
       </div>
 
@@ -259,7 +385,7 @@
         <ul>
           <li><a href="/academy">All courses</a></li>
           <li><a href="/academy#book">The book</a></li>
-          <li><a href="/academy#beginner">Beginner agent course</a></li>
+          <li><a href="/academy#events">Events</a></li>
           <li><a href="/academy#speaking">Speaking</a></li>
         </ul>
       </div>

@@ -6,12 +6,12 @@
 <meta name="theme-color" content="#FAFAF7">
 
 <title>The Studio. Every product Digital Jaywalking sells.</title>
-<meta name="description" content="The full Digital Jaywalking catalog. Operational systems, automations, agents, and apps. One-time pricing, no lock-in, bring your own AI key.">
+<meta name="description" content="The full Digital Jaywalking catalog. Operational systems, automations, agent systems, and apps. One-time pricing, no lock-in, bring your own AI key.">
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://digitaljaywalking.com/studio">
 <meta property="og:title" content="The Studio. Every product Digital Jaywalking sells.">
-<meta property="og:description" content="Operational systems, automations, agents, and apps. One-time pricing, no lock-in, bring your own AI key.">
+<meta property="og:description" content="Operational systems, automations, agent systems, and apps. One-time pricing, no lock-in, bring your own AI key.">
 <meta property="og:site_name" content="Digital Jaywalking">
 
 <link rel="canonical" href="https://digitaljaywalking.com/studio">
@@ -31,10 +31,10 @@
   "mainEntity": {
     "@type": "ItemList",
     "itemListElement": [
-      {"@type": "Product", "name": "InboxToSheet", "description": "Pull emails from Gmail directly into Google Sheets.", "offers": {"@type": "Offer", "price": "67", "priceCurrency": "USD", "availability": "https://schema.org/InStock"}},
+      {"@type": "Product", "name": "Operational System Template", "description": "A complete operational engine for service businesses.", "offers": {"@type": "Offer", "price": "2500", "priceCurrency": "USD", "availability": "https://schema.org/InStock"}},
+      {"@type": "Product", "name": "Run the Books", "description": "Financial operations system for solo operators and small businesses.", "offers": {"@type": "Offer", "availability": "https://schema.org/PreOrder"}},
       {"@type": "Product", "name": "FolderSort", "description": "AI-powered file organizer for Windows.", "offers": {"@type": "Offer", "price": "97", "priceCurrency": "USD", "availability": "https://schema.org/InStock"}},
-      {"@type": "Product", "name": "Operational System Template", "description": "Complete operational engine for service businesses.", "offers": {"@type": "Offer", "price": "2500", "priceCurrency": "USD", "availability": "https://schema.org/InStock"}},
-      {"@type": "Product", "name": "Content Command Center", "description": "Multi-brand content operations system.", "offers": {"@type": "Offer", "availability": "https://schema.org/PreOrder"}}
+      {"@type": "Product", "name": "InboxToSheet", "description": "Pull emails from Gmail directly into Google Sheets.", "offers": {"@type": "Offer", "price": "67", "priceCurrency": "USD", "availability": "https://schema.org/InStock"}}
     ]
   }
 }
@@ -81,16 +81,16 @@
   <div class="container">
 
     <div class="filter-row" role="tablist" aria-label="Filter by category">
-      <button class="filter-pill is-active" data-filter="all" type="button">All</button>
-      <button class="filter-pill" data-filter="operational" type="button">Operational Systems</button>
+      <button class="filter-pill is-active" data-filter="operational" type="button">Operational Systems</button>
       <button class="filter-pill" data-filter="automation" type="button">Automations</button>
-      <button class="filter-pill" data-filter="agent" type="button">Agents</button>
+      <button class="filter-pill" data-filter="agent-system" type="button">Agent Systems</button>
       <button class="filter-pill" data-filter="app" type="button">Apps</button>
+      <button class="filter-pill" data-filter="all" type="button">All</button>
     </div>
 
     <div class="product-grid" id="product-grid">
 
-      <a href="/studio/operational-system-template" class="product-card" data-category="operational">
+      <a href="/studio/operational-system-template" class="product-card is-flagship" data-category="operational">
         <div class="card-meta-row">
           <p class="card-category">Operational System · Licensed</p>
           <span class="pill pill-shipping">Shipping</span>
@@ -103,20 +103,20 @@
         </div>
       </a>
 
-      <a href="/studio/content-command-center" class="product-card" data-category="operational">
+      <a href="/studio/run-the-books" class="product-card is-flagship" data-category="operational">
         <div class="card-meta-row">
-          <p class="card-category">Content Operations · Multi-Brand</p>
+          <p class="card-category">Operational System · Licensed</p>
           <span class="pill pill-soon">Shipping Soon</span>
         </div>
-        <h3>Content Command Center</h3>
-        <p class="card-desc">One system to run content operations across multiple brands. Voice rules, banned-word filtering, scheduled drafting, approval queues. Built to coordinate, not generate slop.</p>
+        <h3>Run the Books</h3>
+        <p class="card-desc">A complete financial operations system for solo operators and small businesses. Invoicing, expense tracking, money-in and money-out flow. Built to run quietly in the background while you do the work.</p>
         <div class="card-footer">
-          <p class="card-price waitlist">Pricing on the waitlist</p>
+          <p class="card-price waitlist">Pricing and release on the waitlist</p>
           <span class="card-cta card-cta-signal">Join waitlist →</span>
         </div>
       </a>
 
-      <a href="/contact?type=custom-build" class="product-card" data-category="operational">
+      <a href="/contact?type=custom-build" class="product-card is-flagship" data-category="operational">
         <div class="card-meta-row">
           <p class="card-category">Custom Build · By Application</p>
           <span class="pill pill-waitlist">By Application</span>
@@ -155,18 +155,17 @@
         </div>
       </a>
 
-      <a href="https://dailyclarity.netlify.app/" class="product-card" data-category="app" target="_blank" rel="noopener">
-        <div class="card-meta-row">
-          <p class="card-category">App · Web</p>
-          <span class="pill pill-shipping">Free</span>
-        </div>
-        <h3>Daily Clarity</h3>
-        <p class="card-desc">An AI-powered thinking assistant. Five tools for working through stuck thoughts, hard decisions, and writing you've been avoiding.</p>
-        <div class="card-footer">
-          <p class="card-price waitlist">Free to use</p>
-          <span class="card-cta">Open it →</span>
-        </div>
-      </a>
+      <div class="catalog-empty" data-empty-for="agent-system">
+        <h3>Agent Systems coming soon.</h3>
+        <p>We're packaging capability-scoped agent systems for sale. Bundles of agents-with-tools, scoped by domain, designed to run real workflows. Get on the list to know when the first one ships.</p>
+        <a href="/build-something" class="empty-cta">Tell us what you'd build →</a>
+      </div>
+
+      <div class="catalog-empty" data-empty-for="app">
+        <h3>More apps coming soon.</h3>
+        <p>Browser extensions, MCP servers, and small desktop tools are in the queue. Get on the list to know when the next one ships.</p>
+        <a href="/build-something" class="empty-cta">Tell us what you'd build →</a>
+      </div>
 
     </div>
 
@@ -202,10 +201,10 @@
       <div class="footer-col">
         <h4>Studio</h4>
         <ul>
-          <li><a href="/studio/inboxtosheet">InboxToSheet</a></li>
-          <li><a href="/studio/foldersort">FolderSort</a></li>
-          <li><a href="/studio">All products →</a></li>
+          <li><a href="/studio/operational-system-template">Operational System</a></li>
+          <li><a href="/studio/run-the-books">Run the Books</a></li>
           <li><a href="/contact?type=custom-build">Custom builds</a></li>
+          <li><a href="/studio">All products →</a></li>
         </ul>
       </div>
 
@@ -214,7 +213,7 @@
         <ul>
           <li><a href="/academy">All courses</a></li>
           <li><a href="/academy#book">The book</a></li>
-          <li><a href="/academy#beginner">Beginner agent course</a></li>
+          <li><a href="/academy#events">Events</a></li>
           <li><a href="/academy#speaking">Speaking</a></li>
         </ul>
       </div>
@@ -246,20 +245,35 @@
 (function() {
   var pills = document.querySelectorAll('.filter-pill');
   var cards = document.querySelectorAll('#product-grid .product-card');
+  var empties = document.querySelectorAll('#product-grid .catalog-empty');
+
+  function applyFilter(f) {
+    cards.forEach(function(c) {
+      if (f === 'all' || c.getAttribute('data-category') === f) {
+        c.style.display = '';
+      } else {
+        c.style.display = 'none';
+      }
+    });
+    empties.forEach(function(e) {
+      var key = e.getAttribute('data-empty-for');
+      if (f === 'all' || f === key) {
+        e.style.display = '';
+      } else {
+        e.style.display = 'none';
+      }
+    });
+  }
+
   pills.forEach(function(p) {
     p.addEventListener('click', function() {
       pills.forEach(function(x) { x.classList.remove('is-active'); });
       p.classList.add('is-active');
-      var f = p.getAttribute('data-filter');
-      cards.forEach(function(c) {
-        if (f === 'all' || c.getAttribute('data-category') === f) {
-          c.style.display = '';
-        } else {
-          c.style.display = 'none';
-        }
-      });
+      applyFilter(p.getAttribute('data-filter'));
     });
   });
+
+  applyFilter('operational');
 })();
 </script>
 

@@ -228,6 +228,43 @@ section.studio { padding: 96px 0; border-top: 0.5px solid var(--line); }
 .product-card:hover .pill { transform: scale(1.04); }
 .product-card:hover .card-cta { background: var(--ink); color: var(--bone); }
 
+/* Flagship cards span the full grid width to read as more important */
+.product-card.is-flagship { grid-column: 1 / -1; min-height: 200px; }
+.product-card.is-flagship h3 { font-size: 26px; }
+.product-card.is-flagship .card-desc { max-width: 640px; }
+
+.catalog-empty {
+  grid-column: 1 / -1;
+  background: var(--paper);
+  border: 0.5px dashed var(--stone);
+  border-radius: var(--radius-lg);
+  padding: 48px 36px;
+  text-align: center;
+  color: var(--slate);
+}
+.catalog-empty h3 {
+  font-size: 22px;
+  margin: 0 0 8px;
+  color: var(--ink);
+}
+.catalog-empty p { font-size: 14px; max-width: 520px; margin: 0 auto 18px; line-height: 1.6; }
+.catalog-empty .empty-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.4px;
+  color: var(--ink);
+  border: 0.5px solid var(--ink);
+  padding: 9px 16px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  transition: all 160ms ease;
+}
+.catalog-empty .empty-cta:hover { background: var(--ink); color: var(--bone); }
+
 .card-meta-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
 .card-category {
   font-family: var(--font-mono);
