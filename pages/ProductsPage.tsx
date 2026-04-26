@@ -31,21 +31,21 @@ const products = [
     tagline: 'Your messy folders, organized once and for all.',
     description:
       'A desktop app that scans your folders and sorts everything into clean structures based on rules you set once. Preview mode shows you where everything will go before anything moves. Full undo built in. Works on Windows with no Python installation required.',
-    price: '$67',
+    price: '$97',
     priceNote: 'One-time payment',
     includes: [
       'Windows desktop app — no install needed',
-      'Drag-and-drop rule builder',
+      'Keyword rule builder — set it once',
       'Preview mode before anything moves',
       'Full undo with backup manifest',
-      'File watcher for ongoing auto-sort',
+      'Auto-Sort watcher — new files sorted automatically',
       'Duplicate and temp file cleanup advisor',
     ],
     accent: 'honey',
     color: 'bg-honey/10',
     borderColor: 'border-honey/20',
     btnColor: 'bg-honey hover:bg-honey/90',
-    url: 'https://digitaljaywalking.gumroad.com/l/foldersort',
+    url: 'https://jaywalker73.gumroad.com/l/foldersort',
   },
 ];
 
