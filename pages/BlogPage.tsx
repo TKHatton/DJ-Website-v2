@@ -4,6 +4,8 @@ interface BlogPageProps {
   onNavigate: (path: string) => void;
 }
 
+type SubscribeState = 'idle' | 'loading' | 'success' | 'error';
+
 const blogPosts = [
   {
     title: 'What a Multi-Agent System Actually Looks Like in Practice',
@@ -33,13 +35,35 @@ const blogPosts = [
 
 const BlogPage: React.FC<BlogPageProps> = ({ onNavigate }) => {
   const [email, setEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
+  const [subscribeState, setSubscribeState] = useState<SubscribeState>('idle');
+  const [subscribeError, setSubscribeError] = useState<string | null>(null);
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email.trim()) {
-      setSubscribed(true);
+    if (!email.trim()) return;
+
+    setSubscribeState('loading');
+    setSubscribeError(null);
+
+    try {
+      const response = await fetch('/api/subscribe-newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.trim() }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || 'Something went wrong');
+      }
+
+      setSubscribeState('success');
       setEmail('');
+    } catch (error) {
+      setSubscribeError(
+        error instanceof Error ? error.message : 'Failed to subscribe. Please try again.'
+      );
+      setSubscribeState('error');
     }
   };
 
@@ -72,28 +96,35 @@ const BlogPage: React.FC<BlogPageProps> = ({ onNavigate }) => {
               inbox.
             </p>
 
-            {subscribed ? (
+            {subscribeState === 'success' ? (
               <div className="bg-white rounded-2xl p-6 border border-honey/20">
                 <p className="text-lg font-semibold text-charcoal">
                   You are in. Watch your inbox.
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-4">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="your@email.com"
-                  required
-                  className="flex-grow px-6 py-4 rounded-full border border-charcoal/10 bg-white text-charcoal placeholder:text-charcoal/40 focus:outline-none focus:ring-2 focus:ring-honey/50"
-                />
-                <button
-                  type="submit"
-                  className="bg-charcoal text-cream px-8 py-4 rounded-full font-semibold hover:bg-charcoal/90 transition-all shadow-lg hover:shadow-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta whitespace-nowrap"
-                >
-                  Subscribe
-                </button>
+              <form onSubmit={handleSubscribe} className="flex flex-col gap-4">
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="your@email.com"
+                    required
+                    disabled={subscribeState === 'loading'}
+                    className="flex-grow px-6 py-4 rounded-full border border-charcoal/10 bg-white text-charcoal placeholder:text-charcoal/40 focus:outline-none focus:ring-2 focus:ring-honey/50 disabled:opacity-50"
+                  />
+                  <button
+                    type="submit"
+                    disabled={subscribeState === 'loading'}
+                    className="bg-charcoal text-cream px-8 py-4 rounded-full font-semibold hover:bg-charcoal/90 transition-all shadow-lg hover:shadow-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {subscribeState === 'loading' ? 'Subscribing...' : 'Subscribe'}
+                  </button>
+                </div>
+                {subscribeState === 'error' && subscribeError && (
+                  <p className="text-sm text-red-600 px-2">{subscribeError}</p>
+                )}
               </form>
             )}
           </div>

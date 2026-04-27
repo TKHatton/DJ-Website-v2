@@ -1,3 +1,13 @@
+function sanitize(str: string): string {
+  if (!str) return '';
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 interface IntakeFormData {
   name: string;
   email: string;
@@ -24,9 +34,9 @@ async function sendEmailViaResend(formData: IntakeFormData): Promise<void> {
 
       <div style="background: #FDFBF7; padding: 20px; border-radius: 12px; margin: 20px 0;">
         <h2 style="color: #4A7C7A; margin-top: 0;">Contact Information</h2>
-        <p><strong>Name:</strong> ${formData.name}</p>
-        <p><strong>Email:</strong> <a href="mailto:${formData.email}">${formData.email}</a></p>
-        ${formData.organization ? `<p><strong>Organization:</strong> ${formData.organization}</p>` : ''}
+        <p><strong>Name:</strong> ${sanitize(formData.name)}</p>
+        <p><strong>Email:</strong> <a href="mailto:${sanitize(formData.email)}">${sanitize(formData.email)}</a></p>
+        ${formData.organization ? `<p><strong>Organization:</strong> ${sanitize(formData.organization)}</p>` : ''}
       </div>
 
       <div style="background: #FDFBF7; padding: 20px; border-radius: 12px; margin: 20px 0;">
@@ -34,21 +44,21 @@ async function sendEmailViaResend(formData: IntakeFormData): Promise<void> {
 
         <h3 style="color: #6B4E71; font-size: 14px; margin-bottom: 8px;">Areas of Interest</h3>
         <ul style="margin: 0 0 16px 0; padding-left: 20px;">
-          ${formData.interests.map(i => `<li>${i}</li>`).join('')}
+          ${formData.interests.map(i => `<li>${sanitize(i)}</li>`).join('')}
         </ul>
 
         <h3 style="color: #6B4E71; font-size: 14px; margin-bottom: 8px;">Project Description</h3>
-        <p style="background: white; padding: 12px; border-radius: 8px; white-space: pre-wrap;">${formData.description}</p>
+        <p style="background: white; padding: 12px; border-radius: 8px; white-space: pre-wrap;">${sanitize(formData.description)}</p>
       </div>
 
       <div style="background: #FDFBF7; padding: 20px; border-radius: 12px; margin: 20px 0;">
         <h2 style="color: #4A7C7A; margin-top: 0;">Context</h2>
-        <p><strong>Team Size:</strong> ${formData.teamSize || 'Not specified'}</p>
-        <p><strong>Timeline:</strong> ${formData.timeline || 'Not specified'}</p>
-        <p><strong>Investment Comfort:</strong> ${formData.investment || 'Not specified'}</p>
+        <p><strong>Team Size:</strong> ${sanitize(formData.teamSize) || 'Not specified'}</p>
+        <p><strong>Timeline:</strong> ${sanitize(formData.timeline) || 'Not specified'}</p>
+        <p><strong>Investment Comfort:</strong> ${sanitize(formData.investment) || 'Not specified'}</p>
         ${formData.anythingElse ? `
           <h3 style="color: #6B4E71; font-size: 14px; margin-bottom: 8px;">Additional Notes</h3>
-          <p style="background: white; padding: 12px; border-radius: 8px; white-space: pre-wrap;">${formData.anythingElse}</p>
+          <p style="background: white; padding: 12px; border-radius: 8px; white-space: pre-wrap;">${sanitize(formData.anythingElse)}</p>
         ` : ''}
       </div>
 
