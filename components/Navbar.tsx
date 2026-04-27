@@ -41,11 +41,11 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPath }) => {
               style={{ width: 'clamp(110px, 14vw, 170px)', height: 'auto', display: 'block' }}
             >
               <g strokeLinecap="round" strokeLinejoin="round">
-                <line x1="17"  y1="21" x2="52"  y2="21" stroke="#1A1A1A" strokeWidth="3.5"/>
-                <line x1="59"  y1="21" x2="95"  y2="21" stroke="#1A1A1A" strokeWidth="3.5"/>
-                <polyline points="102,21 120,8 138,21" stroke="#E2725B" strokeWidth="3.5" fill="none"/>
-                <line x1="145" y1="21" x2="181" y2="21" stroke="#1A1A1A" strokeWidth="3.5"/>
-                <line x1="188" y1="21" x2="223" y2="21" stroke="#1A1A1A" strokeWidth="3.5"/>
+                <line x1="18"  y1="21" x2="50"  y2="21" stroke="#1A1A1A" strokeWidth="3.5"/>
+                <line x1="60"  y1="21" x2="92"  y2="21" stroke="#1A1A1A" strokeWidth="3.5"/>
+                <polyline points="102,21 118,8 134,21" stroke="#E2725B" strokeWidth="3.5" fill="none"/>
+                <line x1="144" y1="21" x2="176" y2="21" stroke="#1A1A1A" strokeWidth="3.5"/>
+                <line x1="186" y1="21" x2="218" y2="21" stroke="#1A1A1A" strokeWidth="3.5"/>
               </g>
               <text
                 x="120"
