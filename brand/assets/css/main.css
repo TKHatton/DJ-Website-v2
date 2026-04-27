@@ -73,7 +73,7 @@ header.site-header {
   padding: 18px 0;
 }
 .brand-mark { display: inline-flex; align-items: center; gap: 0; }
-.brand-mark svg { width: 88px; height: 30px; }
+.brand-mark svg.header-lockup { width: 138px; height: 40px; display: block; }
 
 nav.primary {
   display: flex;
@@ -83,6 +83,33 @@ nav.primary {
 }
 nav.primary a { color: var(--slate); transition: color 160ms ease; }
 nav.primary a:hover { color: var(--ink); }
+.nav-contact { display: none; }
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  align-items: center;
+}
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--ink);
+  border-radius: 1px;
+  transition: transform 220ms ease, opacity 180ms ease;
+  transform-origin: center;
+}
+.site-header.is-open .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.site-header.is-open .nav-toggle span:nth-child(2) { opacity: 0; }
+.site-header.is-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 .btn {
   display: inline-flex;
@@ -875,6 +902,40 @@ footer.site-footer { background: var(--ink); color: var(--bone); padding: 80px 0
   .journal-entry { grid-template-columns: 1fr; gap: 8px; }
   .feature-list { grid-template-columns: 1fr; }
   nav.primary { display: none; }
+  .nav-toggle { display: flex; }
+  .site-header .row > .btn { display: none; }
+  .site-header.is-open nav.primary {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bone);
+    border-top: 0.5px solid var(--line);
+    border-bottom: 0.5px solid var(--line);
+    padding: 16px var(--gutter) 20px;
+    font-size: 18px;
+  }
+  .site-header.is-open nav.primary a {
+    padding: 12px 0;
+    border-bottom: 0.5px solid var(--line);
+    color: var(--ink);
+  }
+  .site-header.is-open nav.primary a:last-child { border-bottom: 0; }
+  .site-header.is-open nav.primary a.nav-contact {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 8px;
+    color: var(--signal-text);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    border-bottom: 0;
+  }
+  .brand-mark svg.header-lockup { width: 120px; height: 35px; }
   .feature-card { flex-direction: column; align-items: flex-start; gap: 20px; }
   .feature-card .card-cta { align-self: stretch; text-align: center; }
   section.hero { padding: 56px 0 40px; }
