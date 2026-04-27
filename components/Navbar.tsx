@@ -31,7 +31,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPath }) => {
           <button 
             onClick={() => handleNav('home')}
             aria-label="Go to home page"
-            className="text-xl md:text-2xl font-accent font-black tracking-tight text-charcoal hover:opacity-80 transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta rounded"
+            className="text-xs md:text-sm font-accent font-black uppercase tracking-[0.18em] text-charcoal hover:opacity-80 transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta rounded"
           >
             Digital Jaywalking
           </button>

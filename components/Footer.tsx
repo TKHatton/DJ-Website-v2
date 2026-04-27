@@ -12,7 +12,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         <div>
           <button 
             onClick={() => onNavigate('home')} 
-            className="text-2xl font-accent font-black tracking-tight hover:opacity-80 transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta rounded"
+            className="text-xs md:text-sm font-accent font-black uppercase tracking-[0.18em] hover:opacity-80 transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta rounded"
             aria-label="Go to home page"
           >
             Digital Jaywalking
