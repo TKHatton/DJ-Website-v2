@@ -626,6 +626,35 @@ section.page-section:first-of-type { border-top: 0; }
   color: var(--muted);
   text-transform: uppercase;
   margin: 0 0 24px;
+  overflow: hidden;
+}
+.founder-block .founder-portrait--monogram {
+  flex-direction: column;
+  border: 0.5px solid var(--line);
+  transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+}
+.founder-block .founder-portrait--monogram:hover {
+  transform: translateY(-3px);
+  border-color: var(--ink);
+  box-shadow: 0 12px 32px -16px rgba(31, 31, 28, 0.12);
+}
+.founder-monogram-letters {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(56px, 9vw, 88px);
+  color: var(--ink);
+  letter-spacing: -0.025em;
+  line-height: 1;
+  margin: 0;
+  text-transform: none;
+}
+.founder-monogram-pixel {
+  width: 16px;
+  height: 16px;
+  background: var(--signal);
+  border-radius: 0;
+  margin-top: 28px;
+  display: block;
 }
 .founder-block h3 { margin: 0 0 4px; }
 .founder-block .founder-role {
