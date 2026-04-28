@@ -28,12 +28,36 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPath }) => {
     <nav className="fixed top-0 w-full z-50 px-6 py-6 md:px-12 pointer-events-none" aria-label="Main navigation">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div className="pointer-events-auto bg-cream/80 backdrop-blur-md px-4 py-2 rounded-full border border-charcoal/5 shadow-sm">
-          <button 
+          <button
             onClick={() => handleNav('home')}
             aria-label="Go to home page"
-            className="text-xs md:text-sm font-accent font-black uppercase tracking-[0.18em] text-charcoal hover:opacity-80 transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta rounded"
+            className="hover:opacity-80 transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta rounded"
           >
-            Digital Jaywalking
+            <svg
+              role="img"
+              aria-label="Digital Jaywalking"
+              viewBox="0 0 240 64"
+              fill="none"
+              style={{ width: 'clamp(110px, 14vw, 170px)', height: 'auto', display: 'block' }}
+            >
+              <g strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18"  y1="21" x2="50"  y2="21" stroke="#1A1A1A" strokeWidth="3.5"/>
+                <line x1="60"  y1="21" x2="92"  y2="21" stroke="#1A1A1A" strokeWidth="3.5"/>
+                <polyline points="102,21 118,8 134,21" stroke="#E2725B" strokeWidth="3.5" fill="none"/>
+                <line x1="144" y1="21" x2="176" y2="21" stroke="#1A1A1A" strokeWidth="3.5"/>
+                <line x1="186" y1="21" x2="218" y2="21" stroke="#1A1A1A" strokeWidth="3.5"/>
+              </g>
+              <text
+                x="120"
+                y="50"
+                textAnchor="middle"
+                fontFamily="Sora, sans-serif"
+                fontWeight="700"
+                fontSize="14"
+                letterSpacing="2.5"
+                fill="#1A1A1A"
+              >DIGITAL JAYWALKING</text>
+            </svg>
           </button>
         </div>
 
