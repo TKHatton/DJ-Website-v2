@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(git add:*)",
-      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd Build Brief form, connect intake forms to Resend, add hash routing\n\n- Created Build Brief \\(discovery\\) form with 7-section wizard\n- Connected StartAProjectPage form to Resend API for email notifications\n- Added hash-based routing \\(URLs like #discovery, #studio now work\\)\n- Added security: honeypot spam prevention, input sanitization\n- Added accessibility: aria labels, describedby, proper focus management\n- Added noindex meta tag support for private pages\n- Created discovery questionnaire script for client calls\n- Added video URL field for Loom/screen recordings\n\nNew files:\n- pages/DiscoveryFormPage.tsx\n- netlify/functions/submit-intake.mts\n- netlify/functions/submit-discovery.mts\n- DISCOVERY-QUESTIONNAIRE.md\n- hooks/useDocumentHead.ts\n- lib/schemas.ts\n- components/JsonLd.tsx\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd Build Brief form, connect intake forms to Resend, add hash routing\n\n- Created Build Brief \\(discovery\\) form with 7-section wizard\n- Connected StartAProjectPage form to Resend API for email notifications\n- Added hash-based routing \\(URLs like #discovery, #studio now work\\)\n- Added security: honeypot spam prevention, input sanitization\n- Added accessibility: aria labels, describedby, proper focus management\n- Added noindex meta tag support for private pages\n- Created discovery questionnaire script for client calls\n- Added video URL field for Loom/screen recordings\n\nNew files:\n- pages/DiscoveryFormPage.tsx\n- netlify/functions/submit-intake.mts\n- netlify/functions/submit-discovery.mts\n- DISCOVERY-QUESTIONNAIRE.md\n- hooks/useDocumentHead.ts\n- lib/schemas.ts\n- components/JsonLd.tsx\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git commit:*)"
     ]
   }
 }

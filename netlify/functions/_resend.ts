@@ -110,7 +110,7 @@ export function errorPage(message: string): Response {
     <p class="eyebrow">Something went wrong</p>
     <h1>That didn't go through.</h1>
     <p>${escapeHtml(message)}</p>
-    <p>Try again, or email us directly at <a href="mailto:jaywalking@digitaljaywalking.com">jaywalking@digitaljaywalking.com</a>.</p>
+    <p>Try again, or email us directly at <a href="mailto:info@digitaljaywalking.com">info@digitaljaywalking.com</a>.</p>
     <p><a href="/">← Back to digitaljaywalking.com</a></p>
   </div>
 </body>

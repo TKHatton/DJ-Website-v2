@@ -2,8 +2,27 @@
   command = ""
   publish = "brand"
 
+[functions]
+  directory = "netlify/functions"
+
 [build.processing]
   skip_processing = false
 
 [build.processing.html]
   pretty_urls = true
+
+# API redirects for form submissions
+[[redirects]]
+  from = "/api/subscribe"
+  to = "/.netlify/functions/submit-subscribe"
+  status = 200
+
+[[redirects]]
+  from = "/api/wishlist"
+  to = "/.netlify/functions/submit-wishlist"
+  status = 200
+
+[[redirects]]
+  from = "/api/contact"
+  to = "/.netlify/functions/submit-contact"
+  status = 200
