@@ -149,7 +149,14 @@
     <h2 id="courses-h2">What we teach.</h2>
     <p style="color: var(--slate); max-width: 560px; margin: 0 0 40px;">Live sessions are taught directly. Multi-session courses include written companion material. Pricing varies by format. Some are free.</p>
 
-    <div class="product-grid">
+    <div class="product-grid" id="course-grid">
+
+      <!-- Self-paced courses are inserted here by assets/js/courses.js, which
+           reads /api/courses, which returns the published products on Gumroad.
+           Publishing a course on Gumroad puts it on this page. Nothing in this
+           file needs editing when a course ships. If the fetch fails, or
+           nothing is published yet, no cards are inserted and the hand-written
+           live sessions below are all that show. -->
 
       <a href="#meetings-course" class="product-card">
         <div class="card-meta-row">
@@ -385,6 +392,7 @@
 </footer>
 
 <script src="/assets/js/main.js" defer></script>
+<script src="/assets/js/courses.js" defer></script>
 
 </body>
 </html>
