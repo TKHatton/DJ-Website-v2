@@ -240,6 +240,32 @@ section.studio { padding: 96px 0; border-top: 0.5px solid var(--line); }
 .studio-intro p { color: var(--slate); max-width: 560px; margin-bottom: 48px; }
 .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
+/* Catalog groups. The academy catalog sells courses and products side by side,
+   so each set gets a quiet label rather than running together as one grid. */
+.catalog-group { margin-top: 56px; }
+.catalog-group-heading {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.4px;
+  color: var(--slate);
+  text-transform: uppercase;
+  margin: 0 0 16px;
+}
+
+/* Cover art carried over from the Gumroad product, so the card and the
+   checkout page show the same image. Pulled out to the card's edges against
+   its 32px padding. */
+.card-cover {
+  display: block;
+  width: calc(100% + 64px);
+  margin: -32px -32px 0;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--paper);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
 .product-card {
   background: #FFFFFF;
   border: 0.5px solid var(--line);
